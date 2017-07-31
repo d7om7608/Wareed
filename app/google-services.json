@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "216199098507",
+    "firebase_url": "https://wareed-1f4ce.firebaseio.com",
+    "project_id": "wareed-1f4ce",
+    "storage_bucket": "wareed-1f4ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216199098507:android:1208d6f1ae0870ba",
+        "android_client_info": {
+          "package_name": "com.example.d7om7.wareed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216199098507-97lvvvers166qmllilqtqsh7ncb7riku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC373NRGoZZ4WJY0qE-2TzDz5K45zKRaPM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
