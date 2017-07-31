@@ -18,12 +18,20 @@ import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+//    private static final String TAG = "PhoneAuthActivity";
+
+//    private PhoneAuthProvider.ForceResendingToken mResendToken;
+//    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
     public static final int RC_SIGN_IN = 1;
     private FirebaseDatabase mFirebaseDatabase;
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -60,23 +68,19 @@ public class MainActivity extends AppCompatActivity
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Toast.makeText(MainActivity.this, "Signed in!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
                 } else {
                     // User is signed out
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setIsSmartLockEnabled(false)
-                                    .setProviders(
-                                            AuthUI.EMAIL_PROVIDER,
-                                            AuthUI.GOOGLE_PROVIDER)
-                                    .build(),
-                            RC_SIGN_IN);
+                    Intent loginIntent = new Intent(MainActivity.this, RegisterActicity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+
                 }
             }
-        };
-    }
 
+        };
+
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -124,6 +128,8 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.action_sign_out) {
+
+                    AuthUI.getInstance().signOut(this);
 
 
             return true;

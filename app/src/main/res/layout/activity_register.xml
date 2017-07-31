@@ -6,15 +6,16 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="37dp"
+        android:layout_height="45dp"
         android:id="@+id/signIn_username_editText"
         android:hint="إسم المستخدم"
         android:gravity="right"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="37dp"
+        android:layout_height="45dp"
         android:id="@+id/signIn_phoneNumber_editText"
         android:hint="رقم الجوال"
         android:gravity="right"
@@ -22,8 +23,50 @@
         android:layout_below="@+id/signIn_username_editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="10dp"
+        android:inputType="number"/>
 
+    <TextView
+        android:id="@+id/signIn_user_blood_type_editText"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="29dp"
+        android:gravity="right"
+
+        android:hint="فئة دمك"
+        android:textSize="18sp"
+        android:layout_below="@+id/signIn_phoneNumber_editText"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/signIn_password_editText"
+        android:hint="كلمة االسر"
+        android:gravity="right"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/signIn_user_blood_type_editText"
+        android:layout_alignParentStart="true"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:onClick="DoRegister"
+        android:text="Register"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/blood_type_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/signIn_user_blood_type_editText"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
