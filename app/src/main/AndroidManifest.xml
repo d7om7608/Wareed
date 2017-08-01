@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.d7om7.wareed.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,9 +26,8 @@
             android:label="@string/action_settings"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".EmergencyListActivity" />
-        <activity android:name=".RequstActivity"></activity>
-        <activity android:name=".RegisterActicity"></activity>
-
+        <activity android:name=".RequstActivity" />
+        <activity android:name=".RegisterActicity" />
     </application>
 
 </manifest>
