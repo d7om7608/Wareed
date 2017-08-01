@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/chat_recycler_view">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+
+        android:layout_width="70dp"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true">
+
+
+        <EditText
+            android:id="@+id/chat_msg_edit_text"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/chat_send_button"
+            android:layout_alignParentBottom="true"
+            android:hint="أكتب رسالتك ..."
+            />
+
+        <Button
+            android:id="@+id/chat_send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:text="أرسل"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

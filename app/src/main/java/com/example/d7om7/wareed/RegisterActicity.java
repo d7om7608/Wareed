@@ -39,11 +39,13 @@ public class RegisterActicity extends AppCompatActivity {
     private EditText PasswordEditText;
     private Spinner BloodTypeSpinner;
     private EditText PhoneNumberEditText;
+    public static String chatUserName ;
 
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
-    private ProgressDialog SignprogressDialog ;
+    private ProgressDialog SignprogressDialog;
+    private ChatManager chatManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,12 @@ public class RegisterActicity extends AppCompatActivity {
         PasswordEditText = (EditText) findViewById(R.id.signIn_password_editText);
         BloodTypeSpinner = (Spinner) findViewById(R.id.blood_type_spinner);
         PhoneNumberEditText = (EditText) findViewById(R.id.signIn_phoneNumber_editText);
+
+        initialize();
+    }
+
+    private void initialize() {
+        chatUserName = UserNameEditText.getText().toString().trim();
 
         final List<String> list = new ArrayList<String>();
         list.add("O+");
@@ -72,33 +80,32 @@ public class RegisterActicity extends AppCompatActivity {
         SignFirebaseDatabase = FirebaseDatabase.getInstance();
         SignAuth = FirebaseAuth.getInstance();
         SignprogressDialog = new ProgressDialog(this);
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("Users");
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City");
     }
 
-    public void DoRegister(View view){
+    public void DoRegister(View view) {
 
         final String UserName = UserNameEditText.getText().toString().trim();
         final String UserPassword = PasswordEditText.getText().toString().trim();
         final String PhoneNumber = PhoneNumberEditText.getText().toString().trim();
         final String BloodType = BloodTypeSpinner.getSelectedItem().toString().trim();
 
-        if (TextUtils.isEmpty(UserName)||TextUtils.isEmpty(UserPassword)||TextUtils.isEmpty(PhoneNumber)||TextUtils.isEmpty(BloodType)){
+        if (TextUtils.isEmpty(UserName) || TextUtils.isEmpty(UserPassword) || TextUtils.isEmpty(PhoneNumber) || TextUtils.isEmpty(BloodType)) {
             System.out.print("445");
-            Toast.makeText(RegisterActicity.this,"Missing data",Toast.LENGTH_SHORT).show();
-        }
-        else {
+            Toast.makeText(RegisterActicity.this, "Missing data", Toast.LENGTH_SHORT).show();
+        } else {
 
-            Toast.makeText(RegisterActicity.this,"no data missing",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActicity.this, "no data missing", Toast.LENGTH_SHORT).show();
             SignprogressDialog.setMessage("Signing up");
             SignprogressDialog.show();
             SignAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {//not name &mail its number and blood instead
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.d("test","onComplete "+task.isSuccessful());
-                    Toast.makeText(RegisterActicity.this,"in on complete",Toast.LENGTH_SHORT).show();
-                    if(task.isSuccessful()){
+                    Log.d("test", "onComplete " + task.isSuccessful());
+                    Toast.makeText(RegisterActicity.this, "in on complete", Toast.LENGTH_SHORT).show();
+                    if (task.isSuccessful()) {
 
-                        Toast.makeText(RegisterActicity.this,"task successful",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActicity.this, "task successful", Toast.LENGTH_SHORT).show();
                         String user_id = SignAuth.getCurrentUser().getUid();
                         DatabaseReference current_user_db = SignDataBase.child(user_id);
                         current_user_db.child("UserName").setValue(UserName);
@@ -107,8 +114,7 @@ public class RegisterActicity extends AppCompatActivity {
                         current_user_db.child("Password").setValue(UserPassword);
 
 
-
-                        Intent mainIntent = new Intent(RegisterActicity.this,MainActivity.class);
+                        Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainIntent);
 

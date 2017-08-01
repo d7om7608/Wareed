@@ -31,45 +31,38 @@
         android:id="@+id/statusTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="13dp"
         android:text=""
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/countOfrequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/statusTime"
-        android:layout_marginTop="41dp"
         android:text=""
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@+id/statusTime"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/countDone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/countOfrequest"
-        android:layout_marginTop="19dp"
         android:text=""
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@+id/countOfrequest"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/bloodTyep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/countDone"
-        android:layout_marginTop="16dp"
         android:text=""
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@+id/countDone"
+        android:layout_alignParentStart="true" />
 
 <Button
     android:layout_width="match_parent"
@@ -77,7 +70,17 @@
     android:text="التفاصيل"
     android:onClick="details"
     android:layout_below="@+id/bloodTyep"
-    android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:layout_marginTop="45dp" />
+    android:id="@+id/button3" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="19dp"
+        android:onClick="GoToChat"
+        android:text="مراسلة" />
 </RelativeLayout>
