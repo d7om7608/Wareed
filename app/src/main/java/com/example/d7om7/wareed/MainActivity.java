@@ -23,7 +23,11 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.example.d7om7.wareed.menagerModel.donor;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +36,6 @@ public class MainActivity extends AppCompatActivity
 
 //    private PhoneAuthProvider.ForceResendingToken mResendToken;
 //    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-
     public static final int RC_SIGN_IN = 1;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
@@ -43,6 +46,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //____________________________________
+        donor=new Donor("ahmad","0552777608",0,"makkah","alnassem","O+","0","0",1,new ArrayList<RequestBlood>());
+        RequestBlood requestBlood=new RequestBlood("khaled",125467,3,"عمليه جراحيه","A+","makkah","king khaled","1438/11/1",1,donor.getUserID(),2);
+        donor.requestBlood.add(requestBlood);
+        //_____________________________________
+
+
+
+
         setContentView(R.layout.sidebar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -166,6 +179,8 @@ public class MainActivity extends AppCompatActivity
 
     }
     public void go_to_requst_blood(View view){
+
+
         Intent startChildActivityIntent = new Intent(this, RequstActivity.class);
         startActivity(startChildActivityIntent);
     }
