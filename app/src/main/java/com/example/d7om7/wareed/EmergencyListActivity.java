@@ -34,8 +34,7 @@ public class EmergencyListActivity extends AppCompatActivity {
     public void GoToChat(View view){
 
         Intent ChatIntent = new Intent(EmergencyListActivity.this, ChatActivity.class);
-        ChatIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(ChatIntent);
+        EmergencyListActivity.this.startActivity(ChatIntent);
 
     }
 

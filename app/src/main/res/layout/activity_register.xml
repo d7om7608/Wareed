@@ -26,8 +26,14 @@
         android:layout_marginTop="10dp"
         android:inputType="number"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout"
+        android:layout_below="@+id/signIn_phoneNumber_editText"
+        android:layout_alignParentStart="true"
+        >
     <TextView
-        android:id="@+id/signIn_user_blood_type_editText"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:layout_marginTop="29dp"
@@ -36,7 +42,42 @@
         android:hint="فئة دمك"
         android:textSize="18sp"
         android:layout_below="@+id/signIn_phoneNumber_editText"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:id="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/blood_type_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:text="المدينة"
+            android:textSize="18sp"
+            />
+        <Spinner
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/city_spinner"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+        </Spinner>
+
+
+    </RelativeLayout>
 
     <EditText
         android:layout_width="match_parent"
@@ -45,10 +86,10 @@
         android:hint="كلمة االسر"
         android:gravity="right"
         android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/signIn_user_blood_type_editText"
+        android:inputType="textPassword"
+        android:layout_below="@+id/relativeLayout"
         android:layout_alignParentStart="true"
-        android:inputType="textPassword" />
+        android:layout_marginTop="62dp" />
 
     <Button
         android:id="@+id/register_button"
@@ -61,12 +102,7 @@
         android:text="Register"
         android:textSize="18sp" />
 
-    <Spinner
-        android:id="@+id/blood_type_spinner"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/signIn_user_blood_type_editText"
-        android:layout_alignParentStart="true" />
+
 
 
 </RelativeLayout>
