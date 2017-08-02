@@ -3,14 +3,11 @@ package com.example.d7om7.wareed;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,25 +21,24 @@ public class RequstActivity extends AppCompatActivity {
     EditText fileNumberText;
     EditText countBloodText;
     EditText reasonOfRequistText;
+
     List<String> spinnerArray;
-    static String positon;
+     String selectBloodType;
+    List<String> spinnerArrayOfHospetal;
+     String selectHospetal;
+    List<String> spinnerArrayOfcity;
+     String selectcity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_requst);
+
+//---------------------------------------------------------------------
         final Spinner spinner = (Spinner) findViewById(R.id.planets_spiner);
-        spinnerArray = new ArrayList<String>();
-        spinnerArray.add("O+");
-        spinnerArray.add("O+");
-        spinnerArray.add("A+");
-        spinnerArray.add("A-");
-        spinnerArray.add("B+");
-        spinnerArray.add("B-");
-        spinnerArray.add("AB+");
-        spinnerArray.add("AB-");
+        spinnerArray = Arrays(3);
+
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -50,7 +46,7 @@ public class RequstActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positon = spinnerArray.get(position);
+                selectBloodType = spinnerArray.get(position);
             }
 
             @Override
@@ -59,6 +55,40 @@ public class RequstActivity extends AppCompatActivity {
             }
 
         });
+        //___________________________________________________________________________________________
+
+
+        //---------------------------------------------------------------------
+        final Spinner spinnerOfCity = (Spinner) findViewById(R.id.city_spiner);
+        spinnerArrayOfcity = Arrays(2);
+        ArrayAdapter adapterOfCity = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArrayOfcity);
+        adapterOfCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOfCity.setAdapter(adapterOfCity);
+
+        //___________________________________________________________________________________________
+
+
+        //---------------------------------------------------------------------
+        final Spinner spinnerOfHospetal = (Spinner) findViewById(R.id.Hospetal_spiner);
+        spinnerArrayOfHospetal = Arrays(1);
+        ArrayAdapter adapterOfHospetal =new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
+
+        adapterOfHospetal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOfHospetal.setAdapter(adapterOfHospetal);
+        spinnerOfHospetal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectHospetal = spinnerArrayOfHospetal.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                spinnerOfHospetal.setSelection(0);
+            }
+
+        });
+
+        //___________________________________________________________________________________________
     }
 
     public void onclick(View view) {
@@ -78,12 +108,19 @@ public class RequstActivity extends AppCompatActivity {
                     Integer.parseInt(fileNumberText.getText().toString()),
                     Integer.parseInt(countBloodText.getText().toString()),
                     reasonOfRequistText.getText().toString(),
-                    positon, "makkah", "sssssss", "dffdsff", 2, donor.getUserID(), 0);
+                    selectBloodType,
+                    selectcity,
+                    selectHospetal,
+                    "5 Days",
+                    2,
+                    donor.getUserID(),
+                    0
+            );
             donor.requestBlood.add(requestBlood);
 
-           Intent startChildActivityIntent = new Intent(this, EmergencyListActivity.class);
+            Intent startChildActivityIntent = new Intent(this, EmergencyListActivity.class);
             startActivity(startChildActivityIntent);
-              txetEmpty();
+            txetEmpty();
 
         }
 
@@ -96,5 +133,39 @@ public class RequstActivity extends AppCompatActivity {
         reasonOfRequistText.setText("");
 
 
+    }
+
+    public List<String> Arrays(int i) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+
+        if (i == 1) {
+            arrayList.add("king khaled");
+            arrayList.add("king abdullah");
+            arrayList.add("noor");
+
+
+        } else if (i == 2) {
+            arrayList.add("makkah");
+            arrayList.add("jeddah");
+
+        } else if (i == 3) {
+
+            arrayList.add("O+");
+            arrayList.add("O+");
+            arrayList.add("A+");
+            arrayList.add("A-");
+            arrayList.add("B+");
+            arrayList.add("B-");
+            arrayList.add("AB+");
+            arrayList.add("AB-");
+
+        }
+        if (i == 4) {
+            arrayList.add("king abdulrahman");
+            arrayList.add("king s3od");
+        }
+
+
+            return arrayList;
     }
 }

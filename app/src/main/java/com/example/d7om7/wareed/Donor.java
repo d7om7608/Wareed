@@ -13,20 +13,18 @@ public class Donor {
     String phoneNumber;
     int donateCount;
     String city;
-    String neighborhood ;
     String bloodType;
     String lastDonatingDate;
     String lastNotificationDate;
     int UserID;
     List<RequestBlood >requestBlood;
     public Donor(String name, String phoneNumber, int donateCount, String city
-            , String neighborhood , String bloodType, String lastDonatingDate, String lastNotificationDate, int UserID,
+             , String bloodType, String lastDonatingDate, String lastNotificationDate, int UserID,
                 List<RequestBlood > requestBlood) {
         this.name=name;
         this.phoneNumber=phoneNumber;
         this.donateCount=donateCount;
         this.city=city;
-        this.neighborhood=neighborhood;
         this.bloodType=bloodType;
         this.lastDonatingDate=lastDonatingDate;
         this.lastNotificationDate=lastNotificationDate;
@@ -74,13 +72,7 @@ public class Donor {
         this.city = city;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
+    
 
     public String getBloodType() {
         return bloodType;
