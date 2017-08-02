@@ -30,11 +30,10 @@
         <activity android:name=".EmergencyListActivity" />
         <activity android:name=".RequstActivity" />
         <activity android:name=".RegisterActicity" />
-<<<<<<< HEAD
+
         <activity android:name=".DisplayDetailse"></activity>
-=======
+
         <activity android:name=".ChatActivity"/>
->>>>>>> 471006dd1bd1af871059af73722ebff0f0c63646
     </application>
 
 </manifest>
