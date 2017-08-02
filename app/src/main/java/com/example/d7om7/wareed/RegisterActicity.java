@@ -38,6 +38,7 @@ public class RegisterActicity extends AppCompatActivity {
     private EditText UserNameEditText;
     private EditText PasswordEditText;
     private Spinner BloodTypeSpinner;
+    private Spinner CitySpinner;
     private EditText PhoneNumberEditText;
     public static String chatUserName ;
 
@@ -45,7 +46,6 @@ public class RegisterActicity extends AppCompatActivity {
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
     private ProgressDialog SignprogressDialog;
-    private ChatManager chatManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,65 +54,85 @@ public class RegisterActicity extends AppCompatActivity {
         UserNameEditText = (EditText) findViewById(R.id.signIn_username_editText);
         PasswordEditText = (EditText) findViewById(R.id.signIn_password_editText);
         BloodTypeSpinner = (Spinner) findViewById(R.id.blood_type_spinner);
+        CitySpinner = (Spinner) findViewById(R.id.city_spiner);
         PhoneNumberEditText = (EditText) findViewById(R.id.signIn_phoneNumber_editText);
 
-        initialize();
-    }
-
-    private void initialize() {
-        chatUserName = UserNameEditText.getText().toString().trim();
-
-        final List<String> list = new ArrayList<String>();
-        list.add("O+");
-        list.add("O+");
-        list.add("A+");
-        list.add("A-");
-        list.add("B+");
-        list.add("B-");
-        list.add("AB+");
-        list.add("AB-");
+        // Blood Type Spinner
+        final List<String> BloodList = new ArrayList<String>();
+        BloodList.add("O+");
+        BloodList.add("O-");
+        BloodList.add("A+");
+        BloodList.add("A-");
+        BloodList.add("B+");
+        BloodList.add("B-");
+        BloodList.add("AB+");
+        BloodList.add("AB-");
         ArrayAdapter<String> BloodSpinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, list);
+                android.R.layout.simple_list_item_1, BloodList);
         BloodSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BloodTypeSpinner.setAdapter(BloodSpinnerAdapter);
+        String userBloodType = BloodTypeSpinner.getSelectedItem().toString();
+
+//        //City Spinner
+//        final List<String> CityList = new ArrayList<String>();
+//        CityList.add("Makkah");
+//        CityList.add("Jeddah");
+//        CityList.add("Ta'if");
+//        CityList.add("Riyadh");
+//        CityList.add("Dammam");
+//        CityList.add("Albaha");
+//        CityList.add("Bahra");
+//        CityList.add("Abha");
+//        ArrayAdapter<String> CitySpinnerAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_list_item_2, CityList);
+//        BloodSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        CitySpinner.setAdapter(CitySpinnerAdapter);
+//        String userCity = CitySpinner.getSelectedItem().toString();
+
+
+
+
 
 
         SignFirebaseDatabase = FirebaseDatabase.getInstance();
         SignAuth = FirebaseAuth.getInstance();
         SignprogressDialog = new ProgressDialog(this);
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City");
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City").child("BloodType").child(userBloodType).child("User");
     }
+
+
+
+
+
+
+
+
+
 
     public void DoRegister(View view) {
 
         final String UserName = UserNameEditText.getText().toString().trim();
         final String UserPassword = PasswordEditText.getText().toString().trim();
         final String PhoneNumber = PhoneNumberEditText.getText().toString().trim();
-        final String BloodType = BloodTypeSpinner.getSelectedItem().toString().trim();
 
-        if (TextUtils.isEmpty(UserName) || TextUtils.isEmpty(UserPassword) || TextUtils.isEmpty(PhoneNumber) || TextUtils.isEmpty(BloodType)) {
+        if (TextUtils.isEmpty(UserName) || TextUtils.isEmpty(UserPassword) || TextUtils.isEmpty(PhoneNumber)) {
             System.out.print("445");
             Toast.makeText(RegisterActicity.this, "Missing data", Toast.LENGTH_SHORT).show();
         } else {
 
-            Toast.makeText(RegisterActicity.this, "no data missing", Toast.LENGTH_SHORT).show();
             SignprogressDialog.setMessage("Signing up");
             SignprogressDialog.show();
             SignAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {//not name &mail its number and blood instead
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.d("test", "onComplete " + task.isSuccessful());
-                    Toast.makeText(RegisterActicity.this, "in on complete", Toast.LENGTH_SHORT).show();
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(RegisterActicity.this, "task successful", Toast.LENGTH_SHORT).show();
                         String user_id = SignAuth.getCurrentUser().getUid();
                         DatabaseReference current_user_db = SignDataBase.child(user_id);
                         current_user_db.child("UserName").setValue(UserName);
                         current_user_db.child("PhoneNumber").setValue(PhoneNumber);
-                        current_user_db.child("BloodType").setValue(BloodType);
                         current_user_db.child("Password").setValue(UserPassword);
-
 
                         Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
