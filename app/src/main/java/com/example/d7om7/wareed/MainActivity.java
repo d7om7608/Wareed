@@ -49,9 +49,8 @@ public class MainActivity extends AppCompatActivity
 
         //____________________________________
 
-        donor=new Donor("ahmad","0552777608",0,"makkah","O+","0","0",1,new ArrayList<RequestBlood>());
-        RequestBlood requestBlood=new RequestBlood("khaled",125467,3,"عمليه جراحيه","A+","makkah","king khaled","1438/11/1",1,donor.getUserID(),2);
-        donor.requestBlood.add(requestBlood);
+        menagerModel menagerModel=new menagerModel();
+        menagerModel.creatDonor();
         //_____________________________________
 
 

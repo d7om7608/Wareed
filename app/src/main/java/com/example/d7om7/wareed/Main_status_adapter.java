@@ -1,5 +1,7 @@
 package com.example.d7om7.wareed;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,12 +11,21 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static android.R.attr.id;
+import static com.example.d7om7.wareed.R.id.bloodType;
+
 
 public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapter.ViewHolder> {
     private List<RequestBlood> requestedBloodList;
+    private changeActivity mCategoryHandler;
 
-    public Main_status_adapter(List<RequestBlood> requestBloods) {
+    public Main_status_adapter(List<RequestBlood> requestBloods,changeActivity handler) {
         this.requestedBloodList = requestBloods;
+        mCategoryHandler =handler;
+
+    }
+    public interface changeActivity  {
+        public void Clicked (int position,int id);
     }
 
     @Override
@@ -25,14 +36,21 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
     }
 
     @Override
-    public void onBindViewHolder(Main_status_adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.reasonOfRequest.setText("" + requestedBloodList.get(position).reasonOfRequest);
         holder.statusTime.setText("" + requestedBloodList.get(position).statusTime);
         holder.countOfrequest.setText("" + requestedBloodList.get(position).countOfBlood);
         holder.countDone.setText("" + requestedBloodList.get(position).countOfdone);
         holder.bloodTyep.setText("" + requestedBloodList.get(position).bloodType);
-        Log.d("hello", "" + position + "    " + requestedBloodList.get(position).reasonOfRequest);
+        Intent intent=new Intent();
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategoryHandler.Clicked(position, id);
+            }
+        });
 
     }
 

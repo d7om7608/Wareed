@@ -3,6 +3,7 @@ package com.example.d7om7.wareed;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,11 +24,11 @@ public class RequstActivity extends AppCompatActivity {
     EditText reasonOfRequistText;
 
     List<String> spinnerArray;
-     String selectBloodType;
-    List<String> spinnerArrayOfHospetal;
-     String selectHospetal;
+    String selectBloodType;
+    List<String> spinnerArrayOfHospetal = null;
+    String selectHospetal;
     List<String> spinnerArrayOfcity;
-     String selectcity;
+    String selectcity;
 
 
     @Override
@@ -65,16 +66,41 @@ public class RequstActivity extends AppCompatActivity {
         adapterOfCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfCity.setAdapter(adapterOfCity);
 
+
         //___________________________________________________________________________________________
 
 
         //---------------------------------------------------------------------
         final Spinner spinnerOfHospetal = (Spinner) findViewById(R.id.Hospetal_spiner);
         spinnerArrayOfHospetal = Arrays(1);
-        ArrayAdapter adapterOfHospetal =new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
+        ArrayAdapter adapterOfHospetal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
 
         adapterOfHospetal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOfHospetal.setAdapter(adapterOfHospetal);
+        spinnerOfCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectcity = spinnerArrayOfcity.get(position);
+                Log.d("hello", selectcity);
+                if (selectcity.equals("makkah"))
+                    spinnerArrayOfHospetal = Arrays(1);
+                else
+                    spinnerArrayOfHospetal = Arrays(4);
+
+                ArrayAdapter adapterOfHospetal = new ArrayAdapter<String>(RequstActivity.this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
+
+                adapterOfHospetal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerOfHospetal.setAdapter(adapterOfHospetal);
+                adapterOfHospetal.notifyDataSetChanged();
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                spinnerOfHospetal.setSelection(0);
+            }
+
+        });
         spinnerOfHospetal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -83,9 +109,8 @@ public class RequstActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                spinnerOfHospetal.setSelection(0);
-            }
 
+            }
         });
 
         //___________________________________________________________________________________________
@@ -116,9 +141,10 @@ public class RequstActivity extends AppCompatActivity {
                     donor.getUserID(),
                     0
             );
+            Log.d("hello",pantienNameText.getText().toString());
             donor.requestBlood.add(requestBlood);
 
-            Intent startChildActivityIntent = new Intent(this, EmergencyListActivity.class);
+            Intent startChildActivityIntent = new Intent(this, MainActivity.class);
             startActivity(startChildActivityIntent);
             txetEmpty();
 
@@ -166,6 +192,6 @@ public class RequstActivity extends AppCompatActivity {
         }
 
 
-            return arrayList;
+        return arrayList;
     }
 }

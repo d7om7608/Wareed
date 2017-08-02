@@ -64,11 +64,12 @@
         android:layout_below="@+id/countDone"
         android:layout_alignParentStart="true" />
 
-<Button
+<TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="التفاصيل"
-    android:onClick="details"
+    android:textSize="20sp"
+    android:gravity="center"
     android:layout_below="@+id/bloodTyep"
     android:layout_alignParentStart="true"
     android:id="@+id/button3" />
