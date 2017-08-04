@@ -1,5 +1,6 @@
 package com.example.d7om7.wareed;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,11 @@ public class RequstActivity extends AppCompatActivity {
     String selectHospetal;
     List<String> spinnerArrayOfcity;
     String selectcity;
+
+    private FirebaseDatabase SignFirebaseDatabase;
+    private FirebaseAuth SignAuth;
+    private DatabaseReference SignDataBase;
+    private ProgressDialog SignprogressDialog;
 
 
     @Override
@@ -114,6 +124,18 @@ public class RequstActivity extends AppCompatActivity {
         });
 
         //___________________________________________________________________________________________
+
+//        String ReqBloodType =   ;
+//        String ReqCity = spinnerOfCity.getSelectedItem().toString().trim() ;
+//        String Reqhosptial;
+//        SignFirebaseDatabase = FirebaseDatabase.getInstance();
+//        SignAuth = FirebaseAuth.getInstance();
+//        SignprogressDialog = new ProgressDialog(this);
+//        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City").child("BloodType").child(spinnerOfHospetal).child("User").child(Username);
+
+
+
+
     }
 
     public void onclick(View view) {
