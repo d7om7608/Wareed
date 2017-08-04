@@ -136,7 +136,7 @@ public class RequstActivity extends AppCompatActivity {
                     selectBloodType,
                     selectcity,
                     selectHospetal,
-                    "5 Days",
+                    "2 Houre",
                     2,
                     donor.getUserID(),
                     0
@@ -177,7 +177,7 @@ public class RequstActivity extends AppCompatActivity {
         } else if (i == 3) {
 
             arrayList.add("O+");
-            arrayList.add("O+");
+            arrayList.add("O-");
             arrayList.add("A+");
             arrayList.add("A-");
             arrayList.add("B+");

@@ -28,6 +28,7 @@ import java.util.List;
 
 import static android.R.attr.phoneNumber;
 import static android.R.attr.start;
+import static com.example.d7om7.wareed.menagerModel.donor;
 
 /**
  * Created by Azura on 7/30/2017.
@@ -131,11 +132,15 @@ public class RegisterActicity extends AppCompatActivity {
                         String user_id = SignAuth.getCurrentUser().getUid();
                         DatabaseReference current_user_db = SignDataBase.child(user_id);
                         current_user_db.child("UserName").setValue(UserName);
+
                         current_user_db.child("PhoneNumber").setValue(PhoneNumber);
                         current_user_db.child("Password").setValue(UserPassword);
 
                         Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        mainIntent.putExtra("NameUser", UserName);
+                        Log.d("hello",UserName+"");
+
                         startActivity(mainIntent);
 
 
