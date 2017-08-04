@@ -42,6 +42,7 @@ public class RegisterActicity extends AppCompatActivity {
     private Spinner CitySpinner;
     private EditText PhoneNumberEditText;
     public static String chatUserName ;
+    public static String userBloodType;
 
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
@@ -52,11 +53,13 @@ public class RegisterActicity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        UserNameEditText = (EditText) findViewById(R.id.signIn_username_editText);
-        PasswordEditText = (EditText) findViewById(R.id.signIn_password_editText);
+        UserNameEditText = (EditText) findViewById(R.id.reg_username_editText);
+        PasswordEditText = (EditText) findViewById(R.id.reg_password_editText);
         BloodTypeSpinner = (Spinner) findViewById(R.id.blood_type_spinner);
         CitySpinner = (Spinner) findViewById(R.id.city_spiner);
-        PhoneNumberEditText = (EditText) findViewById(R.id.signIn_phoneNumber_editText);
+        PhoneNumberEditText = (EditText) findViewById(R.id.reg_phoneNumber_editText);
+
+        String Username = UserNameEditText.getText().toString().trim();
 
         // Blood Type Spinner
         final List<String> BloodList = new ArrayList<String>();
@@ -72,7 +75,7 @@ public class RegisterActicity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, BloodList);
         BloodSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BloodTypeSpinner.setAdapter(BloodSpinnerAdapter);
-        String userBloodType = BloodTypeSpinner.getSelectedItem().toString();
+        userBloodType = BloodTypeSpinner.getSelectedItem().toString();
 
 //        //City Spinner
 //        final List<String> CityList = new ArrayList<String>();
@@ -98,7 +101,7 @@ public class RegisterActicity extends AppCompatActivity {
         SignFirebaseDatabase = FirebaseDatabase.getInstance();
         SignAuth = FirebaseAuth.getInstance();
         SignprogressDialog = new ProgressDialog(this);
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City").child("BloodType").child(userBloodType).child("User");
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City").child("BloodType").child(userBloodType).child("User").child(Username);
     }
 
 
@@ -117,24 +120,30 @@ public class RegisterActicity extends AppCompatActivity {
         final String PhoneNumber = PhoneNumberEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(UserName) || TextUtils.isEmpty(UserPassword) || TextUtils.isEmpty(PhoneNumber)) {
-            System.out.print("445");
+
             Toast.makeText(RegisterActicity.this, "Missing data", Toast.LENGTH_SHORT).show();
         } else {
 
             SignprogressDialog.setMessage("Signing up");
             SignprogressDialog.show();
-            SignAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {//not name &mail its number and blood instead
-                @Override
+            SignAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+            @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.d("test", "onComplete " + task.isSuccessful());
+//                    Log.d("test", "onComplete " + task.isSuccessful());
                     if (task.isSuccessful()) {
 
                         String user_id = SignAuth.getCurrentUser().getUid();
                         DatabaseReference current_user_db = SignDataBase.child(user_id);
                         current_user_db.child("UserName").setValue(UserName);
 
+
+//                        DatabaseReference current_user_db = SignDataBase.child(UserName);
+//                        current_user_db.child("UserNAme").setValue(UserName);
+
                         current_user_db.child("PhoneNumber").setValue(PhoneNumber);
                         current_user_db.child("Password").setValue(UserPassword);
+                        current_user_db.child("UserId").setValue(user_id);
 
                         Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
