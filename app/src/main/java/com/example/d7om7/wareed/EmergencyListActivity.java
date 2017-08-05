@@ -41,38 +41,14 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         status_adapter.notifyDataSetChanged();
 
-        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String bestProvider = manager.getBestProvider(criteria, true);
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Request persission for PROVIDERS
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location location = manager.getLastKnownLocation(bestProvider);
+        /*
+        Here LOCATION variables
+         */
+        LocationClass location = new LocationClass(this);
         double lon = location.getLongitude();
         double lat = location.getLatitude();
-        String city = this.getCity(lon,lat);
-    }
+        String city = location.getCurrectCity();
 
-    private String getCity(double lon,double lat){
-        Geocoder gcd = new Geocoder(getBaseContext(), Locale.ENGLISH);
-        try{
-            List<Address> address = gcd.getFromLocation(lat,lon,1);
-            if(address.size() > 0){
-                return address.get(0).getLocality();
-            }else{
-                return "unknown city";
-            }
-        }catch (IOException ex){
-            return "Error: "+ex.getMessage();
-        }
     }
 
     public void GoToChat(View view){
