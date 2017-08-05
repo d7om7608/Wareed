@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="مرحبا"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="#000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="87dp"
+        android:id="@+id/textView3" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="125dp"
+        android:text="التسجيل"
+        android:textSize="28sp"
+        android:onClick="GoToRegisterActivity"
+        android:id="@+id/button5" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:text="الدخول"
+        android:textSize="28sp"
+        android:onClick="GoToSignInActivity"
+        android:layout_below="@+id/button5"
+        android:layout_alignParentStart="true" />
+
+
+
+
+</RelativeLayout>

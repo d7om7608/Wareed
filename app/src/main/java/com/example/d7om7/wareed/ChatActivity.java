@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 /**
@@ -48,6 +47,7 @@ public class ChatActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "لا يوجد نص مدخل", Toast.LENGTH_SHORT).show();
                 } else {
                     arrayList.add(newMsg);
+
                     arrayAdapter.notifyDataSetChanged();
 
                 }

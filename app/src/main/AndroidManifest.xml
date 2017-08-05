@@ -36,6 +36,8 @@
         <activity android:name=".DisplayDetailse"></activity>
 
         <activity android:name=".ChatActivity"/>
+        <activity android:name=".RegisterorSigninActivity" />
+        <activity android:name=".SignInActivity"/>
     </application>
 
     /**
