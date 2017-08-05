@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
 //                if (user != null) {
 //
 //                } else {
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity
 //                                    .build(),
 //                            RC_SIGN_IN);
 //                }
+
             }
         };
 

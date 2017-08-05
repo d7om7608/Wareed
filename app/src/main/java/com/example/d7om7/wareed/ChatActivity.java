@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import static com.example.d7om7.wareed.menagerModel.donor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,11 +73,11 @@ public class ChatActivity extends AppCompatActivity {
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
                 Log.d("hello",getIntent().getStringExtra("NameUser")+"");
-                // name=getIntent().getStringExtra("NameUser");
+                name=donor.name;
 
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String, Object> map2 = new HashMap<String, Object>();
-               // map2.put("name", name);
+                map2.put("name", name);
                 map2.put("msg", ChatEditText.getText().toString());
 
                 message_root.updateChildren(map2);
@@ -124,9 +125,9 @@ public class ChatActivity extends AppCompatActivity {
         while (i.hasNext()) {
 
             chat_msg = (String) ((DataSnapshot) i.next()).getValue();
-           // chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
+            chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
 
-            arrayList.add( chat_msg);
+            arrayList.add(chat_user_name+" :  "+ chat_msg);
             arrayAdapter.notifyDataSetChanged();
             ChatListView.setSelection(arrayList.size());
         }

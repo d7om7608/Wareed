@@ -130,16 +130,13 @@ public class RegisterActicity extends AppCompatActivity {
 
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-//                    Log.d("test", "onComplete " + task.isSuccessful());
+
                     if (task.isSuccessful()) {
 
                         String user_id = SignAuth.getCurrentUser().getUid();
-                        DatabaseReference current_user_db = SignDataBase.child(user_id);
-                        current_user_db.child("UserName").setValue(UserName);
 
-
-//                        DatabaseReference current_user_db = SignDataBase.child(UserName);
-//                        current_user_db.child("UserNAme").setValue(UserName);
+                        DatabaseReference current_user_db = SignDataBase.child(UserName);
+                        current_user_db.child("UserNAme").setValue(UserName);
 
                         current_user_db.child("PhoneNumber").setValue(PhoneNumber);
                         current_user_db.child("Password").setValue(UserPassword);
