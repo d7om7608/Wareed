@@ -4,104 +4,44 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp">
 
+
     <EditText
+        android:id="@+id/phone_number_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:id="@+id/reg_username_editText"
-        android:hint="إسم المستخدم"
-        android:gravity="right"
-        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:id="@+id/reg_phoneNumber_editText"
-        android:hint="رقم الجوال"
-        android:gravity="right"
-        android:textSize="18sp"
-        android:inputType="number"
-        android:layout_below="@+id/reg_username_editText"
-        android:layout_alignParentStart="true" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout"
-        android:layout_below="@+id/reg_usermail_editText"
-        android:layout_alignStart="@+id/relativeLayout2"
-        android:layout_marginTop="59dp"
-        android:layout_marginBottom="15dp">
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="29dp"
-        android:gravity="right"
-
-        android:hint="فئة دمك"
-        android:textSize="18sp"
-        android:layout_below="@+id/reg_phoneNumber_editText"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/textView2" />
-
-    <Spinner
-        android:id="@+id/blood_type_spinner"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignParentStart="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/relativeLayout2"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="45dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:text="المدينة"
-            android:textSize="18sp"
-            />
-        <Spinner
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/city_spinner"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
-        </Spinner>
-
-
-    </RelativeLayout>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:id="@+id/reg_password_editText"
-        android:hint="كلمة االسر"
-        android:gravity="right"
-        android:textSize="18sp"
-        android:inputType="textPassword"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_alignParentStart="true" />
+        android:hint="Write Phone Number"
+        android:textSize="22sp"
+        android:inputType="phone"/>
 
     <Button
-        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/send_verification_code_button"
+        android:onClick="requestCode"
+        android:text="Send Verification Code"
+        android:textSize="18sp"
+        android:layout_below="@+id/phone_number_edit_text"
+        android:layout_alignParentStart="true" />
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:id="@+id/write_verification_code_edit_text"
+        android:hint="Write Verification Code"
+        android:textSize="22sp"
+        android:layout_below="@+id/send_verification_code_button"
         android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:onClick="DoRegister"
-        android:text="Register"
-        android:textSize="18sp" />
+        android:inputType="number"/>
 
-
-
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="signin_button"
+        android:text="Sign In"
+        android:textSize="20sp"
+        android:layout_below="@+id/write_verification_code_edit_text"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

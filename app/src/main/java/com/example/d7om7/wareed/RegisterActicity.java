@@ -18,13 +18,18 @@ import android.widget.Toast;
 import com.firebase.ui.auth.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static android.R.attr.phoneNumber;
 import static android.R.attr.start;
@@ -33,124 +38,98 @@ import static android.R.attr.start;
  * Created by Azura on 7/30/2017.
  */
 
+
+
 public class RegisterActicity extends AppCompatActivity {
 
-    private EditText UserNameEditText;
-    private EditText PasswordEditText;
-    private Spinner BloodTypeSpinner;
-    private Spinner CitySpinner;
-    private EditText PhoneNumberEditText;
-    public static String chatUserName ;
-    public static String userBloodType;
+    private FirebaseAuth mAuth ;
 
-    private FirebaseDatabase SignFirebaseDatabase;
-    private FirebaseAuth SignAuth;
-    private DatabaseReference SignDataBase;
-    private ProgressDialog SignprogressDialog;
+
+    private EditText PhoneNumberEditText;
+    private EditText VerificationCodeEditText ;
+    String mVerificationId ;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        UserNameEditText = (EditText) findViewById(R.id.reg_username_editText);
-        PasswordEditText = (EditText) findViewById(R.id.reg_password_editText);
-        BloodTypeSpinner = (Spinner) findViewById(R.id.blood_type_spinner);
-        CitySpinner = (Spinner) findViewById(R.id.city_spiner);
-        PhoneNumberEditText = (EditText) findViewById(R.id.reg_phoneNumber_editText);
 
-        String Username = UserNameEditText.getText().toString().trim();
+        PhoneNumberEditText = (EditText) findViewById(R.id.phone_number_edit_text);
+        VerificationCodeEditText = (EditText) findViewById(R.id.write_verification_code_edit_text);
 
-        // Blood Type Spinner
-        final List<String> BloodList = new ArrayList<String>();
-        BloodList.add("O+");
-        BloodList.add("O-");
-        BloodList.add("A+");
-        BloodList.add("A-");
-        BloodList.add("B+");
-        BloodList.add("B-");
-        BloodList.add("AB+");
-        BloodList.add("AB-");
-        ArrayAdapter<String> BloodSpinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, BloodList);
-        BloodSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        BloodTypeSpinner.setAdapter(BloodSpinnerAdapter);
-        userBloodType = BloodTypeSpinner.getSelectedItem().toString();
+        mAuth = FirebaseAuth.getInstance();
 
-//        //City Spinner
-//        final List<String> CityList = new ArrayList<String>();
-//        CityList.add("Makkah");
-//        CityList.add("Jeddah");
-//        CityList.add("Ta'if");
-//        CityList.add("Riyadh");
-//        CityList.add("Dammam");
-//        CityList.add("Albaha");
-//        CityList.add("Bahra");
-//        CityList.add("Abha");
-//        ArrayAdapter<String> CitySpinnerAdapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_list_item_2, CityList);
-//        BloodSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        CitySpinner.setAdapter(CitySpinnerAdapter);
-//        String userCity = CitySpinner.getSelectedItem().toString();
-
-
-
-
-
-
-        SignFirebaseDatabase = FirebaseDatabase.getInstance();
-        SignAuth = FirebaseAuth.getInstance();
-        SignprogressDialog = new ProgressDialog(this);
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City").child("BloodType").child(userBloodType).child("User").child(Username);
     }
 
+    public void requestCode (View view){
 
+        String phoneNumber =  PhoneNumberEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(phoneNumber)) return;
 
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,60, TimeUnit.SECONDS,RegisterActicity.this,new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
 
+                    @Override
+                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                        signInWithCredentials(phoneAuthCredential);
+                    }
 
+                    @Override
+                    public void onVerificationFailed(FirebaseException e) {
+                        Toast.makeText(RegisterActicity.this,"Verification Failed "+e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
 
-
-
-
-
-    public void DoRegister(View view) {
-
-        final String UserName = UserNameEditText.getText().toString().trim();
-        final String UserPassword = PasswordEditText.getText().toString().trim();
-        final String PhoneNumber = PhoneNumberEditText.getText().toString().trim();
-
-        if (TextUtils.isEmpty(UserName) || TextUtils.isEmpty(UserPassword) || TextUtils.isEmpty(PhoneNumber)) {
-
-            Toast.makeText(RegisterActicity.this, "Missing data", Toast.LENGTH_SHORT).show();
-        } else {
-
-            SignprogressDialog.setMessage("Signing up");
-            SignprogressDialog.show();
-            SignAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-            @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    Log.d("test", "onComplete " + task.isSuccessful());
-                    if (task.isSuccessful()) {
-
-                        String user_id = SignAuth.getCurrentUser().getUid();
-                        DatabaseReference current_user_db = SignDataBase.child(UserName);
-                        current_user_db.child("UserNAme").setValue(UserName);
-                        current_user_db.child("PhoneNumber").setValue(PhoneNumber);
-                        current_user_db.child("Password").setValue(UserPassword);
-                        current_user_db.child("UserId").setValue(user_id);
-
-                        Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(mainIntent);
-
+                    @Override
+                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        super.onCodeSent(verificationId, forceResendingToken);
+                        mVerificationId = verificationId;
 
                     }
 
-                    SignprogressDialog.dismiss();
+                    @Override
+                    public void onCodeAutoRetrievalTimeOut(String verificationID) {
+                        super.onCodeAutoRetrievalTimeOut(verificationID);
+                        Toast.makeText(RegisterActicity.this,"Time Out",Toast.LENGTH_SHORT).show();
+
+
+                    }
                 }
-            });
-
-
-        }
+        );
     }
+
+    public void signInWithCredentials (PhoneAuthCredential phoneAuthCredential){
+
+        mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+
+                    Toast.makeText(RegisterActicity.this,"Signed in Successfully",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActicity.this,MainActivity.class);
+                    startActivity(intent);
+
+                }
+
+                else {
+                    Toast.makeText(RegisterActicity.this,"Failed To Sign In ",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+
+    }
+
+    public void signin_button (View view){
+
+        String code = VerificationCodeEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(code)){
+            return; }
+
+            signInWithCredentials(PhoneAuthProvider.getCredential(mVerificationId,code));
+
+    }
+
 }

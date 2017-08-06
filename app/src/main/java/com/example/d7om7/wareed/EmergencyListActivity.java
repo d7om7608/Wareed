@@ -16,6 +16,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +31,17 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     Main_status_adapter status_adapter;
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mRequestDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_list);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+//        mRequestDatabaseReference = FirebaseDatabase.getInstance().getReference().child("City").child()
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

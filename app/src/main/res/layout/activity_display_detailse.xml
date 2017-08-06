@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.d7om7.wareed.RequstActivity">
+    tools:context="com.example.d7om7.wareed.RequestActivity">
 
 
     <ScrollView
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context="com.example.d7om7.wareed.RequstActivity">
+            tools:context="com.example.d7om7.wareed.RequestActivity">
 
 
             <ScrollView

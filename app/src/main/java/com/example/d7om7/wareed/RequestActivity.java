@@ -20,7 +20,7 @@ import java.util.List;
 
 import static com.example.d7om7.wareed.menagerModel.donor;
 
-public class RequstActivity extends AppCompatActivity {
+public class RequestActivity extends AppCompatActivity {
     RequestBlood requestBlood;
     EditText requestBloodText;
     EditText pantienNameText;
@@ -97,7 +97,7 @@ public class RequstActivity extends AppCompatActivity {
                 else
                     spinnerArrayOfHospetal = Arrays(4);
 
-                ArrayAdapter adapterOfHospetal = new ArrayAdapter<String>(RequstActivity.this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
+                ArrayAdapter adapterOfHospetal = new ArrayAdapter<String>(RequestActivity.this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
 
                 adapterOfHospetal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerOfHospetal.setAdapter(adapterOfHospetal);
@@ -125,13 +125,11 @@ public class RequstActivity extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-//        String ReqBloodType =   ;
-//        String ReqCity = spinnerOfCity.getSelectedItem().toString().trim() ;
-//        String Reqhosptial;
-//        SignFirebaseDatabase = FirebaseDatabase.getInstance();
-//        SignAuth = FirebaseAuth.getInstance();
-//        SignprogressDialog = new ProgressDialog(this);
-//        SignDataBase = FirebaseDatabase.getInstance().getReference().child("City").child("BloodType").child(spinnerOfHospetal).child("User").child(Username);
+        String ReqBloodType = spinner.getSelectedItem().toString()   ;
+        String ReqCity = spinnerOfCity.getSelectedItem().toString().trim() ;
+        SignFirebaseDatabase = FirebaseDatabase.getInstance();
+        SignAuth = FirebaseAuth.getInstance();
+        SignprogressDialog = new ProgressDialog(this);
 
 
 
@@ -139,6 +137,9 @@ public class RequstActivity extends AppCompatActivity {
     }
 
     public void onclick(View view) {
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child(requestBlood.getCity())
+        .child("BloodType").child(requestBlood.getBloodType()).child(requestBlood.getRequestID()+"");
+
         requestBloodText = (EditText) findViewById(R.id.reasonOfRequist);
         pantienNameText = (EditText) findViewById(R.id.pantienName);
         fileNumberText = (EditText) findViewById(R.id.fileNumber);
@@ -171,6 +172,15 @@ public class RequstActivity extends AppCompatActivity {
             txetEmpty();
 
         }
+        String user_id = SignAuth.getCurrentUser().getUid();
+        DatabaseReference current_user_db = SignDataBase.child("Requests");
+        current_user_db.child("Hospital").setValue(requestBlood.getNameOfHospital());
+        current_user_db.child("PaitientName").setValue(requestBlood.getPatientName());
+        current_user_db.child("FileNumber").setValue(requestBlood.getPatientFileNumber());
+        current_user_db.child("Reason").setValue(requestBlood.getReasonOfRequest());
+        current_user_db.child("BloodBags").setValue(requestBlood.getCountOfBlood());
+        current_user_db.child("UserID").setValue(user_id);
+
 
     }
 

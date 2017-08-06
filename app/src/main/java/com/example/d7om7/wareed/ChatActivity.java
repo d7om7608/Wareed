@@ -49,6 +49,7 @@ public class ChatActivity extends AppCompatActivity {
                     arrayList.add(newMsg);
 
                     arrayAdapter.notifyDataSetChanged();
+                    ChatEditText.setText("");
 
                 }
             }
