@@ -11,12 +11,12 @@ public class RequestBlood {
     String bloodType;
     String city;
     String nameOfHospital;
-    int requestID;
-    int userID;
+    String requestID;
+    String userID;
     String statusTime;
 
     public RequestBlood(String patientName, int patientFileNumber, int countOfBlood, String reasonOfRequest, String bloodType, String city, String nameOfHospital,
-                        String statusTime, int requestID, int userID, int countOfdone) {
+                        String statusTime, String requestID, String userID, int countOfdone) {
         this.patientName=patientName;
         this.patientFileNumber=patientFileNumber;
         this.countOfBlood=countOfBlood;
@@ -105,19 +105,19 @@ public class RequestBlood {
         this.nameOfHospital = nameOfHospital;
     }
 
-    public int getRequestID() {
+    public String getRequestID() {
         return requestID;
     }
 
-    public void setRequestID(int requestID) {
+    public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 }
