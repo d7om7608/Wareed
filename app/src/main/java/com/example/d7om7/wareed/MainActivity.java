@@ -1,7 +1,14 @@
 package com.example.d7om7.wareed;
 
-import android.app.ListActivity;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,36 +16,43 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.auth.api.Auth;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+
 
 import static com.example.d7om7.wareed.menagerModel.donor;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-//    private static final String TAG = "PhoneAuthActivity";
+//____________________________________dateStart
+private Dialog D_DatePicker;
+    private SimpleDateFormat date;
+    private Calendar calendar;
+    private Button BTN;
+    private TextView TEXT;
+    //____________________________________dateFinsh
 
-//    private PhoneAuthProvider.ForceResendingToken mResendToken;
-//    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    Button notification;
 
     public static final int RC_SIGN_IN = 1;
     private FirebaseDatabase mFirebaseDatabase;
@@ -70,6 +84,23 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //__________________________________________________
+
+
+        //____________________________________dateStart
+        BTN = (Button) findViewById(R.id.BTN);
+        TEXT = (TextView) findViewById(R.id.TEXT);
+
+        calendar = Calendar.getInstance();
+        date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
+
+        BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePicker();
+            }
+        });
+        //____________________________________dateFinsh
+
 
 
 
@@ -115,14 +146,18 @@ public class MainActivity extends AppCompatActivity
         super.onPause();
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
-
+    long time;
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            if (time+2000>System.currentTimeMillis())
             super.onBackPressed();
+            else
+                Toast.makeText(this, "اضغط مرتين للخروج", Toast.LENGTH_SHORT).show();
+        time=System.currentTimeMillis();
         }
     }
 
@@ -194,5 +229,44 @@ public class MainActivity extends AppCompatActivity
         Intent startChildActivityIntent = new Intent(this, RequstActivity.class);
         startActivity(startChildActivityIntent);
     }
+
+
+    public void DatePicker() {
+
+
+        D_DatePicker = new Dialog(this);
+        D_DatePicker.setContentView(R.layout.dilalog_date_picker);
+        final DatePicker datepicker = (DatePicker) D_DatePicker.findViewById(R.id.date_picker);
+        Button BTN_GetDate = (Button) D_DatePicker.findViewById(R.id.BTN_GetDate);
+        Button BTN_Close = (Button) D_DatePicker.findViewById(R.id.BTN_Close);
+
+        datepicker.setMinDate(calendar.getTimeInMillis());
+
+        Calendar calendar_1 = Calendar.getInstance();
+        calendar_1.add(Calendar.MONTH, 24);
+        datepicker.setMaxDate(calendar_1.getTimeInMillis());
+
+        BTN_GetDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar2 = Calendar.getInstance();
+                String FinalDate;
+                calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
+                FinalDate = date.format(calendar2.getTime());
+                TEXT.setText(FinalDate);
+                donor.getRequestBlood().get(0).setStatusTime(FinalDate);
+                D_DatePicker.dismiss();
+            }
+        });
+        BTN_Close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                D_DatePicker.dismiss();
+            }
+        });
+
+        D_DatePicker.show();
+    }
+
 
 }
