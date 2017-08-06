@@ -1,9 +1,16 @@
 package com.example.d7om7.wareed;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.app.NotificationCompat;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
@@ -89,11 +96,25 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Add_Chat(dataSnapshot);
+
+
+
+                NotificationManager mm=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                Bitmap bmp= BitmapFactory.decodeResource(getResources(),R.drawable.img);
+                NotificationCompat.Builder bulder= (NotificationCompat.Builder) new  NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
+                        .setContentText("نص موضوع الرساله").setSmallIcon(R.drawable.img).setLargeIcon(bmp).setAutoCancel(true).setNumber(1);
+                bulder.setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);
+                bulder.setVibrate(new long[]{500,1000,500,1000,500});
+                bulder.setSound(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.jrs));
+
+                mm.notify(1,bulder.build());
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Add_Chat(dataSnapshot);
+
+
 
             }
 
