@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 import static android.R.attr.phoneNumber;
 import static android.R.attr.start;
+import static com.example.d7om7.wareed.menagerModel.donor;
 
 /**
  * Created by Azura on 7/30/2017.
@@ -103,12 +104,34 @@ public class RegisterActicity extends AppCompatActivity {
 
         mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
+<<<<<<< HEAD
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
 
                     Toast.makeText(RegisterActicity.this,"Signed in Successfully",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActicity.this,MainActivity.class);
                     startActivity(intent);
+=======
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if (task.isSuccessful()) {
+
+                        String user_id = SignAuth.getCurrentUser().getUid();
+
+                        DatabaseReference current_user_db = SignDataBase.child(UserName);
+                        current_user_db.child("UserNAme").setValue(UserName);
+
+                        current_user_db.child("PhoneNumber").setValue(PhoneNumber);
+                        current_user_db.child("Password").setValue(UserPassword);
+                        current_user_db.child("UserId").setValue(user_id);
+
+                        Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        mainIntent.putExtra("NameUser", UserName);
+                        Log.d("hello",UserName+"");
+
+                        startActivity(mainIntent);
+>>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
 
                 }
 

@@ -9,35 +9,36 @@ import java.util.List;
 
 public class Donor {
 
-    String name;
-    String phoneNumber;
-    int donateCount;
-    String city;
-    String bloodType;
-    String lastDonatingDate;
-    String lastNotificationDate;
-    int UserID;
-    List<RequestBlood >requestBlood;
+    protected String name;
+    protected String phoneNumber;
+    protected int donateCount;
+    protected String city;
+    protected String bloodType;
+    protected String lastDonatingDate;
+    protected String lastNotificationDate;
+    protected String UserID;
+    protected List<String> requestsId;
+
     public Donor(String name, String phoneNumber, int donateCount, String city
-             , String bloodType, String lastDonatingDate, String lastNotificationDate, int UserID,
-                List<RequestBlood > requestBlood) {
-        this.name=name;
-        this.phoneNumber=phoneNumber;
-        this.donateCount=donateCount;
-        this.city=city;
-        this.bloodType=bloodType;
-        this.lastDonatingDate=lastDonatingDate;
-        this.lastNotificationDate=lastNotificationDate;
-        this.UserID=UserID;
-        this.requestBlood=requestBlood;
+            , String bloodType, String lastDonatingDate, String lastNotificationDate, String UserID,
+                 List<String> requestsId) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.donateCount = donateCount;
+        this.city = city;
+        this.bloodType = bloodType;
+        this.lastDonatingDate = lastDonatingDate;
+        this.lastNotificationDate = lastNotificationDate;
+        this.UserID = UserID;
+        this.requestsId = requestsId;
     }
 
-    public List<RequestBlood> getRequestBlood() {
-        return requestBlood;
+    public String getRequestBlood(int position) {
+        return requestsId.get(position);
     }
 
-    public void setRequestBlood(List<RequestBlood> requestBlood) {
-        this.requestBlood = requestBlood;
+    public void setRequestBlood(String requestId) {
+        this.requestsId.add(requestId);
     }
 
     public String getName() {
@@ -72,7 +73,6 @@ public class Donor {
         this.city = city;
     }
 
-    
 
     public String getBloodType() {
         return bloodType;
@@ -98,14 +98,13 @@ public class Donor {
         this.lastNotificationDate = lastNotificationDate;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return UserID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         UserID = userID;
     }
-
 
 
 }

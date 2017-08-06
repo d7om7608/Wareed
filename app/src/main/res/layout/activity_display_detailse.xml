@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:text="number of jarkl blood"
+                android:text="number of blood bags"
                 android:textSize="20sp" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:text="reason of reqest"
+                android:text="reason of request"
                 android:textSize="20sp" />
 
             <TextView
