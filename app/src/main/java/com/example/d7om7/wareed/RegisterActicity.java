@@ -40,16 +40,14 @@ import static com.example.d7om7.wareed.menagerModel.donor;
  */
 
 
-
 public class RegisterActicity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth ;
+    private FirebaseAuth mAuth;
 
 
     private EditText PhoneNumberEditText;
-    private EditText VerificationCodeEditText ;
-    String mVerificationId ;
-
+    private EditText VerificationCodeEditText;
+    String mVerificationId;
 
 
     @Override
@@ -64,13 +62,13 @@ public class RegisterActicity extends AppCompatActivity {
 
     }
 
-    public void requestCode (View view){
+    public void requestCode(View view) {
 
-        String phoneNumber =  PhoneNumberEditText.getText().toString().trim();
+        String phoneNumber = PhoneNumberEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNumber)) return;
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,60, TimeUnit.SECONDS,RegisterActicity.this,new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+                phoneNumber, 60, TimeUnit.SECONDS, RegisterActicity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -79,7 +77,7 @@ public class RegisterActicity extends AppCompatActivity {
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(RegisterActicity.this,"Verification Failed "+e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActicity.this, "Verification Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -92,7 +90,7 @@ public class RegisterActicity extends AppCompatActivity {
                     @Override
                     public void onCodeAutoRetrievalTimeOut(String verificationID) {
                         super.onCodeAutoRetrievalTimeOut(verificationID);
-                        Toast.makeText(RegisterActicity.this,"Time Out",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActicity.this, "Time Out", Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -100,43 +98,22 @@ public class RegisterActicity extends AppCompatActivity {
         );
     }
 
-    public void signInWithCredentials (PhoneAuthCredential phoneAuthCredential){
+    public void signInWithCredentials(PhoneAuthCredential phoneAuthCredential) {
 
         mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
-<<<<<<< HEAD
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
 
-                    Toast.makeText(RegisterActicity.this,"Signed in Successfully",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActicity.this,MainActivity.class);
+                    Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-=======
-                public void onComplete(@NonNull Task<AuthResult> task) {
+                    finish();
 
-                    if (task.isSuccessful()) {
 
-                        String user_id = SignAuth.getCurrentUser().getUid();
-
-                        DatabaseReference current_user_db = SignDataBase.child(UserName);
-                        current_user_db.child("UserNAme").setValue(UserName);
-
-                        current_user_db.child("PhoneNumber").setValue(PhoneNumber);
-                        current_user_db.child("Password").setValue(UserPassword);
-                        current_user_db.child("UserId").setValue(user_id);
-
-                        Intent mainIntent = new Intent(RegisterActicity.this, MainActivity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mainIntent.putExtra("NameUser", UserName);
-                        Log.d("hello",UserName+"");
-
-                        startActivity(mainIntent);
->>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
-
-                }
-
-                else {
-                    Toast.makeText(RegisterActicity.this,"Failed To Sign In ",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActicity.this, "Failed To Sign In ", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -145,13 +122,14 @@ public class RegisterActicity extends AppCompatActivity {
 
     }
 
-    public void signin_button (View view){
+    public void signin_button(View view) {
 
         String code = VerificationCodeEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(code)){
-            return; }
+        if (TextUtils.isEmpty(code)) {
+            return;
+        }
 
-            signInWithCredentials(PhoneAuthProvider.getCredential(mVerificationId,code));
+        signInWithCredentials(PhoneAuthProvider.getCredential(mVerificationId, code));
 
     }
 

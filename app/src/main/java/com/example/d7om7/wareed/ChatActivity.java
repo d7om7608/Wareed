@@ -115,11 +115,9 @@ public class ChatActivity extends AppCompatActivity {
                 Add_Chat(dataSnapshot);
 
 
-<<<<<<< HEAD
                     arrayAdapter.notifyDataSetChanged();
                     ChatEditText.setText("");
-=======
->>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
+
 
             }
 

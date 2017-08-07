@@ -1,12 +1,10 @@
 package com.example.d7om7.wareed;
 
-<<<<<<< HEAD
-=======
+
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
->>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
 import android.content.Intent;
 
 import android.graphics.Bitmap;
@@ -24,36 +22,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-<<<<<<< HEAD
-=======
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
->>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
-
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-<<<<<<< HEAD
 import java.util.Arrays;
-=======
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 
->>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Donor donor;
 
 //____________________________________dateStart
-private Dialog D_DatePicker;
+    private Dialog D_DatePicker;
     private SimpleDateFormat date;
     private Calendar calendar;
     private Button BTN;
@@ -124,7 +114,6 @@ private Dialog D_DatePicker;
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-<<<<<<< HEAD
                 if (user == null) {
 
                     Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
@@ -134,23 +123,7 @@ private Dialog D_DatePicker;
 
 
                 }
-=======
-//                if (user != null) {
-//
-//                } else {
-//
-//                    startActivityForResult(
-//                            AuthUI.getInstance()
-//                                    .createSignInIntentBuilder()
-//                                    .setAvailableProviders(
-//                                            Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-//                                                    new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build(),
-//                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-//                                    .build(),
-//                            RC_SIGN_IN);
-//                }
 
->>>>>>> 9b79c6a373815de624971fb8f9a5dcd400983ad9
             }
         };
 
@@ -207,7 +180,7 @@ private Dialog D_DatePicker;
         }
         if (id == R.id.action_sign_out) {
 
-                    AuthUI.getInstance().signOut(this);
+             AuthUI.getInstance().signOut(this);
 
 
             return true;
@@ -225,6 +198,9 @@ private Dialog D_DatePicker;
         if (id == R.id.nav_Talks) {
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
+
+            Intent ProfileIntent = new Intent(MainActivity.this,ProfileActivity.class);
+            startActivity(ProfileIntent);
 
         }  else if (id == R.id.nav_share) {
 
@@ -274,7 +250,7 @@ private Dialog D_DatePicker;
                 calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
                 FinalDate = date.format(calendar2.getTime());
                 TEXT.setText(FinalDate);
-                donor.getRequestBlood().get(0).setStatusTime(FinalDate);
+//                donor.getRequestBlood(1).get(0).setStatusTime(FinalDate);
                 D_DatePicker.dismiss();
             }
         });
@@ -287,6 +263,8 @@ private Dialog D_DatePicker;
 
         D_DatePicker.show();
     }
+
+
 
 
 }

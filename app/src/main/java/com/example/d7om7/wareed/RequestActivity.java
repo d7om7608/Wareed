@@ -138,7 +138,7 @@ public class RequestActivity extends AppCompatActivity {
 
     public void onclick(View view) {
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child(requestBlood.getCity())
-        .child("BloodType").child(requestBlood.getBloodType()).child(requestBlood.getRequestID()+"");
+        .child("BloodType").child(requestBlood.getBloodType()).child("Requests");
 
         requestBloodText = (EditText) findViewById(R.id.reasonOfRequist);
         pantienNameText = (EditText) findViewById(R.id.pantienName);
@@ -159,13 +159,13 @@ public class RequestActivity extends AppCompatActivity {
                     selectBloodType,
                     selectcity,
                     selectHospetal,
-                    "2 Houre",
-                    2,
+                    "2 Hours",
+                    2+"",
                     donor.getUserID(),
                     0
             );
             Log.d("hello",pantienNameText.getText().toString());
-            donor.requestBlood.add(requestBlood);
+//            donor.requestBlood.add(requestBlood);
 
             Intent startChildActivityIntent = new Intent(this, MainActivity.class);
             startActivity(startChildActivityIntent);
@@ -173,7 +173,7 @@ public class RequestActivity extends AppCompatActivity {
 
         }
         String user_id = SignAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = SignDataBase.child("Requests");
+        DatabaseReference current_user_db = SignDataBase.child(requestBlood.getRequestID()+"");
         current_user_db.child("Hospital").setValue(requestBlood.getNameOfHospital());
         current_user_db.child("PaitientName").setValue(requestBlood.getPatientName());
         current_user_db.child("FileNumber").setValue(requestBlood.getPatientFileNumber());
