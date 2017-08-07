@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,8 +31,12 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,7 +59,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final int RC_SIGN_IN = 1;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference SearchForProfile;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -97,18 +102,13 @@ public class MainActivity extends AppCompatActivity
                 DatePicker();
             }
         });
-        //____________________________________dateFinsh
+        //____________________________________DateFinish
 
 
 
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
-
-
-
-
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -118,14 +118,11 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
                     MainActivity.this.startActivity(intent);
-
-                } else {
-
-
                 }
-
             }
         };
+
+
 
     }
     @Override
@@ -180,8 +177,8 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.action_sign_out) {
 
-             AuthUI.getInstance().signOut(this);
-
+//             AuthUI.getInstance().signOut(this);
+            mFirebaseAuth.signOut();
 
             return true;
         }
@@ -189,7 +186,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    @SuppressWarnings("StatmentWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.

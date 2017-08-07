@@ -24,8 +24,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ import static com.example.d7om7.wareed.menagerModel.donor;
 public class RegisterActicity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference SearchForProfile;
 
 
     private EditText PhoneNumberEditText;
@@ -59,6 +63,8 @@ public class RegisterActicity extends AppCompatActivity {
         VerificationCodeEditText = (EditText) findViewById(R.id.write_verification_code_edit_text);
 
         mAuth = FirebaseAuth.getInstance();
+        SearchForProfile = FirebaseDatabase.getInstance().getReference().child("users");
+
 
     }
 
@@ -104,12 +110,26 @@ public class RegisterActicity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    SearchForProfile.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.child(mAuth.getCurrentUser().getUid().toString()).hasChildren()) {
+                                Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
 
-                    Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+                            } else {
+
+                                Intent intent = new Intent(RegisterActicity.this, ProfileActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
 
 
                 } else {

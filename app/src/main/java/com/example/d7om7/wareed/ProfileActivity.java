@@ -26,11 +26,13 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference SignDataBase;
 
     private EditText UserNameEditText;
+    private EditText EmailEditText;
     private Spinner BloodTypeSpinner ;
     private Spinner CitySpinner ;
     private Spinner GenderSpinner ;
 
     String UsernameTooked ;
+    String Email;
     String BloodTypeTooked  ;
     String CityTooked ;
     String GenderTooked;
@@ -45,9 +47,11 @@ public class ProfileActivity extends AppCompatActivity {
 
 //        Ui components
         UserNameEditText = (EditText) findViewById(R.id.username_edittext);
+        EmailEditText = (EditText) findViewById(R.id.email_edittext);
         BloodTypeSpinner = (Spinner) findViewById(R.id.profile_bloodType_spinner);
         CitySpinner = (Spinner) findViewById(R.id.profile_city_spinner);
         GenderSpinner = (Spinner) findViewById(R.id.profile_gender_spinner);
+
 
 
         BloodSpinner();
@@ -96,9 +100,9 @@ public class ProfileActivity extends AppCompatActivity {
         BloodTypeTooked = BloodTypeSpinner.getSelectedItem().toString().trim();
         CityTooked = CitySpinner.getSelectedItem().toString().trim();
         GenderTooked = GenderSpinner.getSelectedItem().toString().trim();
+        Email = EmailEditText.getText().toString().trim();
 
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked).child(BloodTypeTooked)
-                .child("users").child(GenderTooked);
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
 
         if (UsernameTooked.isEmpty()||BloodTypeTooked.isEmpty()){
 
@@ -110,6 +114,9 @@ public class ProfileActivity extends AppCompatActivity {
             DatabaseReference current_user_db = SignDataBase.child(UserUID);
             current_user_db.child("user name").setValue(UsernameTooked);
             current_user_db.child("BloodType").setValue(BloodTypeTooked);
+            current_user_db.child("gender").setValue(GenderTooked);
+            current_user_db.child("city").setValue(CityTooked);
+            current_user_db.child("email").setValue(Email);
 
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
