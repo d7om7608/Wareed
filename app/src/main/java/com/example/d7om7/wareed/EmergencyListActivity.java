@@ -46,7 +46,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-////        status_adapter = new Main_status_adapter(donor.requestBlood, this);
+//        status_adapter = new Main_status_adapter(donor.requestBlood, this);
         recyclerView.setAdapter(status_adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         status_adapter.notifyDataSetChanged();
@@ -72,7 +72,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     @Override
     public void Clicked(int position, int id) {
-        Intent startChildActivityIntent = new Intent(this, DisplayDetailse.class);
+        Intent startChildActivityIntent = new Intent(this, DisplayDetails.class);
 //        startChildActivityIntent.putExtra("getPatientName", donor.requestBlood.get(position).getPatientName());
 //        startChildActivityIntent.putExtra("getPatientFileNumber", donor.requestBlood.get(position).getPatientFileNumber());
 //        startChildActivityIntent.putExtra("getCountOfBlood", donor.requestBlood.get(position).getCountOfBlood());

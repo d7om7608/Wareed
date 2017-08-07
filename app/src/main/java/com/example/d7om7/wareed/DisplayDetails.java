@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class DisplayDetailse extends AppCompatActivity {
+public class DisplayDetails extends AppCompatActivity {
     TextView pantienName;
     TextView fileNumber;
     TextView countBlood;

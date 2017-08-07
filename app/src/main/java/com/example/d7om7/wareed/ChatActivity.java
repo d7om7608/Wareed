@@ -1,40 +1,40 @@
 package com.example.d7om7.wareed;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.app.NotificationCompat;
-import android.text.InputFilter;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+        import android.app.Notification;
+        import android.app.NotificationManager;
+        import android.content.Context;
+        import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.support.annotation.Nullable;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.app.AppCompatDelegate;
+        import android.support.v7.app.NotificationCompat;
+        import android.text.InputFilter;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ListView;
+        import android.widget.ProgressBar;
+        import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import static com.example.d7om7.wareed.menagerModel.donor;
+        import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.database.ChildEventListener;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import static com.example.d7om7.wareed.menagerModel.donor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+        import java.util.ArrayList;
+        import java.util.HashMap;
+        import java.util.Iterator;
+        import java.util.Map;
 
-import static android.os.Build.VERSION_CODES.M;
+        import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by Azura on 8/2/2017.
@@ -115,8 +115,8 @@ public class ChatActivity extends AppCompatActivity {
                 Add_Chat(dataSnapshot);
 
 
-                    arrayAdapter.notifyDataSetChanged();
-                    ChatEditText.setText("");
+                arrayAdapter.notifyDataSetChanged();
+                ChatEditText.setText("");
 
 
             }
@@ -157,5 +157,5 @@ public class ChatActivity extends AppCompatActivity {
         }
 
 
-    }
+        }
 }
