@@ -16,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.d7om7.wareed.menagerModel.donor;
 
@@ -34,17 +36,20 @@ public class RequstActivity extends AppCompatActivity {
     String selectHospetal;
     List<String> spinnerArrayOfcity;
     String selectcity;
+    private DatabaseReference root;
 
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
     private ProgressDialog SignprogressDialog;
+    private String temp_key;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requst);
+
 
 //---------------------------------------------------------------------
         final Spinner spinner = (Spinner) findViewById(R.id.planets_spiner);
@@ -163,7 +168,28 @@ public class RequstActivity extends AppCompatActivity {
                     donor.getUserID(),
                     0
             );
-            Log.d("hello",pantienNameText.getText().toString());
+
+            root = FirebaseDatabase.getInstance().getReference().child("RequestBloosd").child(selectBloodType).child("-KqwDA4PBVehFThJgWCP");
+            //_______________________________________
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            temp_key = root.push().getKey();
+            root.updateChildren(map);
+
+            DatabaseReference message_root = root.child(temp_key);
+            Map<String, Object> map2 = new HashMap<String, Object>();
+            map2.put("fileNumber", fileNumberText.getText().toString());
+            map2.put("countBlood", countBloodText.getText().toString());
+            map2.put("reasonOfRequist", reasonOfRequistText.getText().toString());
+            map2.put("selectBloodType", selectBloodType);
+            map2.put("selectcity", selectcity);
+            map2.put("selectHospetal", selectHospetal);
+
+            message_root.updateChildren(map2);
+
+            //________________________________________
+
+
             donor.requestBlood.add(requestBlood);
 
             Intent startChildActivityIntent = new Intent(this, MainActivity.class);

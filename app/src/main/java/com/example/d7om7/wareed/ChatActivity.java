@@ -62,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat");
+
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
@@ -70,6 +70,7 @@ public class ChatActivity extends AppCompatActivity {
                 R.layout.chat_holder, R.id.msg_text_view, arrayList);
         ChatListView.setAdapter(arrayAdapter);
 
+        root = FirebaseDatabase.getInstance().getReference().child("MainChat");
 
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -79,15 +80,15 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
-                Log.d("hello",getIntent().getStringExtra("NameUser")+"");
                 name=donor.name;
 
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String, Object> map2 = new HashMap<String, Object>();
                 map2.put("name", name);
                 map2.put("msg", ChatEditText.getText().toString());
-
                 message_root.updateChildren(map2);
+
+
             }
         });
 
@@ -98,16 +99,6 @@ public class ChatActivity extends AppCompatActivity {
                 Add_Chat(dataSnapshot);
 
 
-
-                NotificationManager mm=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                Bitmap bmp= BitmapFactory.decodeResource(getResources(),R.drawable.img);
-                NotificationCompat.Builder bulder= (NotificationCompat.Builder) new  NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
-                        .setContentText("نص موضوع الرساله").setSmallIcon(R.drawable.img).setLargeIcon(bmp).setAutoCancel(true).setNumber(1);
-                bulder.setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);
-                bulder.setVibrate(new long[]{500,1000,500,1000,500});
-                bulder.setSound(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.jrs));
-
-                mm.notify(1,bulder.build());
             }
 
             @Override
