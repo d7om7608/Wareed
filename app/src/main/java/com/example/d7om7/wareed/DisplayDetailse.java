@@ -34,13 +34,13 @@ public class DisplayDetailse extends AppCompatActivity {
          NameCity=(TextView)findViewById(R.id.NameCity);
          nameHospetal=(TextView)findViewById(R.id.nameHospetal);
 
-        root = FirebaseDatabase.getInstance().getReference().child("RequestBloosd").child("O+").child("-KqwDA4PBVehFThJgWCP").child("countBlood");
+        root = FirebaseDatabase.getInstance().getReference().child("RequestBloosd").child("O+");
 
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
               // dataSnapshot.child("countBlood").getValue()+"";
-                countBlood.setText(dataSnapshot.getValue()+"");
+                countBlood.setText(dataSnapshot.child("countBlood").getValue()+"");
             }
 
             @Override
