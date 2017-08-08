@@ -24,7 +24,6 @@ import static com.example.d7om7.wareed.menagerModel.donor;
 
 public class RequestActivity extends AppCompatActivity {
     RequestBlood requestBlood;
-    EditText requestBloodText;
     EditText pantienNameText;
     EditText fileNumberText;
     EditText countBloodText;
@@ -141,18 +140,17 @@ public class RequestActivity extends AppCompatActivity {
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child("makkah")
         .child("BloodType").child("A+").child("Requests");
 
-        requestBloodText = (EditText) findViewById(R.id.reasonOfRequist);
         pantienNameText = (EditText) findViewById(R.id.pantienName);
         fileNumberText = (EditText) findViewById(R.id.fileNumber);
         countBloodText = (EditText) findViewById(R.id.countBlood);
         reasonOfRequistText = (EditText) findViewById(R.id.reasonOfRequist);
 
 
-        if ((requestBloodText.getText().toString()).equals("") || pantienNameText.getText().toString().equals("") ||
+        if ( pantienNameText.getText().toString().equals("") ||
                 fileNumberText.getText().toString().equals("") || countBloodText.getText().toString().equals("") ||
                 reasonOfRequistText.getText().toString().equals("")) {
         } else {
-            root =FirebaseDatabase.getInstance().getReference().child("reguestBlood");
+            root =FirebaseDatabase.getInstance().getReference().child("requestblood");
 //
 //            String key = root.child("reguestBlood").push().getKey();
 //            root =FirebaseDatabase.getInstance().getReference().child("reguestBlood").child(key);
@@ -201,7 +199,6 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     public void txetEmpty() {
-        requestBloodText.setText("");
         fileNumberText.setText("");
         countBloodText.setText("");
         reasonOfRequistText.setText("");

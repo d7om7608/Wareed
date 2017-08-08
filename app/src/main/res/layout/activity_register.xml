@@ -13,7 +13,8 @@
         android:layout_alignParentTop="true"
         android:hint="Write Phone Number"
         android:textSize="22sp"
-        android:inputType="phone"/>
+        android:inputType="phone"
+        android:maxLength="14"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -34,7 +35,8 @@
         android:textSize="22sp"
         android:layout_below="@+id/send_verification_code_button"
         android:layout_alignParentStart="true"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:maxLength="6"/>
 
     <Button
         android:layout_width="wrap_content"

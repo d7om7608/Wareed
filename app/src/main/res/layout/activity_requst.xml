@@ -37,7 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="20"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -52,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:inputType="number"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="10"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:inputType="number"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="2"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="20"/>
 
             <Spinner
                 android:id="@+id/planets_spiner"
