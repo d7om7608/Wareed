@@ -116,12 +116,12 @@ public class RegisterActicity extends AppCompatActivity {
                             if (dataSnapshot.child(mAuth.getCurrentUser().getUid().toString()).hasChildren()) {
                                 Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
 
                             } else {
-
+ s
                                 Intent intent = new Intent(RegisterActicity.this, ProfileActivity.class);
                                 startActivity(intent);
                             }
