@@ -9,20 +9,20 @@ public class RequestBlood {
     int countOfdone;
     String reasonOfRequest;
     String bloodType;
-    String city;
+
     String nameOfHospital;
     String requestID;
     String userID;
     String statusTime;
 
-    public RequestBlood(String patientName, int patientFileNumber, int countOfBlood, String reasonOfRequest, String bloodType, String city, String nameOfHospital,
+    public RequestBlood(String patientName, int patientFileNumber, int countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
                         String statusTime, String requestID, String userID, int countOfdone) {
         this.patientName=patientName;
         this.patientFileNumber=patientFileNumber;
         this.countOfBlood=countOfBlood;
         this.reasonOfRequest=reasonOfRequest;
         this.bloodType=bloodType;
-        this.city=city;
+
         this.nameOfHospital=nameOfHospital;
         this.requestID=requestID;
         this.userID=userID;
@@ -89,13 +89,6 @@ public class RequestBlood {
         this.bloodType = bloodType;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public String getNameOfHospital() {
         return nameOfHospital;

@@ -56,7 +56,6 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
 
     @Override
     public int getItemCount() {
-        Log.d("hello", requestedBloodList.size() + "");
         return requestedBloodList.size();
     }
 

@@ -16,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.d7om7.wareed.menagerModel.donor;
 
@@ -39,13 +41,12 @@ public class RequestActivity extends AppCompatActivity {
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
     private ProgressDialog SignprogressDialog;
-
-
+    private DatabaseReference root;
+    private String temp_key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requst);
-
 //---------------------------------------------------------------------
         final Spinner spinner = (Spinner) findViewById(R.id.planets_spiner);
         spinnerArray = Arrays(3);
@@ -91,7 +92,6 @@ public class RequestActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectcity = spinnerArrayOfcity.get(position);
-                Log.d("hello", selectcity);
                 if (selectcity.equals("makkah"))
                     spinnerArrayOfHospetal = Arrays(1);
                 else
@@ -137,8 +137,9 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     public void onclick(View view) {
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child(requestBlood.getCity())
-        .child("BloodType").child(requestBlood.getBloodType()).child("Requests");
+
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child("makkah")
+        .child("BloodType").child("A+").child("Requests");
 
         requestBloodText = (EditText) findViewById(R.id.reasonOfRequist);
         pantienNameText = (EditText) findViewById(R.id.pantienName);
@@ -151,35 +152,50 @@ public class RequestActivity extends AppCompatActivity {
                 fileNumberText.getText().toString().equals("") || countBloodText.getText().toString().equals("") ||
                 reasonOfRequistText.getText().toString().equals("")) {
         } else {
+            root =FirebaseDatabase.getInstance().getReference().child("reguestBlood");
+//
+//            String key = root.child("reguestBlood").push().getKey();
+//            root =FirebaseDatabase.getInstance().getReference().child("reguestBlood").child(key);
 
-            requestBlood = new RequestBlood(pantienNameText.getText().toString(),
-                    Integer.parseInt(fileNumberText.getText().toString()),
-                    Integer.parseInt(countBloodText.getText().toString()),
-                    reasonOfRequistText.getText().toString(),
-                    selectBloodType,
-                    selectcity,
-                    selectHospetal,
-                    "2 Hours",
-                    2+"",
-                    donor.getUserID(),
-                    0
-            );
-            Log.d("hello",pantienNameText.getText().toString());
-//            donor.requestBlood.add(requestBlood);
+//            root.child("pantienName").setValue(pantienNameText.getText().toString());
+//            root.child("FileNumber").setValue(fileNumberText.getText().toString());
+//            root.child("BloodBags").setValue(countBloodText.getText().toString());
+//            root.child("Reason").setValue(reasonOfRequistText.getText().toString());
+//            root.child("Hospital").setValue(selectHospetal);
+//            root.child("UserID").setValue("qwed123467");
+//            root.child("BloodType").setValue(selectBloodType);
+//            root.child("statusTime").setValue("1438/8/8");
+//            root.child("RequestID").setValue(key);
+//            root.child("done").setValue("0");
+//
+
+                    Map<String, Object> map = new HashMap<String, Object>();
+            temp_key = root.push().getKey();
+            root.updateChildren(map);
+
+            DatabaseReference message_root = root.child(temp_key);
+            Map<String, Object> map2 = new HashMap<String, Object>();
+            map2.put("pantienName", pantienNameText.getText().toString());
+            map2.put("FileNumber", fileNumberText.getText().toString());
+            map2.put("BloodBags", countBloodText.getText().toString());
+            map2.put("Reason", reasonOfRequistText.getText().toString());
+            map2.put("Hospital", selectHospetal);
+            map2.put("UserID", "qwed123467");
+            map2.put("BloodType", selectBloodType);
+            map2.put("statusTime",("1438/8/8"));
+            map2.put("RequestID", temp_key);
+            map2.put("done", "0");
+
+
+            message_root.updateChildren(map2);
+
 
             Intent startChildActivityIntent = new Intent(this, MainActivity.class);
             startActivity(startChildActivityIntent);
             txetEmpty();
 
         }
-        String user_id = SignAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = SignDataBase.child(requestBlood.getRequestID()+"");
-        current_user_db.child("Hospital").setValue(requestBlood.getNameOfHospital());
-        current_user_db.child("PaitientName").setValue(requestBlood.getPatientName());
-        current_user_db.child("FileNumber").setValue(requestBlood.getPatientFileNumber());
-        current_user_db.child("Reason").setValue(requestBlood.getReasonOfRequest());
-        current_user_db.child("BloodBags").setValue(requestBlood.getCountOfBlood());
-        current_user_db.child("UserID").setValue(user_id);
+
 
 
     }

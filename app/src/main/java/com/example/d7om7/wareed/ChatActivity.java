@@ -79,7 +79,6 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
-                Log.d("hello",getIntent().getStringExtra("NameUser")+"");
                 name=donor.name;
 
                 DatabaseReference message_root = root.child(temp_key);

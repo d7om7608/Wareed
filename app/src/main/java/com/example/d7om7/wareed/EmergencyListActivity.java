@@ -1,52 +1,75 @@
 package com.example.d7om7.wareed;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
-import static com.example.d7om7.wareed.menagerModel.donor;
 
 
 public class EmergencyListActivity extends AppCompatActivity implements Main_status_adapter.changeActivity {
 
-    Donor donor;
     Main_status_adapter status_adapter;
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mRequestDatabaseReference;
+
+    private DatabaseReference root;
+    RequestBlood requestBloodopjict;
+    List<RequestBlood> requestBlood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestBlood = new ArrayList<>();
         setContentView(R.layout.activity_emergency_list);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-//        mRequestDatabaseReference = FirebaseDatabase.getInstance().getReference().child("City").child()
-
-
+        root = FirebaseDatabase.getInstance().getReference().child("reguestBlood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        status_adapter = new Main_status_adapter(donor.requestBlood, this);
+
+        status_adapter = new Main_status_adapter(requestBlood, this);
+        root.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Add_Request(dataSnapshot);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Add_Request(dataSnapshot);
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         recyclerView.setAdapter(status_adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         status_adapter.notifyDataSetChanged();
@@ -61,8 +84,47 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     }
 
-    public void GoToChat(View view){
-        String s=getIntent().getStringExtra("NameUser");
+
+    private void Add_Request(DataSnapshot dataSnapshot) {
+
+        Iterator i = dataSnapshot.getChildren().iterator();
+        while (i.hasNext()) {
+
+            String CountOfBlood = (String) ((DataSnapshot) i.next()).getValue();
+
+            String BloodType = (String) ((DataSnapshot) i.next()).getValue();
+
+            String PatientFileNumber = (String) ((DataSnapshot) i.next()).getValue();
+
+            String NameOfHospital = (String) ((DataSnapshot) i.next()).getValue();
+
+            String ReasonOfRequest = (String) ((DataSnapshot) i.next()).getValue();
+
+            String RequestID = (String) ((DataSnapshot) i.next()).getValue();
+
+            String UserID = (String) ((DataSnapshot) i.next()).getValue();
+
+            String CountOfdone = (String) ((DataSnapshot) i.next()).getValue();
+
+            String PatientName = (String) ((DataSnapshot) i.next()).getValue();
+
+            String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
+            requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                    StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
+
+            requestBlood.add(requestBloodopjict);
+
+
+
+            status_adapter.notifyDataSetChanged();
+        }
+
+
+    }
+
+
+    public void GoToChat(View view) {
+        String s = getIntent().getStringExtra("NameUser");
 
         Intent ChatIntent = new Intent(EmergencyListActivity.this, ChatActivity.class);
         ChatIntent.putExtra("NameUser", s);
@@ -73,13 +135,18 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     @Override
     public void Clicked(int position, int id) {
         Intent startChildActivityIntent = new Intent(this, DisplayDetails.class);
-//        startChildActivityIntent.putExtra("getPatientName", donor.requestBlood.get(position).getPatientName());
-//        startChildActivityIntent.putExtra("getPatientFileNumber", donor.requestBlood.get(position).getPatientFileNumber());
-//        startChildActivityIntent.putExtra("getCountOfBlood", donor.requestBlood.get(position).getCountOfBlood());
-//        startChildActivityIntent.putExtra("getReasonOfRequest", donor.requestBlood.get(position).getReasonOfRequest());
-//        startChildActivityIntent.putExtra("getBloodType", donor.requestBlood.get(position).getBloodType());
-//        startChildActivityIntent.putExtra("getCity", donor.requestBlood.get(position).getCity());
-//        startChildActivityIntent.putExtra("getNameOfHospital", donor.requestBlood.get(position).getNameOfHospital());
+
+
+        startChildActivityIntent.putExtra("getPatientName", requestBlood.get(position).getPatientName());
+        startChildActivityIntent.putExtra("getPatientFileNumber", requestBlood.get(position).getPatientFileNumber());
+        startChildActivityIntent.putExtra("getCountOfBlood", requestBlood.get(position).getCountOfBlood());
+        startChildActivityIntent.putExtra("getBloodType", requestBlood.get(position).getBloodType());
+        startChildActivityIntent.putExtra("getNameOfHospital", requestBlood.get(position).getNameOfHospital());
+        startChildActivityIntent.putExtra("getReasonOfRequest", requestBlood.get(position).getReasonOfRequest());
+        startChildActivityIntent.putExtra("getCountOfdone", requestBlood.get(position).getCountOfdone());
+        startChildActivityIntent.putExtra("getStatusTime", requestBlood.get(position).getStatusTime());
+        startChildActivityIntent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
+        startChildActivityIntent.putExtra("getUserID", requestBlood.get(position).getUserID());
 
         startActivity(startChildActivityIntent);
 
