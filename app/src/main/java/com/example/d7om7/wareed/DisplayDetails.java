@@ -23,14 +23,14 @@ public class DisplayDetails extends AppCompatActivity {
     TextView NameCity;
     TextView nameHospetal;
     private DatabaseReference root;
-
+    Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         root =FirebaseDatabase.getInstance().getReference().child("reguestBlood").child("-KqxW7KbUD1X9QRJbidj");
-        Intent intent=getIntent();
+         intent=getIntent();
         setContentView(R.layout.activity_display_detailse);
          pantienName=(TextView)findViewById(R.id.pantienName);
          fileNumber=(TextView)findViewById(R.id.fileNumber);
@@ -58,10 +58,14 @@ public class DisplayDetails extends AppCompatActivity {
     }
 
     public void GoToChat(View view) {
-        String s = getIntent().getStringExtra("NameUser");
+
+
+        String requestID = intent.getStringExtra("getRequestID");
+        String userID = intent.getStringExtra("getUserID");
 
         Intent ChatIntent = new Intent(this, ChatActivity.class);
-        ChatIntent.putExtra("NameUser", s);
+        ChatIntent.putExtra("requestID", requestID);
+        ChatIntent.putExtra("userID", userID);
         startActivity(ChatIntent);
 
     }

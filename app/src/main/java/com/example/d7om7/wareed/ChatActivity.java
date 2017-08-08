@@ -3,6 +3,7 @@ package com.example.d7om7.wareed;
         import android.app.Notification;
         import android.app.NotificationManager;
         import android.content.Context;
+        import android.content.Intent;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.net.Uri;
@@ -61,8 +62,12 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(@AppCompatDelegate.NightMode Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        Intent intent=getIntent();
 
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat");
+        String requestID = intent.getStringExtra("requestID");
+        String userID = intent.getStringExtra("userID");
+
+        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(donor.getUserID()).child(userID).child(requestID);
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
