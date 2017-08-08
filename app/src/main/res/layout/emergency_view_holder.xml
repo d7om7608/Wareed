@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:orientation="horizontal">
-
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:background="@android:color/white">
+    >
 
     <TextView
         android:id="@+id/reasonOfRequest"
@@ -15,64 +17,201 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:text=""
+
+        android:textAlignment="textEnd"
         android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_today"
+        android:layout_below="@+id/reasonOfRequest"
+        android:layout_alignParentEnd="true" />
+
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="90dp"
+        android:gravity="right"
         android:layout_height="wrap_content"
+        android:text="وقت الحاله"
+        android:textSize="20sp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_below="@+id/reasonOfRequest"
-        android:layout_centerHorizontal="true"
-        android:text="states time"
-        android:textSize="20sp" />
+        android:layout_toStartOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/statusTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
         android:layout_marginTop="13dp"
         android:text=""
-        android:textSize="20sp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true" />
+        android:textAlignment="textEnd"
+        android:textSize="20sp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="18dp"
+    android:layout_below="@+id/statusTime"
+    android:layout_alignParentStart="true"
+    android:orientation="horizontal"
+    android:id="@+id/linearLayout2">
 
-    <TextView
-        android:id="@+id/countOfrequest"
+
+    <ImageView
+        android:layout_weight="1"
+
+        android:id="@+id/bloodTypeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/star_big_on"
+        />
+
+    <ImageView
+        android:layout_weight="1.00"
+
+        android:id="@+id/countofdoneIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:drawable/checkbox_on_background"
+
+        />
+
+    <ImageView
+        android:layout_weight="1"
+
+        android:id="@+id/countofBloodIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_myplaces"
+
+        />
+
+
+</LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"
-        android:layout_below="@+id/statusTime"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="6dp"
 
-    <TextView
-        android:id="@+id/countDone"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3">
+
+
+        <TextView
+            android:id="@+id/bloodTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="فصيله الدم"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/countofdoneTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="تمت"
+            android:textAlignment="center"
+
+
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/countofBloodTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="المطلوب"
+            android:textAlignment="center"
+
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"
-        android:layout_below="@+id/countOfrequest"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="7dp"
+
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout4">
+
+
+        <TextView
+            android:id="@+id/bloodTyep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/statusTime"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/countDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/countOfblood"
+            android:layout_weight="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/countOfblood"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/countOfblood"
+            android:layout_weight="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+
+
+    </LinearLayout>
+
 
     <TextView
-        android:id="@+id/bloodTyep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"
-        android:layout_below="@+id/countDone"
-        android:layout_alignParentStart="true" />
-
-<TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="التفاصيل"
-    android:textSize="20sp"
+    android:textSize="24sp"
     android:gravity="center"
-    android:layout_below="@+id/bloodTyep"
-    android:layout_alignParentStart="true"
-    android:id="@+id/button3" />
+    android:id="@+id/detilse"
+   android:padding="4dp"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/colorwhite"
+        android:background="@color/colordetils"/>
+
 
 
 </RelativeLayout>

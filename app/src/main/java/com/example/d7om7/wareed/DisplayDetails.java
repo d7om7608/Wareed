@@ -29,12 +29,11 @@ public class DisplayDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        root =FirebaseDatabase.getInstance().getReference().child("reguestBlood").child("-KqxW7KbUD1X9QRJbidj");
          intent=getIntent();
         setContentView(R.layout.activity_display_detailse);
          pantienName=(TextView)findViewById(R.id.pantienName);
          fileNumber=(TextView)findViewById(R.id.fileNumber);
-
+        root =FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
 
          countBlood=(TextView)findViewById(R.id.countBlood);
          reasonOfRequist=(TextView)findViewById(R.id.reasonOfRequist);
@@ -45,13 +44,27 @@ public class DisplayDetails extends AppCompatActivity {
 
 
 
-        pantienName.setText(intent.getStringExtra("getPatientName"));
-        fileNumber.setText(intent.getStringExtra("getPatientFileNumber"));
-        countBlood.setText(""+intent.getIntExtra("getCountOfBlood",0));
-        reasonOfRequist.setText(intent.getStringExtra("getReasonOfRequest"));
-        bloodType.setText(intent.getStringExtra("getBloodType"));
-        NameCity.setText("makkah");
-        nameHospetal.setText(intent.getStringExtra("getNameOfHospital"));
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                pantienName.setText( (String) dataSnapshot.child("pantienName").getValue());
+                fileNumber.setText( (String) dataSnapshot.child("FileNumber").getValue());
+                countBlood.setText( (String) dataSnapshot.child("BloodBags").getValue());
+                reasonOfRequist.setText( (String) dataSnapshot.child("Reason").getValue());
+                bloodType.setText( (String) dataSnapshot.child("BloodType").getValue());
+                NameCity.setText("makkah");
+                nameHospetal.setText( (String) dataSnapshot.child("Hospital").getValue());
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 

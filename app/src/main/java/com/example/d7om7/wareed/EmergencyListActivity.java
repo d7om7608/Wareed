@@ -33,11 +33,12 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("الحالات الطارئه");
         requestBlood = new ArrayList<>();
         setContentView(R.layout.activity_emergency_list);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
 
-        root = FirebaseDatabase.getInstance().getReference().child("reguestBlood");
+        root = FirebaseDatabase.getInstance().getReference().child("requestblood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         status_adapter = new Main_status_adapter(requestBlood, this);
@@ -130,14 +131,6 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         Intent startChildActivityIntent = new Intent(this, DisplayDetails.class);
 
 
-        startChildActivityIntent.putExtra("getPatientName", requestBlood.get(position).getPatientName());
-        startChildActivityIntent.putExtra("getPatientFileNumber", requestBlood.get(position).getPatientFileNumber());
-        startChildActivityIntent.putExtra("getCountOfBlood", requestBlood.get(position).getCountOfBlood());
-        startChildActivityIntent.putExtra("getBloodType", requestBlood.get(position).getBloodType());
-        startChildActivityIntent.putExtra("getNameOfHospital", requestBlood.get(position).getNameOfHospital());
-        startChildActivityIntent.putExtra("getReasonOfRequest", requestBlood.get(position).getReasonOfRequest());
-        startChildActivityIntent.putExtra("getCountOfdone", requestBlood.get(position).getCountOfdone());
-        startChildActivityIntent.putExtra("getStatusTime", requestBlood.get(position).getStatusTime());
         startChildActivityIntent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
         startChildActivityIntent.putExtra("getUserID", requestBlood.get(position).getUserID());
 

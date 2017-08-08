@@ -1,9 +1,7 @@
 package com.example.d7om7.wareed;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import static android.R.attr.id;
-import static com.example.d7om7.wareed.R.id.bloodType;
 
 
 public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapter.ViewHolder> {
@@ -71,7 +68,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
             super(itemLayout);
             reasonOfRequest = (TextView) itemLayout.findViewById(R.id.reasonOfRequest);
             statusTime = (TextView) itemLayout.findViewById(R.id.statusTime);
-            countOfrequest = (TextView) itemLayout.findViewById(R.id.countOfrequest);
+            countOfrequest = (TextView) itemLayout.findViewById(R.id.countOfblood);
             countDone = (TextView) itemLayout.findViewById(R.id.countDone);
             bloodTyep = (TextView) itemLayout.findViewById(R.id.bloodTyep);
 

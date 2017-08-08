@@ -15,9 +15,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.example.d7om7.wareed.menagerModel.donor;
@@ -36,6 +39,9 @@ public class RequestActivity extends AppCompatActivity {
     List<String> spinnerArrayOfcity;
     String selectcity;
 
+    private SimpleDateFormat date;
+    private Calendar calendar;
+
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
@@ -46,6 +52,11 @@ public class RequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requst);
+
+
+
+        calendar = Calendar.getInstance();
+        date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
 //---------------------------------------------------------------------
         final Spinner spinner = (Spinner) findViewById(R.id.planets_spiner);
         spinnerArray = Arrays(3);
@@ -140,6 +151,9 @@ public class RequestActivity extends AppCompatActivity {
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child("makkah")
         .child("BloodType").child("A+").child("Requests");
 
+        String FinalDate;
+        FinalDate = date.format(calendar.getTime());
+
         pantienNameText = (EditText) findViewById(R.id.pantienName);
         fileNumberText = (EditText) findViewById(R.id.fileNumber);
         countBloodText = (EditText) findViewById(R.id.countBlood);
@@ -151,25 +165,12 @@ public class RequestActivity extends AppCompatActivity {
                 reasonOfRequistText.getText().toString().equals("")) {
         } else {
             root =FirebaseDatabase.getInstance().getReference().child("requestblood");
-//
-//            String key = root.child("reguestBlood").push().getKey();
-//            root =FirebaseDatabase.getInstance().getReference().child("reguestBlood").child(key);
-
-//            root.child("pantienName").setValue(pantienNameText.getText().toString());
-//            root.child("FileNumber").setValue(fileNumberText.getText().toString());
-//            root.child("BloodBags").setValue(countBloodText.getText().toString());
-//            root.child("Reason").setValue(reasonOfRequistText.getText().toString());
-//            root.child("Hospital").setValue(selectHospetal);
-//            root.child("UserID").setValue("qwed123467");
-//            root.child("BloodType").setValue(selectBloodType);
-//            root.child("statusTime").setValue("1438/8/8");
-//            root.child("RequestID").setValue(key);
-//            root.child("done").setValue("0");
-//
 
                     Map<String, Object> map = new HashMap<String, Object>();
             temp_key = root.push().getKey();
             root.updateChildren(map);
+
+
 
             DatabaseReference message_root = root.child(temp_key);
             Map<String, Object> map2 = new HashMap<String, Object>();
@@ -180,7 +181,7 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("Hospital", selectHospetal);
             map2.put("UserID", "qwed123467");
             map2.put("BloodType", selectBloodType);
-            map2.put("statusTime",("1438/8/8"));
+            map2.put("statusTime",FinalDate);
             map2.put("RequestID", temp_key);
             map2.put("done", "0");
 

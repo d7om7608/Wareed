@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-
-                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
-                    MainActivity.this.startActivity(intent);
-                }
+//                if (user == null) {
+//
+//                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
+//                    MainActivity.this.startActivity(intent);
+//                }
             }
         };
 
@@ -128,13 +128,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+       // mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+       // mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
     long time;
     @Override
@@ -243,7 +243,6 @@ public class MainActivity extends AppCompatActivity
                 calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
                 FinalDate = date.format(calendar2.getTime());
                 TEXT.setText(FinalDate);
-//                donor.getRequestBlood(1).get(0).setStatusTime(FinalDate);
                 D_DatePicker.dismiss();
             }
         });
