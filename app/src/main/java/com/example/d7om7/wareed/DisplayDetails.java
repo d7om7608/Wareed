@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -53,6 +54,15 @@ public class DisplayDetails extends AppCompatActivity {
         nameHospetal.setText(intent.getStringExtra("getNameOfHospital"));
 
 
+
+    }
+
+    public void GoToChat(View view) {
+        String s = getIntent().getStringExtra("NameUser");
+
+        Intent ChatIntent = new Intent(this, ChatActivity.class);
+        ChatIntent.putExtra("NameUser", s);
+        startActivity(ChatIntent);
 
     }
 }

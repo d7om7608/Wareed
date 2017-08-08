@@ -123,14 +123,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     }
 
 
-    public void GoToChat(View view) {
-        String s = getIntent().getStringExtra("NameUser");
 
-        Intent ChatIntent = new Intent(EmergencyListActivity.this, ChatActivity.class);
-        ChatIntent.putExtra("NameUser", s);
-        EmergencyListActivity.this.startActivity(ChatIntent);
-
-    }
 
     @Override
     public void Clicked(int position, int id) {
