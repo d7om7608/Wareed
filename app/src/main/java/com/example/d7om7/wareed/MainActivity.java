@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -114,11 +115,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user == null) {
-//
-//                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
-//                    MainActivity.this.startActivity(intent);
-//                }
+
+                SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
+
+                if (user == null && data.getString("id",null) == null) {
+
+                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
+                    MainActivity.this.startActivity(intent);
+                }
             }
         };
 
@@ -128,13 +132,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-       // mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-       // mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
     long time;
     @Override
@@ -177,6 +181,9 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.action_sign_out) {
 
+            // clear sharedpreference
+            SharedPreferences data = getPreferences(MODE_PRIVATE);
+            data.edit().clear().commit();
 //             AuthUI.getInstance().signOut(this);
             mFirebaseAuth.signOut();
 

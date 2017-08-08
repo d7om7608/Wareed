@@ -1,7 +1,9 @@
 package com.example.d7om7.wareed;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -114,9 +116,24 @@ public class RegisterActicity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.child(mAuth.getCurrentUser().getUid().toString()).hasChildren()) {
+                                DatabaseReference UserData = SearchForProfile.child(mAuth.getCurrentUser().getUid());
+
+                                /*
+                                Save User data in Shared Preference
+                                 */
+                                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("display_name",mAuth.getCurrentUser().getDisplayName());
+                                editor.putString("email",mAuth.getCurrentUser().getEmail());
+                                editor.putString("phone_number",mAuth.getCurrentUser().getPhoneNumber());
+                                editor.putString("id",mAuth.getCurrentUser().getUid());
+                                editor.putString("BloodType",UserData.child("BloodType").toString());
+                                editor.putString("city",UserData.child("city").toString());
+                                editor.putString("email",UserData.child("email").toString());
+                                editor.putString("gender",UserData.child("gender").toString());
+
                                 Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
 
@@ -133,6 +150,7 @@ public class RegisterActicity extends AppCompatActivity {
 
 
                 } else {
+                    Log.d("LOGIN_FAILED","LOGIN HERE AT LINE 136 IN RegisterActivity.java");
                     Toast.makeText(RegisterActicity.this, "Failed To Sign In ", Toast.LENGTH_SHORT).show();
 
                 }
