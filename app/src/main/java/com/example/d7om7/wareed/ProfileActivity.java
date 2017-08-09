@@ -1,11 +1,15 @@
 package com.example.d7om7.wareed;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -13,9 +17,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
+
 
 /**
  * Created by Azura on 8/6/2017.
@@ -23,10 +36,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    CityBloodActivity cityBloodActivity = new CityBloodActivity() ;
+    RegisterActicity registerActicity = new RegisterActicity();
+
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
     private DatabaseReference SignInCity;
+    private DatabaseReference CheckForPreferences;
+
 
     private EditText UserNameEditText;
     private EditText EmailEditText;
@@ -55,8 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
         CitySpinner = (Spinner) findViewById(R.id.profile_city_spinner);
         GenderSpinner = (Spinner) findViewById(R.id.profile_gender_spinner);
 
-
-
         BloodSpinner();
         CitySpinner();
         GenderSpinner();
@@ -66,25 +82,35 @@ public class ProfileActivity extends AppCompatActivity {
         SignFirebaseDatabase = FirebaseDatabase.getInstance();
         SignAuth = FirebaseAuth.getInstance();
 
+        SharedPreferences prefs = getSharedPreferences("UserData",MODE_PRIVATE);
+
+        if(prefs.getString("id",null) != null){
+            UserNameEditText.setText(prefs.getString("display_name","NOTHING HERE"));
+        }
+
+
+
+
+
 
 
     }
 
+
     public void CitySpinner () {
-        String CityArray [] = {"makkah\n", "jeddah\n"};
+        // TODO: ger city from CityBlood Activity
+        String CityArray [] = {"male \n", "female\n"};
+//        String CityArray [] = cityBloodActivity.getCities();
         ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
 
 
-
-
     }
 
 
-
     public void BloodSpinner () {
-        String BloodArray [] = {"A+\n", "A-\n", "B+\n", "B-\n", "AB+\n" , "AB-\n" , "O+\n" , "O-\n"};
+        String[] BloodArray = cityBloodActivity.getBloodTypes();
         ArrayAdapter<String> bloodadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, BloodArray);
         BloodTypeSpinner.setAdapter(bloodadapter);
@@ -127,7 +153,10 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("email").setValue(Email);
 
             DatabaseReference current_user_db_city = SignInCity.child(UserUID);
-
+            Log.d("Hello","B4 method");
+            CityBloodActivity c = new CityBloodActivity();
+            c.saveInPrefernces(current_user_db,SignAuth,getApplicationContext());
+            Log.d("Hello","After method");
 
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

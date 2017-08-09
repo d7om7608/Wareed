@@ -1,6 +1,5 @@
 package com.example.d7om7.wareed;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,22 +15,9 @@ public class Donor {
     protected String bloodType;
     protected String lastDonatingDate;
     protected String lastNotificationDate;
-    protected String UserID;
+    protected String userID;
     protected List<String> requestsId;
 
-    public Donor(String name, String phoneNumber, int donateCount, String city
-            , String bloodType, String lastDonatingDate, String lastNotificationDate, String UserID,
-                 List<String> requestsId) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.donateCount = donateCount;
-        this.city = city;
-        this.bloodType = bloodType;
-        this.lastDonatingDate = lastDonatingDate;
-        this.lastNotificationDate = lastNotificationDate;
-        this.UserID = UserID;
-        this.requestsId = requestsId;
-    }
 
     public String getRequestBlood(int position) {
         return requestsId.get(position);
@@ -42,7 +28,7 @@ public class Donor {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -99,11 +85,11 @@ public class Donor {
     }
 
     public String getUserID() {
-        return UserID;
+        return this.userID;
     }
 
     public void setUserID(String userID) {
-        UserID = userID;
+        this.userID = userID;
     }
 
 

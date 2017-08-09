@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -115,22 +116,11 @@ public class RegisterActicity extends AppCompatActivity {
                     SearchForProfile.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.child(mAuth.getCurrentUser().getUid().toString()).hasChildren()) {
-                                DatabaseReference UserData = SearchForProfile.child(mAuth.getCurrentUser().getUid());
 
-                                /*
-                                Save User data in Shared Preference
-                                 */
-                                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString("display_name",mAuth.getCurrentUser().getDisplayName());
-                                editor.putString("email",mAuth.getCurrentUser().getEmail());
-                                editor.putString("phone_number",mAuth.getCurrentUser().getPhoneNumber());
-                                editor.putString("id",mAuth.getCurrentUser().getUid());
-                                editor.putString("BloodType",UserData.child("BloodType").toString());
-                                editor.putString("city",UserData.child("city").toString());
-                                editor.putString("email",UserData.child("email").toString());
-                                editor.putString("gender",UserData.child("gender").toString());
+
+                            if (dataSnapshot.child(mAuth.getCurrentUser().getUid().toString()).hasChildren()) {
+                                CityBloodActivity c = new CityBloodActivity();
+                                c.saveInPrefernces(SearchForProfile.child(mAuth.getCurrentUser().getUid().toString()),mAuth,getApplicationContext());
 
                                 Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
@@ -159,6 +149,50 @@ public class RegisterActicity extends AppCompatActivity {
 
 
     }
+
+    /*public void  saveInPrefernces(final DatabaseReference UserData,final FirebaseAuth mAuth) {
+
+
+                                Save User data in Shared Preference
+
+        Log.d("Hello","B4 sh pref");
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("UserData",0);
+        Log.d("Hello","after sh pref");
+
+        final SharedPreferences.Editor editor = sharedPref.edit();
+        Log.d("Hello","B4 if  user");
+        if (UserData != null){
+            UserData.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    HashMap<String, String> data = (HashMap) dataSnapshot.getValue();
+                    editor.putString("display_name", data.get("user name").toString());
+                    editor.putString("phone_number", mAuth.getCurrentUser().getPhoneNumber().toString());
+                    editor.putString("id", mAuth.getCurrentUser().getUid().toString());
+                    editor.putString("BloodType", data.get("BloodType").toString());
+                    editor.putString("city", data.get("city").toString());
+                    editor.putString("email", data.get("email").toString());
+                    editor.putString("gender", data.get("gender").toString());
+
+                    editor.apply();
+                    Log.d("Hello", "display name in donor class:" + data.get("email").toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            Log.d("Hello","user data null");
+        }
+
+        //Log.d("Hello",mAuth.getCurrentUser().getUid().toString());
+
+        //editor.putString("email",mAuth.getCurrentUser().getEmail().toString());
+
+        //Log.d("Hello",sharedPref.getString("display_name","nothing in dispaly name"));
+    }*/
 
     public void signin_button(View view) {
 
