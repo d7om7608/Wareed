@@ -57,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
+    String UserName;
     @Override
     protected void onCreate(@AppCompatDelegate.NightMode Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +66,11 @@ public class ChatActivity extends AppCompatActivity {
 
         String requestID = intent.getStringExtra("requestID");
         String userID = intent.getStringExtra("userID");
-
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(donor.getUserID()).child(userID).child(requestID);
+        //____________________________________________________________________ i don't have userid  )=
+      //  Log.d("hello",mFirebaseAuth.getCurrentUser().getUid());
+//        String UserId= mFirebaseAuth.getCurrentUser().getUid();
+//        UserName=FirebaseDatabase.getInstance().getReference().child("users").child(UserId).child("user name").toString();
+      //  root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(UserId).child(userID).child(requestID);
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
@@ -84,7 +87,7 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
-                name=donor.name;
+                name=name+UserName;
 
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String, Object> map2 = new HashMap<String, Object>();

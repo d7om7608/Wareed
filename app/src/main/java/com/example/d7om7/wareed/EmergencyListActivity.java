@@ -7,13 +7,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,8 +27,8 @@ import java.util.List;
 public class EmergencyListActivity extends AppCompatActivity implements Main_status_adapter.changeActivity {
 
     Main_status_adapter status_adapter;
-
-
+    ProgressBar progressBar;
+    //private ProgressBar progressBar;
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
@@ -34,25 +37,40 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("الحالات الطارئه");
-        requestBlood = new ArrayList<>();
         setContentView(R.layout.activity_emergency_list);
+
+        requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
 
         root = FirebaseDatabase.getInstance().getReference().child("requestblood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        //progressBar.setVisibility(View.VISIBLE);
         status_adapter = new Main_status_adapter(requestBlood, this);
+         progressBar = (ProgressBar) findViewById(R.id.progressBarx);
+
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Add_Request(dataSnapshot);
-
+              //  progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Add_Request(dataSnapshot);
-
+            //    progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -85,7 +103,11 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        progressBar.setVisibility(View.GONE);
+    }
     private void Add_Request(DataSnapshot dataSnapshot) {
 
         Iterator i = dataSnapshot.getChildren().iterator();

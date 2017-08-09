@@ -20,9 +20,10 @@ public class DisplayDetails extends AppCompatActivity {
     TextView countBlood;
     TextView reasonOfRequist;
     TextView bloodType;
-    TextView NameCity;
+    TextView dateStatus;
     TextView nameHospetal;
     private DatabaseReference root;
+    TextView countDone;
     Intent intent;
 
 
@@ -31,16 +32,17 @@ public class DisplayDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
          intent=getIntent();
         setContentView(R.layout.activity_display_detailse);
-         pantienName=(TextView)findViewById(R.id.pantienName);
+        setTitle("تفاصيل الحالة");
+
+        pantienName=(TextView)findViewById(R.id.pantienName);
          fileNumber=(TextView)findViewById(R.id.fileNumber);
         root =FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
-
+         countDone=(TextView)findViewById(R.id.countDone);
          countBlood=(TextView)findViewById(R.id.countBlood);
          reasonOfRequist=(TextView)findViewById(R.id.reasonOfRequist);
          bloodType=(TextView)findViewById(R.id.bloodType);
-         NameCity=(TextView)findViewById(R.id.NameCity);
          nameHospetal=(TextView)findViewById(R.id.nameHospetal);
-
+        dateStatus=(TextView)findViewById(R.id.dateStatus);
 
 
 
@@ -48,13 +50,13 @@ public class DisplayDetails extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                countDone.setText( (String) dataSnapshot.child("done").getValue());
                 pantienName.setText( (String) dataSnapshot.child("pantienName").getValue());
                 fileNumber.setText( (String) dataSnapshot.child("FileNumber").getValue());
                 countBlood.setText( (String) dataSnapshot.child("BloodBags").getValue());
                 reasonOfRequist.setText( (String) dataSnapshot.child("Reason").getValue());
                 bloodType.setText( (String) dataSnapshot.child("BloodType").getValue());
-                NameCity.setText("makkah");
+                dateStatus.setText( (String) dataSnapshot.child("statusTime").getValue());
                 nameHospetal.setText( (String) dataSnapshot.child("Hospital").getValue());
 
 

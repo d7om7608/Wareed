@@ -52,6 +52,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:layout_marginTop="13dp"
+        android:layout_marginRight="42dp"
         android:text=""
         android:textAlignment="textEnd"
         android:textSize="20sp" />
