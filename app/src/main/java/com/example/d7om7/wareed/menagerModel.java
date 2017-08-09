@@ -9,6 +9,8 @@ public class menagerModel {
 
     public void creatDonor(){
 if (donor==null) {
+    //TODO ArrayList !! 
+
     //donor = new Donor("ahmad", "0552777608", 0, "makkah", "O+", "0", "0", "1", new ArrayList<String>());
     //donor.setRequestBlood("54666757546");
    //donor.getRequestBlood(0);

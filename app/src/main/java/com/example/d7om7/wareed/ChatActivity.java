@@ -66,6 +66,7 @@ public class ChatActivity extends AppCompatActivity {
 
         String requestID = intent.getStringExtra("requestID");
         String userID = intent.getStringExtra("userID");
+        //TODO fixed user id
         //____________________________________________________________________ i don't have userid  )=
       //  Log.d("hello",mFirebaseAuth.getCurrentUser().getUid());
 //        String UserId= mFirebaseAuth.getCurrentUser().getUid();

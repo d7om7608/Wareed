@@ -3,8 +3,15 @@
     package="com.example.d7om7.wareed">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.LOCATION_HARDWARE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.LOCATION_HARDWARE" />
+    /**
+    Location permission,
+    why two not one? because we choose best provider, if it network we choose COARSE else we choose
+    FINE
+    */
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -32,18 +39,11 @@
         <activity android:name=".EmergencyListActivity" />
         <activity android:name=".RequestActivity" />
         <activity android:name=".RegisterActicity" />
-
-        <activity android:name=".DisplayDetails"></activity>
-
-        <activity android:name=".ChatActivity"/>
-        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".DisplayDetails" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MyCases" />
+        <activity android:name=".MyCasesDetails"></activity>
     </application>
-
-    /**
-    Location permission,
-    why two not one? because we choose best provider, if it network we choose COARSE else we choose FINE
-    */
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
 </manifest>

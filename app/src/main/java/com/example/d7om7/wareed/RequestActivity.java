@@ -177,14 +177,16 @@ public class RequestActivity extends AppCompatActivity {
             DatabaseReference message_root = root.child(temp_key);
             SharedPreferences data = getPreferences(MODE_PRIVATE);
             
-            donor.requestsId.add(temp_key);
+//            donor.requestsId.add(temp_key);
+            String userID=temp_key;
             Map<String, Object> map2 = new HashMap<String, Object>();
             map2.put("pantienName", pantienNameText.getText().toString());
             map2.put("FileNumber", fileNumberText.getText().toString());
             map2.put("BloodBags", countBloodText.getText().toString());
             map2.put("Reason", reasonOfRequistText.getText().toString());
             map2.put("Hospital", selectHospetal);
-            map2.put("UserID",data.getString("id",null));
+            map2.put("UserID","user");
+            //TODO fixed user id
             map2.put("BloodType", selectBloodType);
             map2.put("statusTime",FinalDate);
             map2.put("RequestID", temp_key);

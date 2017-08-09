@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/mix_color"
+    tools:context="com.example.d7om7.wareed.RequestActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/colorwhite">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context="com.example.d7om7.wareed.RequestActivity">
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ScrollView>
+
+
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/reasonOfRequist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="25dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="9dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_weight="1"
+
+                        android:text="اسم المريض"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="25dp"
+                        app:srcCompat="@android:drawable/ic_menu_add" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/pantienName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginRight="65dp"
+                    android:layout_marginTop="8dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_marginTop="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:background="#BDBDBD" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@android:drawable/star_big_on"
+                        android:layout_marginEnd="11dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignEnd="@+id/view3"
+                        android:id="@+id/imageView5" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="فصيله الدم"
+                        android:textAlignment="textEnd"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_alignTop="@+id/imageView5"
+                        android:layout_toStartOf="@+id/imageView5"
+                        android:id="@+id/textView5" />
+
+                    <TextView
+                        android:id="@+id/bloodType"
+                        android:layout_width="79dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/fileNumber"
+                        android:layout_alignBottom="@+id/fileNumber"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_toStartOf="@+id/imageView5"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+
+                        app:srcCompat="@android:drawable/ic_dialog_info" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="25dp"
+                        app:srcCompat="@android:drawable/ic_input_add" />
+
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/imageView2"
+                        android:layout_marginEnd="11dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toStartOf="@+id/imageView2"
+                        android:text="رقم الملف"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/fileNumber"
+                        android:layout_width="70dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView2"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_toStartOf="@+id/imageView2"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="189dp"
+                        android:background="#BDBDBD"
+                        android:id="@+id/view3" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:background="#BDBDBD" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="80dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginRight="8dp"
+                            android:text="تاريخ الحالة"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="25dp"
+                            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/dateStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="62dp"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="textEnd"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginTop="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:background="#BDBDBD" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@android:drawable/checkbox_on_background"
+                        android:layout_marginEnd="11dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignEnd="@+id/view3"
+                        android:id="@+id/imageView5" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="تبرعات تمت"
+                        android:textAlignment="textEnd"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_alignTop="@+id/imageView5"
+                        android:layout_toStartOf="@+id/imageView5"
+                        android:id="@+id/textView5" />
+
+                    <EditText
+                        android:id="@+id/countDone"
+                        android:layout_width="84dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/countBlood"
+                        android:layout_alignBottom="@+id/countBlood"
+                        android:layout_marginLeft="12dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginRight="12dp"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:layout_toStartOf="@+id/imageView5"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+
+
+
+
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="25dp"
+                        app:srcCompat="@android:drawable/checkbox_off_background" />
+
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/imageView2"
+                        android:layout_marginEnd="11dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toStartOf="@+id/imageView2"
+                        android:text="متبرع مطلوب"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/countBlood"
+                        android:layout_width="95dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView2"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_toStartOf="@+id/imageView2"
+                        android:inputType="number"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="189dp"
+                        android:background="#BDBDBD"
+                        android:id="@+id/view3" />
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:background="#BDBDBD" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="25dp"
+                    android:text="اسم المستشفى"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/nameHospetal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:padding="15sp"
+                    android:onClick="saveChanget"
+                    android:background="#1DE9B6"
+                    android:layout_margin="5dp"
+                    android:textSize="33sp"
+                    android:text="حفظ التعديلات"/>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
