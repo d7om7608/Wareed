@@ -132,7 +132,7 @@ public class RegisterActicity extends AppCompatActivity {
                                 editor.putString("email",UserData.child("email").toString());
                                 editor.putString("gender",UserData.child("gender").toString());
 
-                                Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

@@ -1,6 +1,8 @@
 package com.example.d7om7.wareed;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
+    private DatabaseReference SignInCity;
 
     private EditText UserNameEditText;
     private EditText EmailEditText;
@@ -73,6 +76,9 @@ public class ProfileActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
 
+
+
+
     }
 
 
@@ -103,6 +109,8 @@ public class ProfileActivity extends AppCompatActivity {
         Email = EmailEditText.getText().toString().trim();
 
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
+        SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
+                .child("bloodtype").child(BloodTypeTooked).child("users");
 
         if (UsernameTooked.isEmpty()||BloodTypeTooked.isEmpty()){
 
@@ -117,6 +125,9 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("gender").setValue(GenderTooked);
             current_user_db.child("city").setValue(CityTooked);
             current_user_db.child("email").setValue(Email);
+
+            DatabaseReference current_user_db_city = SignInCity.child(UserUID);
+
 
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
