@@ -84,7 +84,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         //_____________________________________________________________________
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(UserId).child(requestID);
+        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child("nNjJ5SErwlPdL3zBxGO70PaI4ex1").child(requestID);
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
