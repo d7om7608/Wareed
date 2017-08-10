@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(prefs.getString("id",null) != null){
             UserNameEditText.setText(prefs.getString("display_name","NOTHING HERE"));
             EmailEditText.setText(prefs.getString("email","NOTHING HERE"));
-            CitySpinner.setSelection(Integer.parseInt(prefs.getString("BloodType","NOTHING HERE")));
+//            CitySpinner.setSelection(Integer.parseInt(prefs.getString("BloodType","NOTHING HERE")));
 
         }
 
@@ -153,6 +153,7 @@ public class ProfileActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
+            Toast.makeText(getApplicationContext(),"تم حفظ الملف",Toast.LENGTH_SHORT).show();
 
 
         }

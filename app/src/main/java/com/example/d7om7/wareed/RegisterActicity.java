@@ -58,7 +58,7 @@ public class RegisterActicity extends AppCompatActivity {
 
     public void requestCode(View view) {
 
-        String phoneNumber = PhoneNumberEditText.getText().toString().trim();
+        String phoneNumber = "00966"+PhoneNumberEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNumber)) return;
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(

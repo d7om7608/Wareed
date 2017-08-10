@@ -15,10 +15,12 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.app.NotificationCompat;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -46,6 +48,9 @@ import static android.os.Build.VERSION_CODES.M;
 public class ChatActivity extends AppCompatActivity {
 
     private ArrayList<String> arrayList = new ArrayList<>();
+
+    LinearLayout ChatViewHolder ;
+    ;
     private ArrayAdapter<String> arrayAdapter;
     private EditText ChatEditText;
     private Button SendBtn;
@@ -83,6 +88,8 @@ public class ChatActivity extends AppCompatActivity {
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
+
+        ChatViewHolder = (LinearLayout) findViewById(R.id.chat_view_holder);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.chat_holder, R.id.msg_text_view, arrayList);
         ChatListView.setAdapter(arrayAdapter);
 
@@ -159,6 +166,12 @@ public class ChatActivity extends AppCompatActivity {
         Iterator i = dataSnapshot.getChildren().iterator();
         ChatEditText.setText("");
         while (i.hasNext()) {
+
+//            if (UserId != null ) {
+//                ChatViewHolder.setGravity(Gravity.RIGHT);
+//            }else{
+//                ChatViewHolder.setGravity(Gravity.LEFT);
+//            }
 
             chat_msg = (String) ((DataSnapshot) i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot) i.next()).getValue();

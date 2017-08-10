@@ -160,36 +160,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-
-        if (id == R.id.action_settings) {
-
-            Intent startSettingActivity=new Intent(this,SettingsActivity.class);
-            startActivity(startSettingActivity);
-            return true;
-        }
-        if (id == R.id.action_help) {
-
-
-            return true;
-        }
-        if (id == R.id.action_sign_out) {
-
-            // clear sharedpreference
-            SharedPreferences data = getPreferences(MODE_PRIVATE);
-            data.edit().clear().commit();
-             AuthUI.getInstance().signOut(this);
-            mFirebaseAuth.signOut();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatmentWithEmptyBody")
     @Override
