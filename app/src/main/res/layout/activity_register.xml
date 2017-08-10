@@ -2,48 +2,84 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:background="@drawable/mix_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorwhite"
+        android:layout_margin = "10dp">
 
 
     <EditText
         android:id="@+id/phone_number_edit_text"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:hint="Write Phone Number"
+        android:hint="رقم الجوال"
         android:textSize="22sp"
         android:inputType="phone"
-        android:maxLength="14"/>
+        android:maxLength="9"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="75dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="+966"
+            android:textSize="22sp"
+            android:layout_alignBottom="@+id/phone_number_edit_text"
+            android:layout_alignParentTop="true"
+            android:id="@+id/textView9"
+            android:textColor="#000000"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/send_verification_code_button"
         android:onClick="requestCode"
-        android:text="Send Verification Code"
+        android:padding="5dp"
+        android:text="أرسل رمز التفعيل"
         android:textSize="18sp"
         android:layout_below="@+id/phone_number_edit_text"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:background="#1DE9B6"
+        />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:id="@+id/textView10"
+            android:gravity="right"
+            android:layout_below="@+id/send_verification_code_button"
+            android:layout_alignParentStart="true"
+            android:text="ادخل رقم جوال بهذه الصيغة (٥۰۰۰۰۰۰۰۰) واضغط على \n (ارسل رمز التفعيل) وانتظر رمز التفعيل ثم اكتبه في خانة \n (رمز التفعيل) واضغط تسجيل"
+            />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="89dp"
         android:id="@+id/write_verification_code_edit_text"
-        android:hint="Write Verification Code"
+        android:hint="رمز التفعيل"
         android:textSize="22sp"
-        android:layout_below="@+id/send_verification_code_button"
-        android:layout_alignParentStart="true"
         android:inputType="number"
-        android:maxLength="6"/>
+        android:maxLength="6"
+        android:layout_below="@+id/textView10"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="signin_button"
-        android:text="Sign In"
+        android:text="تسجيل"
         android:textSize="20sp"
+        android:layout_marginTop="97dp"
         android:layout_below="@+id/write_verification_code_edit_text"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#1DE9B6"
+        />
+
+    </RelativeLayout>
 </RelativeLayout>

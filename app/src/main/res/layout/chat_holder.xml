@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chat_view_holder"
     android:orientation="vertical"
     android:layout_width="325dp"
     android:layout_height="45dp"
-    android:layout_margin="5dp">
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="325dp"
+        android:layout_height="45dp"
+        android:layout_margin="10dp">
 
 
     <TextView
@@ -22,4 +29,5 @@
         android:text="الرسالة"
         android:textColor="#000000"
         android:textSize="22sp" />
+    </LinearLayout>
 </LinearLayout>

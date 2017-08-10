@@ -5,130 +5,197 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.d7om7.wareed.RequestActivity">
+    tools:context="com.example.d7om7.wareed.RequestActivity"
+    android:background="@drawable/mix_color">
 
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/colorwhite"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:context="com.example.d7om7.wareed.RequestActivity">
+            android:layout_height="match_parent">
 
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ScrollView>
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text=" اسم المريض"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp" />
+                android:orientation="vertical"
+                tools:context="com.example.d7om7.wareed.RequestActivity">
 
-            <EditText
-                android:id="@+id/pantienName"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textAlignment="textEnd"
-                android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textColor="@color/colorAccent"
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                android:text="رقم ملف المريض"
-                android:textSize="20sp" />
+                </ScrollView>
 
-            <EditText
-                android:id="@+id/fileNumber"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:inputType="number"
-                android:maxLength="7"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text=" اسم المريض"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp" />
 
-                android:textAlignment="textEnd"
-                android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/pantienName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:maxLength="20"
+                    />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textColor="@color/colorAccent"
-                android:text="عدد اكياس الدم المطلوبة "
-                android:textSize="20sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:text="رقم ملف المريض"
 
-            <EditText
-                android:id="@+id/countBlood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:inputType="number"
-                android:textColor="@color/colorPrimary"
-                android:maxLength="2"
-                android:textAlignment="textEnd"
-                android:textSize="20sp" />
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textColor="@color/colorAccent"
-                android:text="سبب التنويم"
-                android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/fileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:textAlignment="textEnd"
 
-            <EditText
-                android:id="@+id/reasonOfRequist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textColor="@color/colorPrimary"
-                android:textAlignment="textEnd"
-                android:textSize="20sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/planets_spiner"
-                android:layout_width="fill_parent"
-                android:layout_margin="12dp"
-                android:textColor="@color/colorAccent"
-                android:layout_height="wrap_content"></Spinner>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:text="عدد اكياس الدم المطلوبة "
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/city_spiner"
-                android:layout_margin="12dp"
-                android:layout_width="fill_parent"
-                android:textColor="@color/colorAccent"
-                android:layout_height="wrap_content"></Spinner>
+                <EditText
+                    android:id="@+id/countBlood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/Hospetal_spiner"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textColor="@color/colorAccent"></Spinner>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:text="سبب التنويم"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onclick"
-                android:layout_marginTop="15dp"
-                android:text="إضافة"
-                android:textSize="24sp" />
+                <EditText
+                    android:id="@+id/reasonOfRequist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
 
-        </LinearLayout>
-    </ScrollView>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/profile_city_spinner"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="فئة الدم"
+                    android:textSize="18sp"
+                    android:layout_alignTop="@+id/planets_spiner" />
+
+                <Spinner
+                    android:id="@+id/planets_spiner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:maxLength="70"
+
+                    android:textColor="@color/colorAccent"></Spinner>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/profile_city_spinner"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="المدينة"
+                        android:textSize="18sp"
+                        android:layout_alignTop="@+id/city_spiner" />
+
+                    <Spinner
+                    android:id="@+id/city_spiner"
+                    android:layout_width="200dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="12dp"
+                    android:textColor="@color/colorAccent"></Spinner>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/profile_city_spinner"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="المستشفى"
+                        android:textSize="18sp"
+                        android:layout_alignTop="@+id/planets_spiner" />
+
+                <Spinner
+                    android:id="@+id/Hospetal_spiner"
+                    android:layout_width="200dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="12dp"
+                    android:textColor="@color/colorAccent"></Spinner>
+
+                </RelativeLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:onClick="onclick"
+                    android:text="إضافة"
+                    android:textSize="24sp"
+                    android:background="#1DE9B6"
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>

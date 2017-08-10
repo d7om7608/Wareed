@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar
+    android:id="@+id/base_toolbar"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@drawable/mix_color"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<RelativeLayout xmlns:android=
+    "http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,10 +39,8 @@
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/ic_dialog_email"
             android:onClick="go_to_requst_blood"
-            android:layout_marginBottom="6dp"
-            android:layout_alignEnd="@+id/textView7"
-            android:layout_alignStart="@+id/textView7"
-            android:layout_above="@+id/textView7" />
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/textView7"
@@ -59,7 +66,8 @@
 
             android:layout_above="@+id/textView8"
             android:layout_alignEnd="@+id/textView8"
-            android:layout_alignStart="@+id/textView8" />
+            android:layout_alignStart="@+id/textView8"
+            android:id="@+id/imageView3" />
 
 
 
@@ -85,3 +93,4 @@
             <!--android:layout_centerHorizontal="true" />-->
 
 </RelativeLayout>
+</android.support.v7.widget.Toolbar>
