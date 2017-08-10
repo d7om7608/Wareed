@@ -34,15 +34,14 @@
                 </ScrollView>
 
 
-
                 <TextView
-                    android:textColor="@color/colorPrimary"
                     android:id="@+id/reasonOfRequist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="25dp"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -74,10 +73,10 @@
                     android:id="@+id/pantienName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
                     android:layout_marginRight="65dp"
                     android:layout_marginTop="8dp"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
                 <View
@@ -235,8 +234,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="62dp"
                         android:layout_marginTop="12dp"
+                        android:textAlignment="viewEnd"
                         android:textColor="@color/colorPrimary"
-                        android:textAlignment="textEnd"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -367,11 +366,11 @@
                     android:id="@+id/nameHospetal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="25dp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="25dp"
                     android:layout_marginBottom="25dp"
-                    android:textAlignment="textEnd"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="25dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
                 <TextView
