@@ -1,9 +1,6 @@
 package com.example.d7om7.wareed;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,19 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
@@ -32,14 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import static android.R.attr.phoneNumber;
-import static android.R.attr.start;
-import static com.example.d7om7.wareed.menagerModel.donor;
 
 /**
  * Created by Azura on 7/30/2017.
@@ -119,7 +104,7 @@ public class RegisterActicity extends AppCompatActivity {
 
 
                             if (dataSnapshot.child(mAuth.getCurrentUser().getUid().toString()).hasChildren()) {
-                                CityBloodActivity c = new CityBloodActivity();
+                                CityBloodPreferences c = new CityBloodPreferences();
                                 c.saveInPrefernces(SearchForProfile.child(mAuth.getCurrentUser().getUid().toString()),mAuth,getApplicationContext());
 
                                 Toast.makeText(RegisterActicity.this, "Signed in Successfully", Toast.LENGTH_LONG).show();
@@ -140,7 +125,6 @@ public class RegisterActicity extends AppCompatActivity {
 
 
                 } else {
-                    Log.d("LOGIN_FAILED","LOGIN HERE AT LINE 136 IN RegisterActivity.java");
                     Toast.makeText(RegisterActicity.this, "Failed To Sign In ", Toast.LENGTH_SHORT).show();
 
                 }

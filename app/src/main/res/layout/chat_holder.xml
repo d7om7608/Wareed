@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_width="325dp"
+    android:layout_height="45dp"
     android:layout_margin="5dp">
 
 
@@ -18,8 +18,8 @@
         android:id="@+id/msg_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="الرسالة"
         android:gravity="right"
+        android:text="الرسالة"
         android:textColor="#000000"
-        android:textSize="22sp"/>
+        android:textSize="22sp" />
 </LinearLayout>

@@ -204,9 +204,16 @@ public class MainActivity extends AppCompatActivity
             Intent ProfileIntent = new Intent(MainActivity.this,ProfileActivity.class);
             startActivity(ProfileIntent);
 
+        } else if (id == R.id.nav_signout) {
+
+            SharedPreferences data = getPreferences(MODE_PRIVATE);
+            data.edit().clear().commit();
+            mFirebaseAuth.signOut();
+
         } else if (id == R.id.nav_myCases) {
             Intent ProfileIntent = new Intent(MainActivity.this,MyCases.class);
             startActivity(ProfileIntent);
+
 
 
         }
