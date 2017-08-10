@@ -43,7 +43,8 @@
         <activity android:name=".ChatActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MyCases" />
-        <activity android:name=".MyCasesDetails"></activity>
+        <activity android:name=".MyCasesDetails" />
+        <activity android:name=".ListMyChating"></activity>
     </application>
 
 </manifest>

@@ -68,7 +68,6 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Add_Request(dataSnapshot);
-              //  progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -110,7 +109,6 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     @Override
     protected void onResume() {
         super.onResume();
-//        progressBar.setVisibility(View.GONE);
     }
     private void Add_Request(DataSnapshot dataSnapshot) {
 

@@ -46,7 +46,6 @@ import static android.os.Build.VERSION_CODES.M;
 public class ChatActivity extends AppCompatActivity {
 
     private ArrayList<String> arrayList = new ArrayList<>();
-    ;
     private ArrayAdapter<String> arrayAdapter;
     private EditText ChatEditText;
     private Button SendBtn;
@@ -68,9 +67,8 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
         String requestID = intent.getStringExtra("requestID");
-        String userID = intent.getStringExtra("userID");
-        //TODO fixed user id
-        //____________________________________________________________________
+        String requesterID = intent.getStringExtra("userID");
+        //_________________________________________________
 
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
@@ -80,18 +78,12 @@ public class ChatActivity extends AppCompatActivity {
 
         }
 
-      //  Log.d("hello",UserId.toString());
-        Log.d("hello",userID);
-        Log.d("hello",requestID);
-
-
         //_____________________________________________________________________
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(UserId).child(userID).child(requestID);
+        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(UserId).child(requestID);
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
-        arrayAdapter = new ArrayAdapter<String>(this,
-                R.layout.chat_holder, R.id.msg_text_view, arrayList);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.chat_holder, R.id.msg_text_view, arrayList);
         ChatListView.setAdapter(arrayAdapter);
 
 
