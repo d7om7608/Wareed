@@ -185,7 +185,12 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("BloodBags", countBloodText.getText().toString());
             map2.put("Reason", reasonOfRequistText.getText().toString());
             map2.put("Hospital", selectHospetal);
-            map2.put("UserID","user");
+            SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+
+            if (prefs.getString("id", null) != null) {
+
+            }
+            map2.put("UserID",prefs.getString("id", "NOTHING HERE"));
             //TODO fixed user id
             map2.put("BloodType", selectBloodType);
             map2.put("statusTime",FinalDate);

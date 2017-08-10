@@ -1,6 +1,8 @@
 package com.example.d7om7.wareed;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -47,6 +49,8 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         //progressBar.setVisibility(View.VISIBLE);
         status_adapter = new Main_status_adapter(requestBlood, this);
          progressBar = (ProgressBar) findViewById(R.id.progressBarx);
+        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
+
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

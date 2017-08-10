@@ -1,6 +1,8 @@
 package com.example.d7om7.wareed;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -42,6 +44,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         //progressBar.setVisibility(View.VISIBLE);
         myCases_adapter = new AdapterMyCases(requestBlood, this);
         progressBar = (ProgressBar) findViewById(R.id.progressBarx);
+        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

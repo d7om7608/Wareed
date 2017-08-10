@@ -1,41 +1,43 @@
 package com.example.d7om7.wareed;
 
-        import android.app.Notification;
-        import android.app.NotificationManager;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.net.Uri;
-        import android.os.Bundle;
-        import android.support.annotation.Nullable;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.app.AppCompatDelegate;
-        import android.support.v7.app.NotificationCompat;
-        import android.text.InputFilter;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.ListView;
-        import android.widget.ProgressBar;
-        import android.widget.Toast;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.app.NotificationCompat;
+import android.text.InputFilter;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.database.ChildEventListener;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import static com.example.d7om7.wareed.menagerModel.donor;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.Iterator;
-        import java.util.Map;
+import static com.example.d7om7.wareed.menagerModel.donor;
 
-        import static android.os.Build.VERSION_CODES.M;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by Azura on 8/2/2017.
@@ -43,7 +45,8 @@ package com.example.d7om7.wareed;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ArrayList<String> arrayList = new ArrayList<>();;
+    private ArrayList<String> arrayList = new ArrayList<>();
+    ;
     private ArrayAdapter<String> arrayAdapter;
     private EditText ChatEditText;
     private Button SendBtn;
@@ -52,26 +55,38 @@ public class ChatActivity extends AppCompatActivity {
     ListView ChatListView;
     private FirebaseDatabase mFirebaseDatabase;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
-    String name="";
+    String name = "";
     private DatabaseReference root;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    String UserName;
+    String UserId;
+
     @Override
     protected void onCreate(@AppCompatDelegate.NightMode Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        Intent intent=getIntent();
-
+        Intent intent = getIntent();
         String requestID = intent.getStringExtra("requestID");
         String userID = intent.getStringExtra("userID");
         //TODO fixed user id
-        //____________________________________________________________________ i don't have userid  )=
-      //  Log.d("hello",mFirebaseAuth.getCurrentUser().getUid());
-//        String UserId= mFirebaseAuth.getCurrentUser().getUid();
-//        UserName=FirebaseDatabase.getInstance().getReference().child("users").child(UserId).child("user name").toString();
-      //  root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(UserId).child(userID).child(requestID);
+        //____________________________________________________________________
+
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+
+        if (prefs.getString("id", null) != null) {
+            name = (prefs.getString("display_name", "NOTHING HERE"));
+            UserId = (prefs.getString("id", "NOTHING HERE"));
+
+        }
+
+      //  Log.d("hello",UserId.toString());
+        Log.d("hello",userID);
+        Log.d("hello",requestID);
+
+
+        //_____________________________________________________________________
+        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(UserId).child(userID).child(requestID);
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
@@ -88,8 +103,6 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
-                name=name+UserName;
-
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String, Object> map2 = new HashMap<String, Object>();
                 map2.put("name", name);
@@ -106,16 +119,15 @@ public class ChatActivity extends AppCompatActivity {
                 Add_Chat(dataSnapshot);
 
 
-
-                NotificationManager mm=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                Bitmap bmp= BitmapFactory.decodeResource(getResources(),R.drawable.img);
-                NotificationCompat.Builder bulder= (NotificationCompat.Builder) new  NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
+                NotificationManager mm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.img);
+                NotificationCompat.Builder bulder = (NotificationCompat.Builder) new NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
                         .setContentText("نص موضوع الرساله").setSmallIcon(R.drawable.img).setLargeIcon(bmp).setAutoCancel(true).setNumber(1);
-                bulder.setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);
-                bulder.setVibrate(new long[]{500,1000,500,1000,500});
-                bulder.setSound(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.jrs));
+                bulder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+                bulder.setVibrate(new long[]{500, 1000, 500, 1000, 500});
+                bulder.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.jrs));
 
-                mm.notify(1,bulder.build());
+                mm.notify(1, bulder.build());
             }
 
             @Override
@@ -159,11 +171,11 @@ public class ChatActivity extends AppCompatActivity {
             chat_msg = (String) ((DataSnapshot) i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
 
-            arrayList.add(chat_user_name+" :  "+ chat_msg);
+            arrayList.add(chat_user_name + " :  " + chat_msg);
             arrayAdapter.notifyDataSetChanged();
             ChatListView.setSelection(arrayList.size());
         }
 
 
-        }
+    }
 }

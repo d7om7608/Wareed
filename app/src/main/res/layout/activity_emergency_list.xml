@@ -15,6 +15,7 @@
         android:layout_gravity="center"
         android:layout_centerVertical="true"
         android:visibility="visible"
+
         android:layout_centerHorizontal="true" />
 
     <android.support.v7.widget.RecyclerView
