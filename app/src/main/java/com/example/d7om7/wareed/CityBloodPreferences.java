@@ -10,16 +10,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Azura on 8/9/2017.
  */
 
-public class CityBloodActivity {
+public class CityBloodPreferences {
+    List<String> cities;
+
 
 
     public static String [] getBloodTypes (){
@@ -28,12 +32,27 @@ public class CityBloodActivity {
 
     }
 
-    public void getCities () {
+    public List getCities () {
 
         DatabaseReference CitiesReference ;
         CitiesReference = FirebaseDatabase.getInstance().getReference().child("cities");
-//        Map<String, String> BloodArray = CitiesReference.child("cities")
-            return ;
+        CitiesReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                 cities= dataSnapshot.child("cities").getValue(List.class);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return cities ;
     }
 
     public void  saveInPrefernces(final DatabaseReference UserData,final FirebaseAuth mAuth,Context c) {

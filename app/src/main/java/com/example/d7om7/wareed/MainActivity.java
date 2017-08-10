@@ -206,6 +206,14 @@ public class MainActivity extends AppCompatActivity
             Intent ProfileIntent = new Intent(MainActivity.this,ProfileActivity.class);
             startActivity(ProfileIntent);
 
+        } else if (id == R.id.nav_signout) {
+
+            SharedPreferences data = getPreferences(MODE_PRIVATE);
+            data.edit().clear().commit();
+            mFirebaseAuth.signOut();
+
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

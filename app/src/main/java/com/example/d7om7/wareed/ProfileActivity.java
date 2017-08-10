@@ -1,14 +1,10 @@
 package com.example.d7om7.wareed;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,18 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.Map;
+import java.util.List;
 
 
 /**
@@ -36,7 +25,7 @@ import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    CityBloodActivity cityBloodActivity = new CityBloodActivity() ;
+    CityBloodPreferences cityBloodActivity = new CityBloodPreferences() ;
     RegisterActicity registerActicity = new RegisterActicity();
 
     private FirebaseDatabase SignFirebaseDatabase;
@@ -86,6 +75,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         if(prefs.getString("id",null) != null){
             UserNameEditText.setText(prefs.getString("display_name","NOTHING HERE"));
+            EmailEditText.setText(prefs.getString("email","NOTHING HERE"));
+            CitySpinner.setSelection(Integer.parseInt(prefs.getString("BloodType","NOTHING HERE")));
+
         }
 
 
@@ -99,10 +91,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void CitySpinner () {
         // TODO: ger city from CityBlood Activity
-        String CityArray [] = {"male \n", "female\n"};
-//        String CityArray [] = cityBloodActivity.getCities();
-        ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, CityArray);
+        String CityArray [] = {"makkah\n", "jeddah\n"};
+//        List CityArray  = cityBloodActivity.getCities();
+        ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
 
 
@@ -154,7 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             DatabaseReference current_user_db_city = SignInCity.child(UserUID);
             Log.d("Hello","B4 method");
-            CityBloodActivity c = new CityBloodActivity();
+            CityBloodPreferences c = new CityBloodPreferences();
             c.saveInPrefernces(current_user_db,SignAuth,getApplicationContext());
             Log.d("Hello","After method");
 
