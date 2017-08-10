@@ -5,11 +5,16 @@
         <item
             android:id="@+id/nav_Talks"
             android:icon="@android:drawable/stat_notify_chat"
-            android:title="Talks" />
+            android:title="المحادثات" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@android:drawable/ic_input_get"
-            android:title="my profile" />
+            android:title="ملفي الشخصي" />
+
+        <item
+            android:id="@+id/nav_myCases"
+            android:icon="@drawable/fui_ic_twitter_bird_white_24dp"
+            android:title="حالاتي" />
 
         <item
             android:id="@+id/nav_signout"
@@ -19,14 +24,11 @@
 
     <!--<item android:title="Communicate">-->
         <!--<menu>-->
-            <!--<item-->
+           <!--<item-->
                 <!--android:id="@+id/nav_share"-->
                 <!--android:icon="@drawable/ic_menu_share"-->
                 <!--android:title="Share" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_send"-->
-                <!--android:icon="@drawable/ic_menu_send"-->
-                <!--android:title="Send" />-->
+
         <!--</menu>-->
     <!--</item>-->
 

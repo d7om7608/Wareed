@@ -3,7 +3,6 @@ package com.example.d7om7.wareed;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DisplayDetails extends AppCompatActivity {
+public class MyCasesDetails extends AppCompatActivity {
     TextView pantienName;
     TextView fileNumber;
     TextView countBlood;
@@ -23,25 +22,25 @@ public class DisplayDetails extends AppCompatActivity {
     TextView dateStatus;
     TextView nameHospetal;
     private DatabaseReference root;
-    TextView countDone;
+    EditText countDone;
     Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         intent=getIntent();
-        setContentView(R.layout.activity_display_detailse);
-        setTitle("تفاصيل الحالة");
+        setContentView(R.layout.activity_my_cases_details);
+        intent=getIntent();
+        setTitle("تفاصيل حالتي");
 
         pantienName=(TextView)findViewById(R.id.pantienName);
-         fileNumber=(TextView)findViewById(R.id.fileNumber);
-        root =FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
-         countDone=(TextView)findViewById(R.id.countDone);
-         countBlood=(TextView)findViewById(R.id.countBlood);
-         reasonOfRequist=(TextView)findViewById(R.id.reasonOfRequist);
-         bloodType=(TextView)findViewById(R.id.bloodType);
-         nameHospetal=(TextView)findViewById(R.id.nameHospetal);
+        fileNumber=(TextView)findViewById(R.id.fileNumber);
+        root = FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
+        countDone=(EditText)findViewById(R.id.countDone);
+        countBlood=(TextView)findViewById(R.id.countBlood);
+        reasonOfRequist=(TextView)findViewById(R.id.reasonOfRequist);
+        bloodType=(TextView)findViewById(R.id.bloodType);
+        nameHospetal=(TextView)findViewById(R.id.nameHospetal);
         dateStatus=(TextView)findViewById(R.id.dateStatus);
 
 
@@ -72,16 +71,14 @@ public class DisplayDetails extends AppCompatActivity {
 
     }
 
-    public void GoToChat(View view) {
+    public void saveChanget(View view) {
 
 
-        String requestID = intent.getStringExtra("getRequestID");
-        String userID = intent.getStringExtra("getUserID");
+     root.child("done").setValue(countDone.getText().toString());
 
-        Intent ChatIntent = new Intent(this, ChatActivity.class);
-        ChatIntent.putExtra("requestID", requestID);
-        ChatIntent.putExtra("userID", userID);
+        Intent ChatIntent = new Intent(this, MainActivity.class);
         startActivity(ChatIntent);
 
     }
 }
+

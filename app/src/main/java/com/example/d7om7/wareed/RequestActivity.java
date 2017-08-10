@@ -2,6 +2,7 @@ package com.example.d7om7.wareed;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class RequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requst);
+        setTitle("إنشاء طلب للتبرع");
 
 
 
@@ -173,13 +175,23 @@ public class RequestActivity extends AppCompatActivity {
 
 
             DatabaseReference message_root = root.child(temp_key);
+            SharedPreferences data = getPreferences(MODE_PRIVATE);
+            
+//            donor.requestsId.add(temp_key);
+            String userID=temp_key;
             Map<String, Object> map2 = new HashMap<String, Object>();
             map2.put("pantienName", pantienNameText.getText().toString());
             map2.put("FileNumber", fileNumberText.getText().toString());
             map2.put("BloodBags", countBloodText.getText().toString());
             map2.put("Reason", reasonOfRequistText.getText().toString());
             map2.put("Hospital", selectHospetal);
-            map2.put("UserID", "qwed123467");
+            SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+
+            if (prefs.getString("id", null) != null) {
+
+            }
+            map2.put("UserID",prefs.getString("id", "NOTHING HERE"));
+            //TODO fixed user id
             map2.put("BloodType", selectBloodType);
             map2.put("statusTime",FinalDate);
             map2.put("RequestID", temp_key);

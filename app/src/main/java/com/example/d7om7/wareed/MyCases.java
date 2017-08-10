@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -24,13 +22,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+public class MyCases extends AppCompatActivity implements AdapterMyCases.changeActivity {
 
-
-public class EmergencyListActivity extends AppCompatActivity implements Main_status_adapter.changeActivity {
-
-    Main_status_adapter status_adapter;
+    AdapterMyCases myCases_adapter;
     ProgressBar progressBar;
-    //private ProgressBar progressBar;
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
@@ -38,8 +33,8 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("الحالات الطارئه");
-        setContentView(R.layout.activity_emergency_list);
+        setContentView(R.layout.activity_my_cases);
+        setTitle("حالاتي");
 
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
@@ -47,10 +42,9 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         root = FirebaseDatabase.getInstance().getReference().child("requestblood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //progressBar.setVisibility(View.VISIBLE);
-        status_adapter = new Main_status_adapter(requestBlood, this);
-         progressBar = (ProgressBar) findViewById(R.id.progressBarx);
+        myCases_adapter = new AdapterMyCases(requestBlood, this);
+        progressBar = (ProgressBar) findViewById(R.id.progressBarx);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
-
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -68,13 +62,13 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Add_Request(dataSnapshot);
-              //  progressBar.setVisibility(View.GONE);
+                //  progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Add_Request(dataSnapshot);
-            //    progressBar.setVisibility(View.GONE);
+                //    progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -93,9 +87,9 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
             }
         });
 
-        recyclerView.setAdapter(status_adapter);
+        recyclerView.setAdapter(myCases_adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        status_adapter.notifyDataSetChanged();
+        myCases_adapter.notifyDataSetChanged();
 
         /*
         Here LOCATION variables
@@ -143,7 +137,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
 
 
-            status_adapter.notifyDataSetChanged();
+            myCases_adapter.notifyDataSetChanged();
         }
 
 
@@ -154,7 +148,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     @Override
     public void Clicked(int position, int id) {
-        Intent startChildActivityIntent = new Intent(this, DisplayDetails.class);
+        Intent startChildActivityIntent = new Intent(this, MyCasesDetails.class);
 
 
         startChildActivityIntent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
@@ -164,3 +158,4 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     }
 }
+

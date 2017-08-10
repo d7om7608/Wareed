@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity
     private SimpleDateFormat date;
     private Calendar calendar;
     private Button BTN;
-    private TextView TEXT;
     //____________________________________dateFinsh
 
     Button notification;
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         //____________________________________dateStart
         BTN = (Button) findViewById(R.id.BTN);
-        TEXT = (TextView) findViewById(R.id.TEXT);
+
 
         calendar = Calendar.getInstance();
         date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
@@ -119,7 +118,6 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
 
                 if (user == null && data.getString("id",null) == null) {
-
                     Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
                     MainActivity.this.startActivity(intent);
                 }
@@ -132,7 +130,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+       mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity
             // clear sharedpreference
             SharedPreferences data = getPreferences(MODE_PRIVATE);
             data.edit().clear().commit();
-//             AuthUI.getInstance().signOut(this);
+             AuthUI.getInstance().signOut(this);
             mFirebaseAuth.signOut();
 
             return true;
@@ -211,6 +209,10 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences data = getPreferences(MODE_PRIVATE);
             data.edit().clear().commit();
             mFirebaseAuth.signOut();
+
+        } else if (id == R.id.nav_myCases) {
+            Intent ProfileIntent = new Intent(MainActivity.this,MyCases.class);
+            startActivity(ProfileIntent);
 
 
 
@@ -257,7 +259,6 @@ public class MainActivity extends AppCompatActivity
                 String FinalDate;
                 calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
                 FinalDate = date.format(calendar2.getTime());
-                TEXT.setText(FinalDate);
                 D_DatePicker.dismiss();
             }
         });

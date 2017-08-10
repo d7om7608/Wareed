@@ -56,47 +56,47 @@
         android:text=""
         android:textAlignment="textEnd"
         android:textSize="20sp" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="18dp"
-    android:layout_below="@+id/statusTime"
-    android:layout_alignParentStart="true"
-    android:orientation="horizontal"
-    android:id="@+id/linearLayout2">
-
-
-    <ImageView
-        android:layout_weight="1"
-
-        android:id="@+id/bloodTypeIcon"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/star_big_on"
-        />
-
-    <ImageView
-        android:layout_weight="1.00"
-
-        android:id="@+id/countofdoneIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:srcCompat="@android:drawable/checkbox_on_background"
-
-        />
-
-    <ImageView
-        android:layout_weight="1"
-
-        android:id="@+id/countofBloodIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_myplaces"
-
-        />
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/statusTime"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2">
 
 
-</LinearLayout>
+        <ImageView
+            android:layout_weight="1"
+
+            android:id="@+id/bloodTypeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/star_big_on"
+            />
+
+        <ImageView
+            android:layout_weight="1.00"
+
+            android:id="@+id/countofdoneIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@android:drawable/checkbox_on_background"
+
+            />
+
+        <ImageView
+            android:layout_weight="1"
+
+            android:id="@+id/countofBloodIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_myplaces"
+
+            />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -199,13 +199,13 @@
 
 
     <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="التفاصيل"
-    android:textSize="24sp"
-    android:gravity="center"
-    android:id="@+id/detilse"
-   android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="تعديل الحاله"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:id="@+id/detilse"
+        android:padding="4dp"
         android:layout_below="@+id/linearLayout4"
         android:layout_alignParentStart="true"
         android:layout_marginTop="18dp"
