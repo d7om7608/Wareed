@@ -9,13 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.app.NotificationCompat;
-import android.text.InputFilter;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +19,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -32,14 +27,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.example.d7om7.wareed.menagerModel.donor;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by Azura on 8/2/2017.
@@ -84,7 +75,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         //_____________________________________________________________________
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child("nNjJ5SErwlPdL3zBxGO70PaI4ex1").child(requestID);
+        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(UserId).child(requestID);
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
@@ -166,12 +157,6 @@ public class ChatActivity extends AppCompatActivity {
         Iterator i = dataSnapshot.getChildren().iterator();
         ChatEditText.setText("");
         while (i.hasNext()) {
-
-//            if (UserId != null ) {
-//                ChatViewHolder.setGravity(Gravity.RIGHT);
-//            }else{
-//                ChatViewHolder.setGravity(Gravity.LEFT);
-//            }
 
             chat_msg = (String) ((DataSnapshot) i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot) i.next()).getValue();

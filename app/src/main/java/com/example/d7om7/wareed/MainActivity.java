@@ -2,15 +2,10 @@ package com.example.d7om7.wareed;
 
 
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,27 +13,20 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
-import com.firebase.ui.auth.AuthUI;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -116,11 +104,11 @@ public class MainActivity extends AppCompatActivity
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
-
-                if (user == null && data.getString("id",null) == null) {
-                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
-                    MainActivity.this.startActivity(intent);
-                }
+//
+//                if (user == null && data.getString("id",null) == null) {
+//                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
+//                    MainActivity.this.startActivity(intent);
+//                }
             }
         };
 
@@ -130,13 +118,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-       mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+     //  mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+       // mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
     long time;
     @Override
