@@ -30,7 +30,6 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     Main_status_adapter status_adapter;
     ProgressBar progressBar;
-    //private ProgressBar progressBar;
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
@@ -99,11 +98,11 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         /*
         Here LOCATION variables
          */
-        LocationClass location = new LocationClass(this);
-        double lon = location.getLongitude();
-        double lat = location.getLatitude();
-        String city = location.getCurrectCity();
-
+//        LocationClass location = new LocationClass(this);
+//        double lon = location.getLongitude();
+//        double lat = location.getLatitude();
+//        String city = location.getCurrectCity();
+//TODO fares i put here comment
     }
 
     @Override
@@ -152,13 +151,10 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
     @Override
     public void Clicked(int position, int id) {
-        Intent startChildActivityIntent = new Intent(this, DisplayDetails.class);
-
-
-        startChildActivityIntent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
-        startChildActivityIntent.putExtra("getUserID", requestBlood.get(position).getUserID());
-
-        startActivity(startChildActivityIntent);
+        Intent intent = new Intent(this, DisplayDetails.class);
+        intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
+        intent.putExtra("getUserID", requestBlood.get(position).getUserID());
+        startActivity(intent);
 
     }
 }

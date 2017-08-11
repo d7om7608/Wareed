@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
-//
-//                if (user == null && data.getString("id",null) == null) {
-//                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
-//                    MainActivity.this.startActivity(intent);
-//                }
+
+                if (user == null && data.getString("id",null) == null) {
+                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
+                    MainActivity.this.startActivity(intent);
+                }
             }
         };
 
@@ -118,13 +118,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-     //  mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+     mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-       // mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
     long time;
     @Override
@@ -151,7 +151,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Talks) {
-            // Handle the camera action
+            Intent ProfileIntent = new Intent(MainActivity.this,ListMyChating.class);
+            startActivity(ProfileIntent);
         } else if (id == R.id.nav_profile) {
 
             Intent ProfileIntent = new Intent(MainActivity.this,ProfileActivity.class);

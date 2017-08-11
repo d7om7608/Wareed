@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,14 +58,11 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     String UserId;
-
     @Override
     protected void onCreate(@AppCompatDelegate.NightMode Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        Intent intent = getIntent();
-        String requestID = intent.getStringExtra("requestID");
-        String requesterID = intent.getStringExtra("userID");
+
         //_________________________________________________
 
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -75,7 +74,21 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         //_____________________________________________________________________
-        root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(UserId).child(requestID);
+        Intent intent = getIntent();
+        if (intent.getStringExtra("requestID")!=null) {
+            String requestID = intent.getStringExtra("requestID");
+            String requesterID = intent.getStringExtra("userID");
+            root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(UserId).child(requestID);
+
+        }else
+        {
+            String requesterID= intent.getStringExtra("NameRequster");
+            String requestID= intent.getStringExtra("FileNumber");
+            String donerID= intent.getStringExtra("NameDoner");
+            root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(donerID).child(requestID);
+
+
+        }
 
         ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
@@ -87,7 +100,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        mProgressBar.setVisibility(View.VISIBLE);
         SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,22 +116,33 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Add_Chat(dataSnapshot);
+                arrayAdapter.notifyDataSetChanged();
 
 
-                NotificationManager mm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.img);
-                NotificationCompat.Builder bulder = (NotificationCompat.Builder) new NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
-                        .setContentText("نص موضوع الرساله").setSmallIcon(R.drawable.img).setLargeIcon(bmp).setAutoCancel(true).setNumber(1);
-                bulder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-                bulder.setVibrate(new long[]{500, 1000, 500, 1000, 500});
-                bulder.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.jrs));
-
-                mm.notify(1, bulder.build());
+//                NotificationManager mm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.img);
+//                NotificationCompat.Builder bulder = (NotificationCompat.Builder) new NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
+//                        .setContentText("نص موضوع الرساله").setSmallIcon(R.drawable.img).setLargeIcon(bmp).setAutoCancel(true).setNumber(1);
+//                bulder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+//                bulder.setVibrate(new long[]{500, 1000, 500, 1000, 500});
+//                bulder.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.jrs));
+//
+//                mm.notify(1, bulder.build());
             }
 
             @Override
@@ -149,6 +173,8 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 
     private String chat_msg, chat_user_name;

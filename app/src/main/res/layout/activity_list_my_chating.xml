@@ -6,14 +6,6 @@
 
 
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/linearLayout"
-        android:id="@+id/my_chat_list_view"
-        android:layout_marginBottom="5dp"/>
     <ProgressBar
         android:id="@+id/chatingProgressBar"
         style="?android:attr/progressBarStyleLarge"
@@ -21,5 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/my_chat_RecyclerView"
+        android:layout_margin="16dp" />
+
 
 </RelativeLayout>

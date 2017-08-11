@@ -34,11 +34,11 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.reasonOfRequest.setText("" + requestedBloodList.get(position).reasonOfRequest);
-        holder.statusTime.setText("" + requestedBloodList.get(position).statusTime);
-        holder.countOfrequest.setText("" + requestedBloodList.get(position).countOfBlood);
-        holder.countDone.setText("" + requestedBloodList.get(position).countOfdone);
-        holder.bloodTyep.setText("" + requestedBloodList.get(position).bloodType);
+        holder.reasonOfRequest.setText("" + requestedBloodList.get(position).getReasonOfRequest());
+        holder.statusTime.setText("" + requestedBloodList.get(position).getStatusTime());
+        holder.countOfrequest.setText("" + requestedBloodList.get(position).getCountOfBlood());
+        holder.countDone.setText("" + requestedBloodList.get(position).getCountOfdone());
+        holder.bloodTyep.setText("" + requestedBloodList.get(position).getBloodType());
         Intent intent=new Intent();
 
 

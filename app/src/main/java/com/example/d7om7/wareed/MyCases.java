@@ -1,6 +1,7 @@
 package com.example.d7om7.wareed;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -21,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static android.R.attr.id;
 
 public class MyCases extends AppCompatActivity implements AdapterMyCases.changeActivity {
 
@@ -107,7 +111,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 //        progressBar.setVisibility(View.GONE);
     }
     private void Add_Request(DataSnapshot dataSnapshot) {
-
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         Iterator i = dataSnapshot.getChildren().iterator();
         while (i.hasNext()) {
 
@@ -125,21 +129,26 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 
             String UserID = (String) ((DataSnapshot) i.next()).getValue();
 
-            String CountOfdone = (String) ((DataSnapshot) i.next()).getValue();
-
-            String PatientName = (String) ((DataSnapshot) i.next()).getValue();
-
-            String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
-            requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                    StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
-
-            requestBlood.add(requestBloodopjict);
 
 
+                String CountOfdone = (String) ((DataSnapshot) i.next()).getValue();
 
-            myCases_adapter.notifyDataSetChanged();
+                String PatientName = (String) ((DataSnapshot) i.next()).getValue();
+
+                String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
+                requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                        StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
+
+            Log.d("hello",UserID);
+            Log.d("hello",prefs.getString("id", "NOTHING HERE"));
+
+            if (UserID.equals(prefs.getString("id", "NOTHING HERE"))) {
+                requestBlood.add(requestBloodopjict);
+            }
+
+                myCases_adapter.notifyDataSetChanged();
+
         }
-
 
     }
 
