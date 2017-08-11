@@ -46,9 +46,9 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
         root = FirebaseDatabase.getInstance().getReference().child("requestblood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //progressBar.setVisibility(View.VISIBLE);
         status_adapter = new Main_status_adapter(requestBlood, this);
          progressBar = (ProgressBar) findViewById(R.id.progressBarx);
+        progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
 

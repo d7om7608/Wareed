@@ -25,9 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ListMyChating extends AppCompatActivity {
+public class ListMyChating extends AppCompatActivity/* implements AdapterMyChating.changeActivity*/{
     private ArrayList<String> arrayList = new ArrayList<>();
-    private ArrayAdapter<String> arrayAdapter;
+    AdapterMyChating adapterMyChating;
     ProgressBar mProgressBar;
     ListView ChatListView;
     DatabaseReference root;
@@ -37,9 +37,10 @@ public class ListMyChating extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_my_chating);
+        setTitle("محادثاتي");
         ChatListView = (ListView) findViewById(R.id.my_chat_list_view);
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_chat_view_holder, R.id.msg_text_view, arrayList);
-        ChatListView.setAdapter(arrayAdapter);
+//        adapterMyChating = new Main_status_adapter(requestBlood, this);
+//        ChatListView.setAdapter(adapterMyChating);
         mProgressBar = (ProgressBar) findViewById(R.id.chatingProgressBar);
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -75,7 +76,7 @@ public class ListMyChating extends AppCompatActivity {
                // Add_Chat(dataSnapshot);
 
 
-                arrayAdapter.notifyDataSetChanged();
+             //   arrayAdapter.notifyDataSetChanged();
 
 
             }

@@ -189,17 +189,9 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("BloodBags", countBloodText.getText().toString());
             map2.put("Reason", reasonOfRequistText.getText().toString());
             map2.put("Hospital", selectHospetal);
-            map2.put("RequesterId", SignAuth.getCurrentUser().getUid().toString());
-//            DatabaseReference current_user_db = SignDataBase.child(SignAuth.getCurrentUser().getUid().toString());
-//            current_user_db.child("user name").child(SignAuth.getCurrentUser().getUid().toString()).child("requests").setValue(requestBlood);
-
             SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
-            if (prefs.getString("id", null) != null) {
-
-            }
             map2.put("UserID",prefs.getString("id", "NOTHING HERE"));
-            //TODO fixed user id
             map2.put("BloodType", selectBloodType);
             map2.put("statusTime",FinalDate);
             map2.put("RequestID", temp_key);
