@@ -59,6 +59,10 @@ public class RequestActivity extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
         date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
+
+//---------------------------------------------------------------------
+        Intent intent = getIntent();
+        String requestID = intent.getStringExtra("requestID");
 //---------------------------------------------------------------------
         final Spinner spinner = (Spinner) findViewById(R.id.planets_spiner);
         spinnerArray = Arrays(3);
@@ -185,6 +189,10 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("BloodBags", countBloodText.getText().toString());
             map2.put("Reason", reasonOfRequistText.getText().toString());
             map2.put("Hospital", selectHospetal);
+            map2.put("RequesterId", SignAuth.getCurrentUser().getUid().toString());
+//            DatabaseReference current_user_db = SignDataBase.child(SignAuth.getCurrentUser().getUid().toString());
+//            current_user_db.child("user name").child(SignAuth.getCurrentUser().getUid().toString()).child("requests").setValue(requestBlood);
+
             SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
             if (prefs.getString("id", null) != null) {
