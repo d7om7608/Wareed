@@ -138,9 +138,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
                 String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
                 requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
                         StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
-
-            Log.d("hello",UserID);
-            Log.d("hello",prefs.getString("id", "NOTHING HERE"));
+            
 
             if (UserID.equals(prefs.getString("id", "NOTHING HERE"))) {
                 requestBlood.add(requestBloodopjict);
