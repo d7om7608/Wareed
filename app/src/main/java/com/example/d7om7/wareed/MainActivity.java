@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
-//
-//                if (user == null && data.getString("id",null) == null) {
-//                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
-//                    MainActivity.this.startActivity(intent);
-//                }
+
+                if (user == null && data.getString("id",null) == null) {
+                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
+                    MainActivity.this.startActivity(intent);
+                }
             }
         };
 
@@ -118,13 +118,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-     //  mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+      mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-       // mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
     long time;
     @Override
