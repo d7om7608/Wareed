@@ -91,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void CitySpinner () {
         // TODO: ger city from CityBlood Activity
-        String CityArray [] = {"makkah\n", "jeddah\n"};
+        String CityArray [] = {"مكة\n\n", "جدة\n\n"};
 //        List CityArray  = cityBloodActivity.getCities();
         ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
