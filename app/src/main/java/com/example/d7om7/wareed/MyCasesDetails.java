@@ -81,6 +81,14 @@ public class MyCasesDetails extends AppCompatActivity {
         Intent ChatIntent = new Intent(this, MainActivity.class);
         startActivity(ChatIntent);
 
+
     }
-}
+    public void deletMyCase(View view) {
+        root.removeValue();
+        Intent ChatIntent = new Intent(this, MyCases.class);
+        startActivity(ChatIntent);
+
+
+    }
+    }
 

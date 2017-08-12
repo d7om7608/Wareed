@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,40 +24,31 @@ public class DisplayDetails extends AppCompatActivity {
     private DatabaseReference root;
     TextView countDone;
     Intent intent;
-
+    ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         intent=getIntent();
+        intent = getIntent();
         setContentView(R.layout.activity_display_detailse);
         setTitle("تفاصيل الحالة");
 
-        pantienName=(TextView)findViewById(R.id.pantienName);
-         fileNumber=(TextView)findViewById(R.id.fileNumber);
-        root =FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
-         countDone=(TextView)findViewById(R.id.countDone);
-         countBlood=(TextView)findViewById(R.id.countBlood);
-         reasonOfRequist=(TextView)findViewById(R.id.reasonOfRequist);
-         bloodType=(TextView)findViewById(R.id.bloodType);
-         nameHospetal=(TextView)findViewById(R.id.nameHospetal);
-        dateStatus=(TextView)findViewById(R.id.dateStatus);
+        pantienName = (TextView) findViewById(R.id.pantienName);
+        fileNumber = (TextView) findViewById(R.id.fileNumber);
+        root = FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
+        countDone = (TextView) findViewById(R.id.countDone);
+        countBlood = (TextView) findViewById(R.id.countBlood);
+        reasonOfRequist = (TextView) findViewById(R.id.reasonOfRequist);
+        bloodType = (TextView) findViewById(R.id.bloodType);
+        nameHospetal = (TextView) findViewById(R.id.nameHospetal);
+        dateStatus = (TextView) findViewById(R.id.dateStatus);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressDesplayDetails);
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
 
-
-
-        root.addValueEventListener(new ValueEventListener() {
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                countDone.setText( (String) dataSnapshot.child("done").getValue());
-                pantienName.setText( (String) dataSnapshot.child("pantienName").getValue());
-                fileNumber.setText( (String) dataSnapshot.child("FileNumber").getValue());
-                countBlood.setText( (String) dataSnapshot.child("BloodBags").getValue());
-                reasonOfRequist.setText( (String) dataSnapshot.child("Reason").getValue());
-                bloodType.setText( (String) dataSnapshot.child("BloodType").getValue());
-                dateStatus.setText( (String) dataSnapshot.child("statusTime").getValue());
-                nameHospetal.setText( (String) dataSnapshot.child("Hospital").getValue());
-
+                mProgressBar.setVisibility(View.INVISIBLE);
 
             }
 
@@ -66,6 +58,27 @@ public class DisplayDetails extends AppCompatActivity {
             }
         });
 
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                countDone.setText((String) dataSnapshot.child("done").getValue());
+                pantienName.setText((String) dataSnapshot.child("pantienName").getValue());
+                fileNumber.setText((String) dataSnapshot.child("FileNumber").getValue());
+                countBlood.setText((String) dataSnapshot.child("BloodBags").getValue());
+                reasonOfRequist.setText((String) dataSnapshot.child("Reason").getValue());
+                bloodType.setText((String) dataSnapshot.child("BloodType").getValue());
+                dateStatus.setText((String) dataSnapshot.child("statusTime").getValue());
+                nameHospetal.setText((String) dataSnapshot.child("Hospital").getValue());
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
     }

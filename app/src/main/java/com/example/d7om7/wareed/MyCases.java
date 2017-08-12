@@ -138,7 +138,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
                 String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
                 requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
                         StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
-            
+
 
             if (UserID.equals(prefs.getString("id", "NOTHING HERE"))) {
                 requestBlood.add(requestBloodopjict);
@@ -157,12 +157,13 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
     public void Clicked(int position, int id) {
         Intent startChildActivityIntent = new Intent(this, MyCasesDetails.class);
 
-
         startChildActivityIntent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
         startChildActivityIntent.putExtra("getUserID", requestBlood.get(position).getUserID());
 
         startActivity(startChildActivityIntent);
 
     }
+
+
 }
 

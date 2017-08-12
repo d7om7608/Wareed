@@ -373,16 +373,38 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:padding="15sp"
-                    android:onClick="saveChanget"
-                    android:background="#1DE9B6"
-                    android:layout_margin="5dp"
-                    android:textSize="33sp"
-                    android:text="حفظ التعديلات"/>
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:padding="15sp"
+                        android:textColor="@color/cardview_light_background"
+                        android:onClick="deletMyCase"
+                        android:background="#970800"
+                        android:layout_margin="5dp"
+                        android:textSize="25sp"
+                        android:text="حذف الحالة"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:padding="15sp"
+                        android:layout_weight="1"
+                        android:onClick="saveChanget"
+                        android:background="#1DE9B6"
+                        android:layout_margin="5dp"
+                        android:textSize="25sp"
+                        android:text="حفظ التعديلات"/>
+
+                </LinearLayout>
+
+
             </LinearLayout>
         </ScrollView>
 

@@ -3,6 +3,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_mainActivity"
+            android:icon="@drawable/fui_ic_twitter_bird_white_24dp"
+            android:title="الصفحه الرئيسيه" />
+
+        <item
             android:id="@+id/nav_Talks"
             android:icon="@android:drawable/stat_notify_chat"
             android:title="المحادثات" />

@@ -150,7 +150,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_Talks) {
+        if (id == R.id.nav_mainActivity) {
+            Intent ProfileIntent = new Intent(MainActivity.this,MainActivity.class);
+            startActivity(ProfileIntent);
+
+        } else if (id == R.id.nav_Talks) {
             Intent ProfileIntent = new Intent(MainActivity.this,ListMyChating.class);
             startActivity(ProfileIntent);
         } else if (id == R.id.nav_profile) {
