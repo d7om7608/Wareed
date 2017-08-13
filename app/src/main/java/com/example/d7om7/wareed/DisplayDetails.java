@@ -105,6 +105,8 @@ public class DisplayDetails extends AppCompatActivity {
             ChatIntent.putExtra("requestID", requestID);
             ChatIntent.putExtra("userID", userID);
             startActivity(ChatIntent);
+            finish();
+
         }
     }
     public void onBackPressed() {

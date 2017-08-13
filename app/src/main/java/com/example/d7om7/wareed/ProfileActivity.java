@@ -1,5 +1,6 @@
 package com.example.d7om7.wareed;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,15 +9,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+
+import static com.example.d7om7.wareed.R.id.BTN;
 
 
 /**
@@ -34,21 +43,25 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference SignInCity;
     private DatabaseReference CheckForPreferences;
 
-
+    private Dialog D_DatePicker;
     private EditText UserNameEditText;
     private EditText EmailEditText;
     private Spinner BloodTypeSpinner;
     private Spinner CitySpinner;
     private Spinner GenderSpinner;
-
+    private EditText ageText;
     String UsernameTooked;
     String Email;
     String BloodTypeTooked;
     String CityTooked;
     String GenderTooked;
     String UserUID;
-
-
+    String age;
+    String DateSecond;
+    private Button BTN;
+    private Calendar calendar;
+    private SimpleDateFormat date;
+    private TextView TextDate;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +73,23 @@ public class ProfileActivity extends AppCompatActivity {
         BloodTypeSpinner = (Spinner) findViewById(R.id.profile_bloodType_spinner);
         CitySpinner = (Spinner) findViewById(R.id.profile_city_spinner);
         GenderSpinner = (Spinner) findViewById(R.id.profile_gender_spinner);
+        ageText=(EditText)findViewById(R.id.age);
+        TextDate=(TextView)findViewById(R.id.TextDate);
+        //____________________________________dateStart
+        BTN = (Button) findViewById(R.id.date);
+
+
+        calendar = Calendar.getInstance();
+        date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
+
+        BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePicker();
+            }
+        });
+        //____________________________________DateFinish
+
 
         BloodSpinner();
         CitySpinner();
@@ -118,7 +148,8 @@ public class ProfileActivity extends AppCompatActivity {
         CityTooked = CitySpinner.getSelectedItem().toString().trim();
         GenderTooked = GenderSpinner.getSelectedItem().toString().trim();
         Email = EmailEditText.getText().toString().trim();
-
+        age=ageText.getText().toString().trim();
+        DateSecond=TextDate.getText().toString().trim();
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
         SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
                 .child("bloodtype").child(BloodTypeTooked).child("users");
@@ -134,6 +165,10 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("gender").setValue(GenderTooked);
             current_user_db.child("city").setValue(CityTooked);
             current_user_db.child("email").setValue(Email);
+            current_user_db.child("age").setValue(age);
+            current_user_db.child("DateSecondDonate").setValue(DateSecond);
+            current_user_db.child("LastNotification").setValue("0");
+            current_user_db.child("donateCount").setValue("0");
 
             DatabaseReference current_user_db_city = SignInCity.child(UserUID);
             Log.d("Hello", "B4 method");
@@ -152,6 +187,43 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
+    public void DatePicker() {
+
+
+        D_DatePicker = new Dialog(this);
+        D_DatePicker.setContentView(R.layout.dilalog_date_picker);
+        final DatePicker datepicker = (DatePicker) D_DatePicker.findViewById(R.id.date_picker);
+        Button BTN_GetDate = (Button) D_DatePicker.findViewById(R.id.BTN_GetDate);
+        Button BTN_Close = (Button) D_DatePicker.findViewById(R.id.BTN_Close);
+
+        datepicker.setMinDate(calendar.getTimeInMillis());
+
+        Calendar calendar_1 = Calendar.getInstance();
+        calendar_1.add(Calendar.MONTH, 24);
+        datepicker.setMaxDate(calendar_1.getTimeInMillis());
+
+        BTN_GetDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar2 = Calendar.getInstance();
+                String FinalDate;
+                calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
+                FinalDate = date.format(calendar2.getTime());
+                  ;
+                TextDate.setText(FinalDate+"     "+calendar2.get(Calendar.SECOND));
+                D_DatePicker.dismiss();
+            }
+        });
+        BTN_Close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                D_DatePicker.dismiss();
+            }
+        });
+
+        D_DatePicker.show();
+    }
+
 
     public void onBackPressed() {
         Intent ProfileIntent = new Intent(this, MainActivity.class);

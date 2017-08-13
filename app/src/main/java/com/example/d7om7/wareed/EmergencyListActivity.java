@@ -98,10 +98,10 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         /*
         Here LOCATION variables
          */
-//        LocationClass location = new LocationClass(getApplicationContext());
-//        double lon = location.getLongitude();
-//        double lat = location.getLatitude();
-//        String city = location.getCurrectCity();
+        LocationClass location = new LocationClass(getApplicationContext());
+        double lon = location.getLongitude();
+        double lat = location.getLatitude();
+        String city = location.getCurrectCity();
     }
 
     @Override
