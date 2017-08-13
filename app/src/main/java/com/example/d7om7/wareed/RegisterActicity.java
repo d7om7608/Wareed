@@ -116,6 +116,7 @@ public class RegisterActicity extends AppCompatActivity {
 
                                 Intent intent = new Intent(RegisterActicity.this, ProfileActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         }
                         @Override

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Donor donor;
 
-//____________________________________dateStart
+    //____________________________________dateStart
     private Dialog D_DatePicker;
     private SimpleDateFormat date;
     private Calendar calendar;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         //____________________________________
 
-        menagerModel menagerModel=new menagerModel();
+        menagerModel menagerModel = new menagerModel();
         menagerModel.creatDonor();
         //_____________________________________
         setContentView(R.layout.sidebar);
@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity
         //____________________________________DateFinish
 
 
-
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -105,20 +103,21 @@ public class MainActivity extends AppCompatActivity
 
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
 
-                if (user == null && data.getString("id",null) == null) {
-                    Intent intent = new Intent(MainActivity.this,RegisterActicity.class);
+                if (user == null && data.getString("id", null) == null) {
+                    Intent intent = new Intent(MainActivity.this, RegisterActicity.class);
                     MainActivity.this.startActivity(intent);
+                    finish();
                 }
             }
         };
 
 
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-     mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
@@ -126,22 +125,22 @@ public class MainActivity extends AppCompatActivity
         super.onPause();
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
+
     long time;
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if (time+2000>System.currentTimeMillis())
-            super.onBackPressed();
+            if (time + 2000 > System.currentTimeMillis())
+                super.onBackPressed();
             else
                 Toast.makeText(this, "اضغط مرتين للخروج", Toast.LENGTH_SHORT).show();
-        time=System.currentTimeMillis();
+            time = System.currentTimeMillis();
         }
     }
-
-
 
 
     @SuppressWarnings("StatmentWithEmptyBody")
@@ -151,16 +150,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_mainActivity) {
-            Intent ProfileIntent = new Intent(MainActivity.this,MainActivity.class);
+            Intent ProfileIntent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(ProfileIntent);
 
         } else if (id == R.id.nav_Talks) {
-            Intent ProfileIntent = new Intent(MainActivity.this,ListMyChating.class);
+            Intent ProfileIntent = new Intent(MainActivity.this, ListMyChating.class);
             startActivity(ProfileIntent);
+            finish();
         } else if (id == R.id.nav_profile) {
-
-            Intent ProfileIntent = new Intent(MainActivity.this,ProfileActivity.class);
+            Intent ProfileIntent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(ProfileIntent);
+            finish();
 
         } else if (id == R.id.nav_signout) {
 
@@ -169,9 +169,9 @@ public class MainActivity extends AppCompatActivity
             mFirebaseAuth.signOut();
 
         } else if (id == R.id.nav_myCases) {
-            Intent ProfileIntent = new Intent(MainActivity.this,MyCases.class);
+            Intent ProfileIntent = new Intent(MainActivity.this, MyCases.class);
             startActivity(ProfileIntent);
-
+            finish();
 
 
         }
@@ -181,17 +181,19 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void go_to_List_Emergency(View view){
+    public void go_to_List_Emergency(View view) {
 
         Intent startChildActivityIntent = new Intent(this, EmergencyListActivity.class);
         startActivity(startChildActivityIntent);
-
+        finish();
     }
-    public void go_to_requst_blood(View view){
+
+    public void go_to_requst_blood(View view) {
 
 
         Intent startChildActivityIntent = new Intent(this, RequestActivity.class);
         startActivity(startChildActivityIntent);
+        finish();
     }
 
 
@@ -229,8 +231,6 @@ public class MainActivity extends AppCompatActivity
 
         D_DatePicker.show();
     }
-
-
 
 
 }

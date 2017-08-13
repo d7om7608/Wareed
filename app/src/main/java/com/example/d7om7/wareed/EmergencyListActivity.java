@@ -46,7 +46,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         root = FirebaseDatabase.getInstance().getReference().child("requestblood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         status_adapter = new Main_status_adapter(requestBlood, this);
-         progressBar = (ProgressBar) findViewById(R.id.progressBarx);
+         progressBar = (ProgressBar) findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
@@ -55,7 +55,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -98,11 +98,10 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         /*
         Here LOCATION variables
          */
-//        LocationClass location = new LocationClass(this);
+//        LocationClass location = new LocationClass(getApplicationContext());
 //        double lon = location.getLongitude();
 //        double lat = location.getLatitude();
 //        String city = location.getCurrectCity();
-//TODO fares i put here comment
     }
 
     @Override
@@ -155,6 +154,12 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
         intent.putExtra("getUserID", requestBlood.get(position).getUserID());
         startActivity(intent);
+        finish();
 
+    }
+    public void onBackPressed() {
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
+        startActivity(ProfileIntent);
+        finish();
     }
 }

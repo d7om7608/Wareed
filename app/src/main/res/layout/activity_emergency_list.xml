@@ -9,7 +9,7 @@
     android:background="@drawable/mix_color">
 
     <ProgressBar
-        android:id="@+id/progressBarx"
+        android:id="@+id/progress"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"

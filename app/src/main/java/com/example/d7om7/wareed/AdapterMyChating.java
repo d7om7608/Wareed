@@ -1,6 +1,5 @@
 package com.example.d7om7.wareed;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +37,7 @@ public interface changeActivity  {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
         holder.namePantent.setText(informationOfChatings.get(position).getNameRequster());
         holder.senderName.setText(informationOfChatings.get(position).getNameDoner());
         holder.requstID.setText(informationOfChatings.get(position).getFileNumber());

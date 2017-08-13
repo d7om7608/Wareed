@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -58,14 +59,16 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     String UserId;
+    int count =0;
+    SharedPreferences prefs ;
     @Override
     protected void onCreate(@AppCompatDelegate.NightMode Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+count=0;
         //_________________________________________________
 
-        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
         if (prefs.getString("id", null) != null) {
             name = (prefs.getString("display_name", "NOTHING HERE"));
@@ -79,14 +82,14 @@ public class ChatActivity extends AppCompatActivity {
             String requestID = intent.getStringExtra("requestID");
             String requesterID = intent.getStringExtra("userID");
             root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(UserId).child(requestID);
-
+            count=1;
         }else
         {
             String requesterID= intent.getStringExtra("NameRequster");
             String requestID= intent.getStringExtra("FileNumber");
             String donerID= intent.getStringExtra("NameDoner");
             root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(donerID).child(requestID);
-
+            count=2;
 
         }
 
@@ -104,6 +107,7 @@ public class ChatActivity extends AppCompatActivity {
         SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!ChatEditText.getText().toString().equals("")){
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
@@ -111,8 +115,12 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> map2 = new HashMap<String, Object>();
                 map2.put("name", name);
                 map2.put("msg", ChatEditText.getText().toString());
+                if (name.equals(prefs.getString("display_name", "NOTHING HERE")))
+                ChatEditText.setText("");
 
                 message_root.updateChildren(map2);
+            }else
+                    Toast.makeText(getApplicationContext(),"الرجاء ادخال نص",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -132,23 +140,17 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Add_Chat(dataSnapshot);
                 arrayAdapter.notifyDataSetChanged();
+                ChatListView.setSelection(arrayAdapter.getCount());
+                ChatListView.deferNotifyDataSetChanged();
 
-
-//                NotificationManager mm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.img);
-//                NotificationCompat.Builder bulder = (NotificationCompat.Builder) new NotificationCompat.Builder(ChatActivity.this).setContentTitle("عنوان الرساله")
-//                        .setContentText("نص موضوع الرساله").setSmallIcon(R.drawable.img).setLargeIcon(bmp).setAutoCancel(true).setNumber(1);
-//                bulder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-//                bulder.setVibrate(new long[]{500, 1000, 500, 1000, 500});
-//                bulder.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.jrs));
 //
-//                mm.notify(1, bulder.build());
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Add_Chat(dataSnapshot);
-
+                ChatListView.setSelection(arrayAdapter.getCount());
+                ChatListView.deferNotifyDataSetChanged();
 
                 arrayAdapter.notifyDataSetChanged();
                 ChatEditText.setText("");
@@ -175,16 +177,27 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
+    public void onBackPressed() {
 
+        if (count == 2) {
+            Intent ProfileIntent = new Intent(this, ListMyChating.class);
+            startActivity(ProfileIntent);
+            finish();
+        }else if (count == 1){
 
+            Intent ProfileIntent = new Intent(this, DisplayDetails.class);
+            startActivity(ProfileIntent);
+            finish();
+        }
+    }
     private String chat_msg, chat_user_name;
 
     private void Add_Chat(DataSnapshot dataSnapshot) {
 
         Iterator i = dataSnapshot.getChildren().iterator();
-        ChatEditText.setText("");
         while (i.hasNext()) {
-
+            ChatListView.setSelection(arrayAdapter.getCount());
+            ChatListView.deferNotifyDataSetChanged();
             chat_msg = (String) ((DataSnapshot) i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
 

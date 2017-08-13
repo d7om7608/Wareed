@@ -31,7 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ListMyChating extends AppCompatActivity implements AdapterMyChating.changeActivity {
-
+    RecyclerView recyclerView;
     AdapterMyChating adapterMyChating;
     ProgressBar mProgressBar;
     List<InformationOfChating> informationOfChatings;
@@ -44,7 +44,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_my_chating);
         setTitle("محادثاتي");
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_chat_RecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.my_chat_RecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         informationOfChatings = new ArrayList<>();
         adapterMyChating = new AdapterMyChating(informationOfChatings, this);
@@ -52,8 +52,6 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
         mProgressBar = (ProgressBar) findViewById(R.id.chatingProgressBar);
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-//        InformationOfChating informationOfChatings1=new InformationOfChating("5hIjxtjnCTY4BdpFVHPssIMbWOb2","5hIjxtjnCTY4BdpFVHPssIMbWOb2","-KrHTmI_i-JIhPgZxHox");
-//        informationOfChatings.add(informationOfChatings1);
         adapterMyChating.notifyDataSetChanged();
         if (prefs.getString("id", null) != null) {
             UserId = (prefs.getString("id", "NOTHING HERE"));
@@ -79,11 +77,15 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 AddMyChating(dataSnapshot);
+                adapterMyChating.notifyDataSetChanged();
+
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 AddMyChating(dataSnapshot);
+                adapterMyChating.notifyDataSetChanged();
+
             }
 
             @Override
@@ -125,6 +127,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
     private void AddMyChating(DataSnapshot dataSnapshot) {
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         Iterator iRequster = dataSnapshot.getChildren().iterator();
+
         while (iRequster.hasNext()) {
 
 
@@ -132,33 +135,31 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
             Iterator i2 = dataSnapshot.child(nameRequster).getChildren().iterator();
 
             while (i2.hasNext()) {
-                String id=((DataSnapshot) i2.next()).getKey();
-                if (id.equals(prefs.getString("id", "NOTHING HERE"))){
-                DonerID = id;
+                String id = ((DataSnapshot) i2.next()).getKey();
+                if (id.equals(prefs.getString("id", "NOTHING HERE"))) {
+                    DonerID = id;
 
-                Iterator i3 = dataSnapshot.child(nameRequster).child(DonerID).getChildren().iterator();
-                while (i3.hasNext()) {
+                    Iterator i3 = dataSnapshot.child(nameRequster).child(DonerID).getChildren().iterator();
+                    while (i3.hasNext()) {
 
-                    RequestID = (String) ((DataSnapshot) i3.next()).getKey();
+                        RequestID = ((DataSnapshot) i3.next()).getKey();
+                        InformationOfChating informationOfChatings1 = new InformationOfChating(nameRequster, DonerID, RequestID);
+                       // informationOfChatings.removeAll(informationOfChatings);
+                        informationOfChatings.add(informationOfChatings1);
 
-//                    String senderName ="ss"+dataSnapshot.child("users").child(DonerID).child("user name").getValue().toString();
-//                    String nameRequsest ="ss"+dataSnapshot.child("requestblood").child(nameRequster).child("Reason").getValue().toString();
-//                    String pantentName ="ss"+dataSnapshot.child("users").child(RequestID).child("user name").getValue().toString();
-                    InformationOfChating informationOfChatings1 = new InformationOfChating(nameRequster, DonerID, RequestID);
-                    informationOfChatings.add(informationOfChatings1);
 
+                    }
                 }
-            }
 
-             }
+            }
         }
 
         adapterMyChating.notifyDataSetChanged();
         Iterator idoer = dataSnapshot.getChildren().iterator();
 
         while (idoer.hasNext()) {
-            String id= ((DataSnapshot) idoer.next()).getKey();
-            if (id.equals(prefs.getString("id", "NOTHING HERE"))){
+            String id = ((DataSnapshot) idoer.next()).getKey();
+            if (id.equals(prefs.getString("id", "NOTHING HERE"))) {
 
                 nameRequster = id;
                 Iterator i2 = dataSnapshot.child(nameRequster).getChildren().iterator();
@@ -170,22 +171,36 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                     Iterator i3 = dataSnapshot.child(nameRequster).child(DonerID).getChildren().iterator();
                     while (i3.hasNext()) {
 
-                        RequestID =  ((DataSnapshot) i3.next()).getKey();
-//                        String senderName ="ss"+dataSnapshot.child("users").child(DonerID).child("user name").getValue().toString();
-//                        String nameRequsest ="ss"+dataSnapshot.child("requestblood").child(nameRequster).child("Reason").getValue().toString();
-//                        String pantentName ="ss"+dataSnapshot.child("users").child(RequestID).child("user name").getValue().toString();
-
+                        RequestID = ((DataSnapshot) i3.next()).getKey();
                         InformationOfChating informationOfChatings1 = new InformationOfChating(nameRequster, DonerID, RequestID);
-
+                     //   informationOfChatings.removeAll(informationOfChatings);
                         informationOfChatings.add(informationOfChatings1);
-
                     }
                 }
 
             }
         }
 
+         adapterMyChating.notifyDataSetChanged();
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapterMyChating.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapterMyChating.notifyDataSetChanged();
+    }
+
+    public void onBackPressed() {
+
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
+        startActivity(ProfileIntent);
+        finish();
     }
 }

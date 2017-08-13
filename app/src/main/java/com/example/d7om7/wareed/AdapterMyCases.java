@@ -39,7 +39,6 @@ public class AdapterMyCases extends RecyclerView.Adapter<AdapterMyCases.ViewHold
         holder.countOfrequest.setText("" + requestedBloodList.get(position).countOfBlood);
         holder.countDone.setText("" + requestedBloodList.get(position).countOfdone);
         holder.bloodTyep.setText("" + requestedBloodList.get(position).bloodType);
-        Intent intent=new Intent();
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

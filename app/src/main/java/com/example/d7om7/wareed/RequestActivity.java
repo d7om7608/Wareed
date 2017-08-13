@@ -203,6 +203,7 @@ public class RequestActivity extends AppCompatActivity {
 
             Intent startChildActivityIntent = new Intent(this, MainActivity.class);
             startActivity(startChildActivityIntent);
+            finish();
             txetEmpty();
 
         }
@@ -251,5 +252,10 @@ public class RequestActivity extends AppCompatActivity {
 
 
         return arrayList;
+    }
+    public void onBackPressed() {
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
+        startActivity(ProfileIntent);
+        finish();
     }
 }

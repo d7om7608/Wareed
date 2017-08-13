@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    CityBloodPreferences cityBloodActivity = new CityBloodPreferences() ;
+    CityBloodPreferences cityBloodActivity = new CityBloodPreferences();
     RegisterActicity registerActicity = new RegisterActicity();
 
     private FirebaseDatabase SignFirebaseDatabase;
@@ -37,17 +37,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     private EditText UserNameEditText;
     private EditText EmailEditText;
-    private Spinner BloodTypeSpinner ;
-    private Spinner CitySpinner ;
-    private Spinner GenderSpinner ;
+    private Spinner BloodTypeSpinner;
+    private Spinner CitySpinner;
+    private Spinner GenderSpinner;
 
-    String UsernameTooked ;
+    String UsernameTooked;
     String Email;
-    String BloodTypeTooked  ;
-    String CityTooked ;
+    String BloodTypeTooked;
+    String CityTooked;
     String GenderTooked;
-    String UserUID ;
-
+    String UserUID;
 
 
     @Override
@@ -71,27 +70,22 @@ public class ProfileActivity extends AppCompatActivity {
         SignFirebaseDatabase = FirebaseDatabase.getInstance();
         SignAuth = FirebaseAuth.getInstance();
 
-        SharedPreferences prefs = getSharedPreferences("UserData",MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
-        if(prefs.getString("id",null) != null){
-            UserNameEditText.setText(prefs.getString("display_name","NOTHING HERE"));
-            EmailEditText.setText(prefs.getString("email","NOTHING HERE"));
+        if (prefs.getString("id", null) != null) {
+            UserNameEditText.setText(prefs.getString("display_name", "NOTHING HERE"));
+            EmailEditText.setText(prefs.getString("email", "NOTHING HERE"));
 //            CitySpinner.setSelection(Integer.parseInt(prefs.getString("BloodType","NOTHING HERE")));
 
         }
 
 
-
-
-
-
-
     }
 
 
-    public void CitySpinner () {
+    public void CitySpinner() {
         // TODO: ger city from CityBlood Activity
-        String CityArray [] = {"مكة\n\n", "جدة\n\n"};
+        String CityArray[] = {"مكة\n\n", "جدة\n\n"};
 //        List CityArray  = cityBloodActivity.getCities();
         ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
@@ -100,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    public void BloodSpinner () {
+    public void BloodSpinner() {
         String[] BloodArray = cityBloodActivity.getBloodTypes();
         ArrayAdapter<String> bloodadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, BloodArray);
@@ -108,15 +102,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void GenderSpinner () {
-        String GenderArray [] = {"male \n", "female\n"};
+    public void GenderSpinner() {
+        String GenderArray[] = {"male \n", "female\n"};
         ArrayAdapter<String> genderadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, GenderArray);
         GenderSpinner.setAdapter(genderadapter);
 
     }
 
-    public void SaveSettingsOnClick (View view){
+    public void SaveSettingsOnClick(View view) {
 
         UserUID = SignAuth.getCurrentUser().getUid();
         UsernameTooked = UserNameEditText.getText().toString().trim();
@@ -129,12 +123,10 @@ public class ProfileActivity extends AppCompatActivity {
         SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
                 .child("bloodtype").child(BloodTypeTooked).child("users");
 
-        if (UsernameTooked.isEmpty()||BloodTypeTooked.isEmpty()){
+        if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
 
-            Toast.makeText(ProfileActivity.this,"Missing Data",Toast.LENGTH_SHORT).show();
-        }
-
-        else {
+            Toast.makeText(ProfileActivity.this, "Missing Data", Toast.LENGTH_SHORT).show();
+        } else {
 
             DatabaseReference current_user_db = SignDataBase.child(UserUID);
             current_user_db.child("user name").setValue(UsernameTooked);
@@ -144,23 +136,26 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("email").setValue(Email);
 
             DatabaseReference current_user_db_city = SignInCity.child(UserUID);
-            Log.d("Hello","B4 method");
+            Log.d("Hello", "B4 method");
             CityBloodPreferences c = new CityBloodPreferences();
-            c.saveInPrefernces(current_user_db,SignAuth,getApplicationContext());
-            Log.d("Hello","After method");
+            c.saveInPrefernces(current_user_db, SignAuth, getApplicationContext());
+            Log.d("Hello", "After method");
 
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
-            Toast.makeText(getApplicationContext(),"تم حفظ الملف",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "تم حفظ الملف", Toast.LENGTH_SHORT).show();
 
 
         }
 
 
-
     }
 
-
+    public void onBackPressed() {
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
+        startActivity(ProfileIntent);
+        finish();
+    }
 }

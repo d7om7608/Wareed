@@ -1,11 +1,14 @@
 package com.example.d7om7.wareed;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +38,7 @@ public class DisplayDetails extends AppCompatActivity {
 
         pantienName = (TextView) findViewById(R.id.pantienName);
         fileNumber = (TextView) findViewById(R.id.fileNumber);
+        //Log("hello")
         root = FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
         countDone = (TextView) findViewById(R.id.countDone);
         countBlood = (TextView) findViewById(R.id.countBlood);
@@ -89,10 +93,23 @@ public class DisplayDetails extends AppCompatActivity {
         String requestID = intent.getStringExtra("getRequestID");
         String userID = intent.getStringExtra("getUserID");
 
-        Intent ChatIntent = new Intent(this, ChatActivity.class);
-        ChatIntent.putExtra("requestID", requestID);
-        ChatIntent.putExtra("userID", userID);
-        startActivity(ChatIntent);
+        SharedPreferences  prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
+        if (userID.equals(prefs.getString("id", "NOTHING HERE"))){
+            Log.d("hello",userID);
+            Log.d("hello",prefs.getString("id", "NOTHING HERE"));
+
+            Toast.makeText(getApplicationContext(),"هذه الحاله خاصه بك",Toast.LENGTH_SHORT).show();
+        }else {
+            Intent ChatIntent = new Intent(this, ChatActivity.class);
+            ChatIntent.putExtra("requestID", requestID);
+            ChatIntent.putExtra("userID", userID);
+            startActivity(ChatIntent);
+        }
+    }
+    public void onBackPressed() {
+        Intent ProfileIntent = new Intent(this, EmergencyListActivity.class);
+        startActivity(ProfileIntent);
+        finish();
     }
 }

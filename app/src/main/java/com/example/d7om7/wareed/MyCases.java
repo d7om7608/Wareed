@@ -161,9 +161,14 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         startChildActivityIntent.putExtra("getUserID", requestBlood.get(position).getUserID());
 
         startActivity(startChildActivityIntent);
+        finish();
 
     }
 
-
+    public void onBackPressed() {
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
+        startActivity(ProfileIntent);
+        finish();
+    }
 }
 
