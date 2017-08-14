@@ -55,14 +55,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/age"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/dateButon"
             android:text="dsdfdffsdf"
             android:textAlignment="center"
             android:id="@+id/TextDate"
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/editText"
+            android:id="@+id/dateButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -81,7 +81,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="102dp"
             android:layout_below="@+id/age"
-            android:layout_alignStart="@+id/editText"></Spinner>
+            android:layout_alignStart="@+id/dateButon"></Spinner>
 
         <TextView
             android:id="@+id/textView2"

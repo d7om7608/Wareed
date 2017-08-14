@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         ageText=(EditText)findViewById(R.id.age);
         TextDate=(TextView)findViewById(R.id.TextDate);
         //____________________________________dateStart
-        BTN = (Button) findViewById(R.id.date);
+        BTN = (Button) findViewById(R.id.dateButton);
 
 
         calendar = Calendar.getInstance();
