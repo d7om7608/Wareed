@@ -17,10 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -63,6 +68,10 @@ public class ProfileActivity extends AppCompatActivity {
     private Calendar calendar;
     private SimpleDateFormat date;
     private TextView TextDate;
+    private List<String> CityArray=new ArrayList<>();
+    ArrayAdapter<String> cityadapter;
+    String  IdCity ;
+    String  nameCity;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +83,8 @@ public class ProfileActivity extends AppCompatActivity {
         BloodTypeSpinner = (Spinner) findViewById(R.id.profile_bloodType_spinner);
         CitySpinner = (Spinner) findViewById(R.id.profile_city_spinner);
         GenderSpinner = (Spinner) findViewById(R.id.profile_gender_spinner);
-        ageText=(EditText)findViewById(R.id.age);
-        TextDate=(TextView)findViewById(R.id.TextDate);
+        ageText = (EditText) findViewById(R.id.age);
+        TextDate = (TextView) findViewById(R.id.TextDate);
         //____________________________________dateStart
         BTN = (Button) findViewById(R.id.dateButton);
 
@@ -114,14 +123,32 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void CitySpinner() {
         // TODO: ger city from CityBlood Activity
-        
-        String CityArray[] = {"مكة\n\n", "جدة\n\n"};
-        ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot chelldDataSnapshot:dataSnapshot.child("cities").getChildren() ){
+
+              IdCity =  chelldDataSnapshot.getKey();
+
+              nameCity = (String) chelldDataSnapshot.child("name").getValue().toString();
+
+            CityArray.add(nameCity);
+            cityadapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+         cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
 
 
     }
-
 
     public void BloodSpinner() {
         String[] BloodArray = cityBloodActivity.getBloodTypes();
@@ -144,14 +171,13 @@ public class ProfileActivity extends AppCompatActivity {
         UserUID = SignAuth.getCurrentUser().getUid();
         UsernameTooked = UserNameEditText.getText().toString().trim();
         BloodTypeTooked = BloodTypeSpinner.getSelectedItem().toString().trim();
-        CityTooked = CitySpinner.getSelectedItem().toString().trim();
+        CityTooked =""+ CitySpinner.getSelectedItemPosition();//.getSelectedItem().toString().trim();
         GenderTooked = GenderSpinner.getSelectedItem().toString().trim();
         Email = EmailEditText.getText().toString().trim();
-        age=ageText.getText().toString().trim();
-        //DateSecond=TextDate.getText().toString().trim();
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
-        SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
-                .child("bloodtype").child(BloodTypeTooked).child("users");
+        age = ageText.getText().toString().trim();
+        SignDataBase = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(CityTooked).child(BloodTypeTooked)
+                .child("users");//.child(nameCity);
+
 
         if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
 
@@ -169,11 +195,8 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("LastNotification").setValue("0");
             current_user_db.child("donateCount").setValue("0");
 
-            DatabaseReference current_user_db_city = SignInCity.child(UserUID);
-            Log.d("Hello", "B4 method");
             CityBloodPreferences c = new CityBloodPreferences();
             c.saveInPrefernces(current_user_db, SignAuth, getApplicationContext());
-            Log.d("Hello", "After method");
 
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -186,6 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
+
     public void DatePicker() {
 
 

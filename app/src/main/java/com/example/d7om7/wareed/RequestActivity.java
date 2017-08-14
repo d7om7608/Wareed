@@ -164,13 +164,15 @@ public class RequestActivity extends AppCompatActivity {
         fileNumberText = (EditText) findViewById(R.id.fileNumber);
         countBloodText = (EditText) findViewById(R.id.countBlood);
         reasonOfRequistText = (EditText) findViewById(R.id.reasonOfRequist);
+        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData",0);
 
 
         if ( pantienNameText.getText().toString().equals("") ||
                 fileNumberText.getText().toString().equals("") || countBloodText.getText().toString().equals("") ||
                 reasonOfRequistText.getText().toString().equals("")) {
         } else {
-            root =FirebaseDatabase.getInstance().getReference().child("requestblood");
+            root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city","null"))
+            .child(selectBloodType).child("cases");
 
                     Map<String, Object> map = new HashMap<String, Object>();
             temp_key = root.push().getKey();
@@ -179,8 +181,7 @@ public class RequestActivity extends AppCompatActivity {
 
 
             DatabaseReference message_root = root.child(temp_key);
-            SharedPreferences data = getPreferences(MODE_PRIVATE);
-            
+
 //            donor.requestsId.add(temp_key);
             String userID=temp_key;
             Map<String, Object> map2 = new HashMap<String, Object>();

@@ -1,6 +1,7 @@
 package com.example.d7om7.wareed;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -42,8 +43,10 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData",0);
 
-        root = FirebaseDatabase.getInstance().getReference().child("requestblood");
+        root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city","null"))
+                .child(data.getString("BloodType","null")).child("cases");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         status_adapter = new Main_status_adapter(requestBlood, this);
          progressBar = (ProgressBar) findViewById(R.id.progress);
