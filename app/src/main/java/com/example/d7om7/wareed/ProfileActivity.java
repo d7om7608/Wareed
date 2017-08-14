@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -57,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
     String GenderTooked;
     String UserUID;
     String age;
-    String DateSecond;
+    long DateSecond;
     private Button BTN;
     private Calendar calendar;
     private SimpleDateFormat date;
@@ -105,8 +106,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (prefs.getString("id", null) != null) {
             UserNameEditText.setText(prefs.getString("display_name", "NOTHING HERE"));
             EmailEditText.setText(prefs.getString("email", "NOTHING HERE"));
-//            CitySpinner.setSelection(Integer.parseInt(prefs.getString("BloodType","NOTHING HERE")));
-
         }
 
 
@@ -115,8 +114,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void CitySpinner() {
         // TODO: ger city from CityBlood Activity
+        
         String CityArray[] = {"مكة\n\n", "جدة\n\n"};
-//        List CityArray  = cityBloodActivity.getCities();
         ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
 
@@ -149,7 +148,7 @@ public class ProfileActivity extends AppCompatActivity {
         GenderTooked = GenderSpinner.getSelectedItem().toString().trim();
         Email = EmailEditText.getText().toString().trim();
         age=ageText.getText().toString().trim();
-        DateSecond=TextDate.getText().toString().trim();
+        //DateSecond=TextDate.getText().toString().trim();
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
         SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
                 .child("bloodtype").child(BloodTypeTooked).child("users");
@@ -206,11 +205,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Calendar calendar2 = Calendar.getInstance();
-                String FinalDate;
                 calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
-                FinalDate = date.format(calendar2.getTime());
-                  ;
-                TextDate.setText(FinalDate+"     "+calendar2.get(Calendar.SECOND));
+                Date time = calendar2.getTime();
+                long UnixTime = time.getTime();
+                TextDate.setText(String.valueOf(UnixTime));
+                DateSecond = UnixTime;
                 D_DatePicker.dismiss();
             }
         });
