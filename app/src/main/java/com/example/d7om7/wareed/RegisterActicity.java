@@ -135,49 +135,7 @@ public class RegisterActicity extends AppCompatActivity {
 
     }
 
-    /*public void  saveInPrefernces(final DatabaseReference UserData,final FirebaseAuth mAuth) {
 
-
-                                Save User data in Shared Preference
-
-        Log.d("Hello","B4 sh pref");
-        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("UserData",0);
-        Log.d("Hello","after sh pref");
-
-        final SharedPreferences.Editor editor = sharedPref.edit();
-        Log.d("Hello","B4 if  user");
-        if (UserData != null){
-            UserData.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    HashMap<String, String> data = (HashMap) dataSnapshot.getValue();
-                    editor.putString("display_name", data.get("user name").toString());
-                    editor.putString("phone_number", mAuth.getCurrentUser().getPhoneNumber().toString());
-                    editor.putString("id", mAuth.getCurrentUser().getUid().toString());
-                    editor.putString("BloodType", data.get("BloodType").toString());
-                    editor.putString("city", data.get("city").toString());
-                    editor.putString("email", data.get("email").toString());
-                    editor.putString("gender", data.get("gender").toString());
-
-                    editor.apply();
-                    Log.d("Hello", "display name in donor class:" + data.get("email").toString());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }else{
-            Log.d("Hello","user data null");
-        }
-
-        //Log.d("Hello",mAuth.getCurrentUser().getUid().toString());
-
-        //editor.putString("email",mAuth.getCurrentUser().getEmail().toString());
-
-        //Log.d("Hello",sharedPref.getString("display_name","nothing in dispaly name"));
-    }*/
 
     public void signin_button(View view) {
 

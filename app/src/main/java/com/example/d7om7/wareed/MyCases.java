@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static android.R.attr.data;
 import static android.R.attr.id;
 
 public class MyCases extends AppCompatActivity implements AdapterMyCases.changeActivity {
@@ -33,22 +34,25 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
+    SharedPreferences prefs ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cases);
         setTitle("حالاتي");
-
+        prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
 
-        root = FirebaseDatabase.getInstance().getReference().child("requestblood");
+        root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city","null"));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //progressBar.setVisibility(View.VISIBLE);
         myCases_adapter = new AdapterMyCases(requestBlood, this);
         progressBar = (ProgressBar) findViewById(R.id.progressBarx);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
+
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -62,27 +66,21 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 
             }
         });
-        root.addChildEventListener(new ChildEventListener() {
+
+
+        root.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Add_Request(dataSnapshot);
-                //  progressBar.setVisibility(View.GONE);
-            }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("hello","fgngg");
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Add_Request(dataSnapshot);
-                //    progressBar.setVisibility(View.GONE);
-            }
+                for(DataSnapshot chelldDataSnapshotBloodType:dataSnapshot.getChildren() ){
+                    if (chelldDataSnapshotBloodType.hasChild("cases")) {
+                        for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.child("cases").getChildren()) {
+                            Log.d("hello",chelldDataSnapshotCases.getValue().toString());
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                        }
+                    }
+                }
             }
 
             @Override
@@ -90,6 +88,10 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 
             }
         });
+
+
+
+
 
         recyclerView.setAdapter(myCases_adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -111,8 +113,12 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 //        progressBar.setVisibility(View.GONE);
     }
     private void Add_Request(DataSnapshot dataSnapshot) {
-        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         Iterator i = dataSnapshot.getChildren().iterator();
+
+
+
+
+
         while (i.hasNext()) {
 
             String CountOfBlood = (String) ((DataSnapshot) i.next()).getValue();
