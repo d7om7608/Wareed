@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,16 +36,20 @@ public class RequestActivity extends AppCompatActivity {
     EditText countBloodText;
     EditText reasonOfRequistText;
 
-    List<String> spinnerArray;
+    /*
+    variables of citiesSpinner
+     */
+    List<String> CityArray = new ArrayList<String>();
+    ArrayAdapter<String> cityadapter;
+    Spinner CitySpinner;
+
+
+
     String selectBloodType;
-    List<String> spinnerArrayOfHospetal = null;
     String selectHospetal;
-    List<String> spinnerArrayOfcity;
-    String selectcity;
 
     private SimpleDateFormat date;
     private Calendar calendar;
-
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
@@ -60,12 +67,9 @@ public class RequestActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
 
-//---------------------------------------------------------------------
-        Intent intent = getIntent();
-        String requestID = intent.getStringExtra("requestID");
-//---------------------------------------------------------------------
+
         final Spinner spinner = (Spinner) findViewById(R.id.planets_spiner);
-        spinnerArray = Arrays(3);
+        final String[] spinnerArray = CityBloodPreferences.getBloodTypes();
 
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
@@ -74,7 +78,7 @@ public class RequestActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectBloodType = spinnerArray.get(position);
+                selectBloodType = spinnerArray[position];
             }
 
             @Override
@@ -83,66 +87,9 @@ public class RequestActivity extends AppCompatActivity {
             }
 
         });
-        //___________________________________________________________________________________________
 
-
-        //---------------------------------------------------------------------
-        final Spinner spinnerOfCity = (Spinner) findViewById(R.id.city_spiner);
-        spinnerArrayOfcity = Arrays(2);
-        ArrayAdapter adapterOfCity = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArrayOfcity);
-        adapterOfCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOfCity.setAdapter(adapterOfCity);
-
-
-        //___________________________________________________________________________________________
-
-
-        //---------------------------------------------------------------------
-        final Spinner spinnerOfHospetal = (Spinner) findViewById(R.id.Hospetal_spiner);
-        spinnerArrayOfHospetal = Arrays(1);
-        ArrayAdapter adapterOfHospetal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
-
-        adapterOfHospetal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOfHospetal.setAdapter(adapterOfHospetal);
-        spinnerOfCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectcity = spinnerArrayOfcity.get(position);
-                if (selectcity.equals("makkah"))
-                    spinnerArrayOfHospetal = Arrays(1);
-                else
-                    spinnerArrayOfHospetal = Arrays(4);
-
-                ArrayAdapter adapterOfHospetal = new ArrayAdapter<String>(RequestActivity.this, android.R.layout.simple_spinner_item, spinnerArrayOfHospetal);
-
-                adapterOfHospetal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerOfHospetal.setAdapter(adapterOfHospetal);
-                adapterOfHospetal.notifyDataSetChanged();
-            }
-
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                spinnerOfHospetal.setSelection(0);
-            }
-
-        });
-        spinnerOfHospetal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectHospetal = spinnerArrayOfHospetal.get(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //___________________________________________________________________________________________
-
-        String ReqBloodType = spinner.getSelectedItem().toString()   ;
-        String ReqCity = spinnerOfCity.getSelectedItem().toString().trim() ;
+        CitySpinner = (Spinner) findViewById(R.id.city_spiner);
+        citiesSpinner();
         SignFirebaseDatabase = FirebaseDatabase.getInstance();
         SignAuth = FirebaseAuth.getInstance();
         SignprogressDialog = new ProgressDialog(this);
@@ -152,6 +99,29 @@ public class RequestActivity extends AppCompatActivity {
 
     }
 
+    private void citiesSpinner() {
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("cities");
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot chelldDataSnapshot:dataSnapshot.getChildren() ){
+
+                    String nameCity = chelldDataSnapshot.child("name").getValue().toString();
+                    CityArray.add(nameCity);
+                    cityadapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
+        CitySpinner.setAdapter(cityadapter);
+    }
+
     public void onclick(View view) {
 
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("cities").child("makkah")
@@ -159,7 +129,7 @@ public class RequestActivity extends AppCompatActivity {
 
         String FinalDate;
         FinalDate = date.format(calendar.getTime());
-
+        int selectedCity = CitySpinner.getSelectedItemPosition();
         pantienNameText = (EditText) findViewById(R.id.pantienName);
         fileNumberText = (EditText) findViewById(R.id.fileNumber);
         countBloodText = (EditText) findViewById(R.id.countBlood);
@@ -171,7 +141,7 @@ public class RequestActivity extends AppCompatActivity {
                 fileNumberText.getText().toString().equals("") || countBloodText.getText().toString().equals("") ||
                 reasonOfRequistText.getText().toString().equals("")) {
         } else {
-            root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city","null"))
+            root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(String.valueOf(selectedCity))
             .child(selectBloodType).child("cases");
 
                     Map<String, Object> map = new HashMap<String, Object>();
@@ -221,39 +191,6 @@ public class RequestActivity extends AppCompatActivity {
 
     }
 
-    public List<String> Arrays(int i) {
-        ArrayList<String> arrayList = new ArrayList<String>();
-
-        if (i == 1) {
-            arrayList.add("king khaled");
-            arrayList.add("king abdullah");
-            arrayList.add("noor");
-
-
-        } else if (i == 2) {
-            arrayList.add("makkah");
-            arrayList.add("jeddah");
-
-        } else if (i == 3) {
-
-            arrayList.add("O+");
-            arrayList.add("O-");
-            arrayList.add("A+");
-            arrayList.add("A-");
-            arrayList.add("B+");
-            arrayList.add("B-");
-            arrayList.add("AB+");
-            arrayList.add("AB-");
-
-        }
-        if (i == 4) {
-            arrayList.add("king abdulrahman");
-            arrayList.add("king s3od");
-        }
-
-
-        return arrayList;
-    }
     public void onBackPressed() {
         Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);

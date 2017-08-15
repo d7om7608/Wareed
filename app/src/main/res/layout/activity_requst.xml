@@ -112,26 +112,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/profile_city_spinner"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="فئة الدم"
-                    android:textSize="18sp"
-                    android:layout_alignTop="@+id/planets_spiner" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/profile_city_spinner"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/planets_spiner"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="فئة الدم"
+                        android:textSize="18sp" />
 
-                <Spinner
-                    android:id="@+id/planets_spiner"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:maxLength="70"
+                    <Spinner
+                        android:id="@+id/planets_spiner"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:maxLength="70"
 
-                    android:textColor="@color/colorAccent"></Spinner>
+                        android:textColor="@color/colorAccent"></Spinner>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -144,18 +144,18 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/profile_city_spinner"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/city_spiner"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:text="المدينة"
-                        android:textSize="18sp"
-                        android:layout_alignTop="@+id/city_spiner" />
+                        android:textSize="18sp" />
 
                     <Spinner
-                    android:id="@+id/city_spiner"
-                    android:layout_width="200dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="12dp"
-                    android:textColor="@color/colorAccent"></Spinner>
+                        android:id="@+id/city_spiner"
+                        android:layout_width="200dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="12dp"
+                        android:textColor="@color/colorAccent"></Spinner>
 
                 </RelativeLayout>
 
@@ -169,18 +169,18 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/profile_city_spinner"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/Hospetal_spiner"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:text="المستشفى"
-                        android:textSize="18sp"
-                        android:layout_alignTop="@+id/Hospetal_spiner" />
+                        android:textSize="18sp" />
 
-                <Spinner
-                    android:id="@+id/Hospetal_spiner"
-                    android:layout_width="200dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="12dp"
-                    android:textColor="@color/colorAccent"></Spinner>
+                    <Spinner
+                        android:id="@+id/Hospetal_spiner"
+                        android:layout_width="200dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="12dp"
+                        android:textColor="@color/colorAccent"></Spinner>
 
                 </RelativeLayout>
 
@@ -188,11 +188,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:background="#1DE9B6"
                     android:onClick="onclick"
                     android:text="إضافة"
-                    android:textSize="24sp"
-                    android:background="#1DE9B6"
-                    />
+                    android:textSize="24sp" />
 
             </LinearLayout>
         </ScrollView>

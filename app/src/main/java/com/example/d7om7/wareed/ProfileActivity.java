@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,14 +42,9 @@ import static com.example.d7om7.wareed.R.id.BTN;
 public class ProfileActivity extends AppCompatActivity {
 
     CityBloodPreferences cityBloodActivity = new CityBloodPreferences();
-    RegisterActicity registerActicity = new RegisterActicity();
-
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
-    private DatabaseReference SignInCity;
-    private DatabaseReference CheckForPreferences;
-
     private Dialog D_DatePicker;
     private EditText UserNameEditText;
     private EditText EmailEditText;
@@ -66,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
     long DateSecond;
     private Button BTN;
     private Calendar calendar;
-    private SimpleDateFormat date;
     private TextView TextDate;
     private List<String> CityArray=new ArrayList<>();
     ArrayAdapter<String> cityadapter;
@@ -90,7 +85,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         calendar = Calendar.getInstance();
-        date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
 
         BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +170,7 @@ public class ProfileActivity extends AppCompatActivity {
         Email = EmailEditText.getText().toString().trim();
         age = ageText.getText().toString().trim();
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(CityTooked).child(BloodTypeTooked)
-                .child("users");//.child(nameCity);
+                .child("users");
 
 
         if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
@@ -194,6 +188,13 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("DateSecondDonate").setValue(DateSecond);
             current_user_db.child("LastNotification").setValue("0");
             current_user_db.child("donateCount").setValue("0");
+
+            /**
+             * Firebase generate token.
+             */
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+            current_user_db.child("NotificationToken").setValue(refreshedToken);
 
             CityBloodPreferences c = new CityBloodPreferences();
             c.saveInPrefernces(current_user_db, SignAuth, getApplicationContext());
@@ -218,8 +219,6 @@ public class ProfileActivity extends AppCompatActivity {
         final DatePicker datepicker = (DatePicker) D_DatePicker.findViewById(R.id.date_picker);
         Button BTN_GetDate = (Button) D_DatePicker.findViewById(R.id.BTN_GetDate);
         Button BTN_Close = (Button) D_DatePicker.findViewById(R.id.BTN_Close);
-
-        datepicker.setMinDate(calendar.getTimeInMillis());
 
         Calendar calendar_1 = Calendar.getInstance();
         calendar_1.add(Calendar.MONTH, 24);
