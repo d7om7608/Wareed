@@ -194,7 +194,6 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("LastNotification").setValue("0");
             current_user_db.child("donateCount").setValue("0");
 
-            Log.d("Hello", "B4 method");
             CityBloodPreferences c = new CityBloodPreferences();
             c.saveInPrefernces(current_user_db, SignAuth, getApplicationContext());
 

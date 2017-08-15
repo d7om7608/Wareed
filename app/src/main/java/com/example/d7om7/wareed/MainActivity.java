@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Main_status_adapter.changeActivity  {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Main_status_adapter.changeActivity {
 
 
     public static final int RC_SIGN_IN = 1;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-//___________________________________________
+    //___________________________________________
     Main_status_adapter status_adapter;
     ProgressBar progressBar;
     private DatabaseReference root;
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
 
 
         //____________________________________
@@ -86,9 +85,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //__________________________________________________
 
 
-
-
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -99,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
 
+                //  data.edit().putString("id", "yQsA1Av6oHY8RjlM6Y9cTwTEhxn1").commit();
                 if (user == null && data.getString("id", null) == null) {
                     Intent intent = new Intent(MainActivity.this, RegisterActicity.class);
                     MainActivity.this.startActivity(intent);
@@ -107,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-         //__________________________EmergencyStart
+        //__________________________EmergencyStart
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
         SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String NameOfHospital = (String) chelldDataSnapshotCases.child("Hospital").getValue();
 
-                    String ReasonOfRequest =(String) chelldDataSnapshotCases.child("Reason").getValue();
+                    String ReasonOfRequest = (String) chelldDataSnapshotCases.child("Reason").getValue();
 
                     String RequestID = (String) chelldDataSnapshotCases.child("RequestID").getValue();
 
@@ -189,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         double lat = location.getLatitude();
         String city = location.getCurrectCity();
         //__________________________EmergencyEND
-
 
 
     }
@@ -258,7 +254,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_myCases) {
             Intent ProfileIntent = new Intent(MainActivity.this, MyCases.class);
-            startActivity(ProfileIntent);finish();
+            startActivity(ProfileIntent);
+            finish();
 
 
         }
@@ -269,15 +266,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-
     @Override
     public void Clicked(int position, int id) {
-//        Intent intent = new Intent(this, DisplayDetails.class);
-//        intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
-//        intent.putExtra("getUserID", requestBlood.get(position).getUserID());
-//        startActivity(intent);
-//        finish();
+        Intent intent = new Intent(this, DisplayDetails.class);
+        intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
+        intent.putExtra("getUserID", requestBlood.get(position).getUserID());
+        startActivity(intent);
+        finish();
 
     }
 }

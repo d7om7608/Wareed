@@ -100,8 +100,7 @@ public class DisplayDetails extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
         if (userID.equals(prefs.getString("id", "NOTHING HERE"))) {
-            Log.d("hello", userID);
-            Log.d("hello", prefs.getString("id", "NOTHING HERE"));
+
 
             Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
         } else {
