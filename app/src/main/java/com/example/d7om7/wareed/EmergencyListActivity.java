@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 
 
-
 public class EmergencyListActivity extends AppCompatActivity implements Main_status_adapter.changeActivity {
 
     Main_status_adapter status_adapter;
@@ -43,13 +42,13 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
-        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData",0);
+        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
 
-        root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city","null"))
-                .child(data.getString("BloodType","null")).child("cases");
+        root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
+                .child(data.getString("BloodType", "null")).child("cases");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         status_adapter = new Main_status_adapter(requestBlood, this);
-         progressBar = (ProgressBar) findViewById(R.id.progress);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
@@ -66,26 +65,43 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
             }
         });
-        root.addChildEventListener(new ChildEventListener() {
+        root.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Add_Request(dataSnapshot);
-            }
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Add_Request(dataSnapshot);
-            //    progressBar.setVisibility(View.GONE);
-            }
+                for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.getChildren()) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            }
+                    String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
 
+                    String PatientFileNumber = (String) chelldDataSnapshotCases.child("FileNumber").getValue();
+
+                    String NameOfHospital = (String) chelldDataSnapshotCases.child("Hospital").getValue();
+
+                    String ReasonOfRequest =(String) chelldDataSnapshotCases.child("Reason").getValue();
+
+                    String RequestID = (String) chelldDataSnapshotCases.child("RequestID").getValue();
+
+                    String UserID = (String) chelldDataSnapshotCases.child("UserID").getValue();
+
+
+                    String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
+
+                    String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
+
+                    String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
+                    requestBloodopjict = new RequestBlood(PatientName, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                            StatusTime, RequestID, UserID, (CountOfdone));
+
+
+                    requestBlood.add(requestBloodopjict);
+
+                    status_adapter.notifyDataSetChanged();
+
+
+                }
             }
 
             @Override
@@ -93,7 +109,6 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
 
             }
         });
-
         recyclerView.setAdapter(status_adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         status_adapter.notifyDataSetChanged();
@@ -110,42 +125,6 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     @Override
     protected void onResume() {
         super.onResume();
-    }
-    private void Add_Request(DataSnapshot dataSnapshot) {
-
-        Iterator i = dataSnapshot.getChildren().iterator();
-        while (i.hasNext()) {
-
-            String CountOfBlood = (String) ((DataSnapshot) i.next()).getValue();
-
-            String BloodType = (String) ((DataSnapshot) i.next()).getValue();
-
-            String PatientFileNumber = (String) ((DataSnapshot) i.next()).getValue();
-
-            String NameOfHospital = (String) ((DataSnapshot) i.next()).getValue();
-
-            String ReasonOfRequest = (String) ((DataSnapshot) i.next()).getValue();
-
-            String RequestID = (String) ((DataSnapshot) i.next()).getValue();
-
-            String UserID = (String) ((DataSnapshot) i.next()).getValue();
-
-            String CountOfdone = (String) ((DataSnapshot) i.next()).getValue();
-
-            String PatientName = (String) ((DataSnapshot) i.next()).getValue();
-
-            String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
-            requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                    StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
-
-            requestBlood.add(requestBloodopjict);
-
-
-
-            status_adapter.notifyDataSetChanged();
-        }
-
-
     }
 
 
@@ -167,6 +146,7 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         finish();
 
     }
+
     public void onBackPressed() {
         Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);

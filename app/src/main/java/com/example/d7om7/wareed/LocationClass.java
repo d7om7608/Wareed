@@ -43,11 +43,11 @@ public class LocationClass {
             return;
         }
         criteria = new Criteria();
-        bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
-        android.location.Location location = manager.getLastKnownLocation(bestProvider);
-        lon = location.getLongitude();
-        lat = location.getLatitude();
-        alt = location.getAltitude();
+//        bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
+//        android.location.Location location = manager.getLastKnownLocation(bestProvider);
+//        lon = location.getLongitude();
+//        lat = location.getLatitude();
+//        alt = location.getAltitude();
 
 
     }
