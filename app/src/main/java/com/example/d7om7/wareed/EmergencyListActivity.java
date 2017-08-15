@@ -149,6 +149,13 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
     }
 
 
+    public void go_to_request_blood(View view) {
+
+
+        Intent startChildActivityIntent = new Intent(this, RequestActivity.class);
+        startActivity(startChildActivityIntent);
+        finish();
+    }
 
 
     @Override

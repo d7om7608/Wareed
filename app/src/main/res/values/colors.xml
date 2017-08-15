@@ -6,6 +6,9 @@
     <color name="colorwhite">#FFFFFF</color>
     <color name="colordetils">#5b6cce</color>
     <color name="colordeprogres">#ffb3dc</color>
+    <color name="black">#000000</color>
+    <color name="LightRed">#E4B57A</color>
+    <color name="DarkRed">#FB493A</color>
 
 
 
