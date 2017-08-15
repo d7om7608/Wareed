@@ -96,7 +96,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
             countOfrequest = (TextView) itemLayout.findViewById(R.id.countOfblood);
             countDone = (TextView) itemLayout.findViewById(R.id.countDone);
             bloodTyep = (TextView) itemLayout.findViewById(R.id.bloodTyep);
-            BloodInfoLayout = (RelativeLayout) itemLayout.findViewById(R.id.relativeLayout);
+            BloodInfoLayout = (RelativeLayout) itemLayout.findViewById(R.id.relativeLayoutvis);
 
 
         }
