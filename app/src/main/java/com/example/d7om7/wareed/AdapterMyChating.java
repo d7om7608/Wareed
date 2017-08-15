@@ -48,7 +48,7 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final SharedPreferences data = context.getSharedPreferences("UserData", 0);
 
         root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
@@ -57,8 +57,10 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                namePantent= (String)dataSnapshot.child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue();
 
+                holder.namePantent.setText((String)dataSnapshot.child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue());
+                holder.senderName.setText((String)dataSnapshot.child(informationOfChatings.get(position).getNameDoner()).child("user name").getValue());
+                holder.requstID.setText(informationOfChatings.get(position).getRequesterID());
                         }
 
 
@@ -69,9 +71,7 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
 
 
         });
-        holder.namePantent.setText(namePantent);
-        holder.senderName.setText(informationOfChatings.get(position).getNameDoner());
-        holder.requstID.setText(informationOfChatings.get(position).getRequesterID());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

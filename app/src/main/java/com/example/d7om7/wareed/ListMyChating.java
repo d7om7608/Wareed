@@ -112,8 +112,16 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                             for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-                                informationOfChatings.add(informationOfChatings1);
-                                adapterMyChating.notifyDataSetChanged();
+                                for (int i=0;i<informationOfChatings.size();i++){
+                                    if (informationOfChatings.get(i).getNameRequster().equals(idRequester)&&
+                                            informationOfChatings.get(i).getNameDoner().equals(IdDoner)&&
+                                            informationOfChatings.get(i).getRequestID().equals(IdRequest)){
+                                            informationOfChatings.add(informationOfChatings1);
+                                            adapterMyChating.notifyDataSetChanged();
+                                    }
+
+                                }
+
                             }
 
                         }
@@ -136,7 +144,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
 
         Intent intent = new Intent(this, ChatActivity.class);
         intent.putExtra("NameRequster", informationOfChatings.get(position).getNameRequster());
-        intent.putExtra("FileNumber", informationOfChatings.get(position).getRequesterID());
+        intent.putExtra("FileNumber", informationOfChatings.get(position).getRequestID());
         intent.putExtra("NameDoner", informationOfChatings.get(position).getNameDoner());
 
         startActivity(intent);

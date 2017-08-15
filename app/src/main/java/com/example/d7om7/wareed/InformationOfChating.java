@@ -7,12 +7,12 @@ package com.example.d7om7.wareed;
 public class InformationOfChating {
     String nameRequster;
     String nameDoner;
-    String requesterID;
+    String requestID;
 
-    public InformationOfChating(String nameRequster,String nameDoner,String requesterID) {
+    public InformationOfChating(String nameRequster,String nameDoner,String requestID) {
         this.nameRequster=nameRequster;
         this.nameDoner=nameDoner;
-        this.requesterID=requesterID;
+        this.requestID=requestID;
     }
 
     public String getNameRequster() {
@@ -31,11 +31,11 @@ public class InformationOfChating {
         this.nameDoner = nameDoner;
     }
 
-    public String getRequesterID() {
-        return requesterID;
+    public String getRequestID() {
+        return requestID;
     }
 
-    public void setRequesterID(String requesterID) {
-        this.requesterID = requesterID;
+    public void setRequestID(String requestID) {
+        this.requestID = requestID;
     }
 }
