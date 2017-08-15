@@ -60,12 +60,9 @@ public class CityBloodPreferences {
                                 /*
                                 Save User data in Shared Preference
                                  */
-        Log.d("Hello","B4 sh pref");
         SharedPreferences sharedPref = c.getSharedPreferences("UserData",0);
-        Log.d("Hello","after sh pref");
 
         final SharedPreferences.Editor editor = sharedPref.edit();
-        Log.d("Hello","B4 if  user");
         if (UserData != null){
             UserData.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -80,7 +77,6 @@ public class CityBloodPreferences {
                     editor.putString("gender", data.get("gender").toString());
 
                     editor.apply();
-                    Log.d("Hello", "display name in donor class:" + data.get("email").toString());
                 }
 
                 @Override
@@ -89,13 +85,11 @@ public class CityBloodPreferences {
                 }
             });
         }else{
-            Log.d("Hello","user data null");
         }
 
-        //Log.d("Hello",mAuth.getCurrentUser().getUid().toString());
+
 
         //editor.putString("email",mAuth.getCurrentUser().getEmail().toString());
 
-        //Log.d("Hello",sharedPref.getString("display_name","nothing in dispaly name"));
     }
 }

@@ -25,7 +25,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
+import static android.R.attr.data;
 
 
 public class MainActivity extends AppCompatActivity
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity
 
                 SharedPreferences data = getPreferences(Context.MODE_PRIVATE);
 
+               //  data.edit().putString("id", "yQsA1Av6oHY8RjlM6Y9cTwTEhxn1").commit();
                 if (user == null && data.getString("id", null) == null) {
                     Intent intent = new Intent(MainActivity.this, RegisterActicity.class);
                     MainActivity.this.startActivity(intent);
