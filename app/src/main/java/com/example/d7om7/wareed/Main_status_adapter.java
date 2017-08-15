@@ -91,7 +91,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
 
         public ViewHolder(View itemLayout) {
             super(itemLayout);
-            reasonOfRequest = (TextView) itemLayout.findViewById(R.id.reasonOfRequest);
+            reasonOfRequest = (TextView) itemLayout.findViewById(R.id.reasonOfRequist);
             statusTime = (TextView) itemLayout.findViewById(R.id.statusTime);
             countOfrequest = (TextView) itemLayout.findViewById(R.id.countOfblood);
             countDone = (TextView) itemLayout.findViewById(R.id.countDone);

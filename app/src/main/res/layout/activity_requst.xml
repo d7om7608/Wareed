@@ -17,6 +17,7 @@
             android:layout_height="470dp">
 
             <LinearLayout
+                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -25,43 +26,45 @@
                 android:weightSum="1">
 
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </ScrollView>
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
-
-                <EditText
-                    android:id="@+id/pantienName"
-                    android:hint="Patient Name"
-                    android:layout_width="305dp"
-                    android:layout_height="wrap_content"
-                    android:maxLength="20"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/imageView6"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/group112"
-                        android:id="@+id/imageView6"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true" />
-                </RelativeLayout>
-                <RelativeLayout
+                        android:src="@drawable/group112" />
+
+                    <EditText
+                        android:id="@+id/pantienName"
+                        android:layout_width="305dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:hint="Patient Name"
+                        android:maxLength="20"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/a1212"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
                 <EditText
                     android:textSize="20sp"
                     android:textColor="@color/black"
@@ -76,19 +79,20 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true" />
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/a1212"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true" />
-                </RelativeLayout>
 
-                <RelativeLayout
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/a5432"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true" />
                 <EditText
                     android:hint="Blood Bags Needed"
                     android:id="@+id/countBlood"
@@ -103,19 +107,20 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true" />
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/a5432"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true" />
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/patientstate"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/imageView8" />
                 <EditText
                     android:hint="Patient State"
                     android:id="@+id/reasonOfRequist"
@@ -128,27 +133,18 @@
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/imageView8" />
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/patientstate"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"
-                        android:id="@+id/imageView8" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
 
-                <RelativeLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_margin="10dp"
+                    android:layout_width="394dp"
                     android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -163,57 +159,51 @@
                         android:id="@+id/planets_spiner"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true">
 
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:maxLength="70"
-                        android:textColor="@color/colorAccent"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"></Spinner>
+                    </Spinner>
 
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_margin="5dp"
+                <LinearLayout
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
 
                     <TextView
-                        android:textColor="@color/black"
                         android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/city_spiner"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:text="City"
-                        android:textSize="18sp"
-                        android:layout_alignBottom="@+id/city_spiner" />
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                     <Spinner
-                    android:id="@+id/city_spiner"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-
+                        android:id="@+id/city_spiner"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                    android:textColor="@color/colorAccent"></Spinner>
+                        ></Spinner>
 
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_margin="5dp"
+                <LinearLayout
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/Hospetal_spiner"
                         android:layout_alignParentStart="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginStart="13dp"
                         android:text="Hospital"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
@@ -222,14 +212,9 @@
                         android:id="@+id/Hospetal_spiner"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginEnd="12dp"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:textColor="@color/colorAccent"></Spinner>
+                        android:layout_alignParentRight="true"></Spinner>
 
-                </RelativeLayout>
+                </LinearLayout>
 
 
 
@@ -242,6 +227,7 @@
         android:layout_height="40dp"
         android:background="@drawable/red_gradient"
         android:onClick="onclick"
+        android:layout_alignParentBottom="true"
         android:text="Add"
         android:textColor="@color/colorwhite"
         android:textSize="24sp"
