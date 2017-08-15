@@ -1,43 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="335dp"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
     android:layout_centerHorizontal="true"
-    android:layout_height="166dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@android:color/white">
+    android:backgroundTint="@color/colorwhite"
+    android:background="@drawable/shadow"
+    android:elevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"
+        android:paddingBottom="5dp">
 
     <ImageView
         android:layout_margin="5dp"
-        android:layout_width="38dp"
-        android:layout_height="45dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/group142"
         android:id="@+id/blood_pic"/>
+
     <TextView
-        android:fontFamily="sans-serif"
-        android:layout_width="215dp"
+        android:id="@+id/reasonOfRequest"
+        android:layout_width="205dp"
         android:layout_height="wrap_content"
-        android:text="Arm Surgery"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
+        android:fontFamily="sans-serif"
+        android:text="Arm Surgery"
+        android:textAlignment="gravity"
+        android:gravity="left"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginStart="12dp"
         android:layout_alignTop="@+id/blood_pic"
-        android:layout_toEndOf="@+id/blood_pic"
-        android:id="@+id/reasonOfRequest" />
+        android:layout_toEndOf="@+id/blood_pic" />
     <TextView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:id="@+id/statusTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2017/8/16"
-        android:layout_alignTop="@+id/textView12"
-        android:layout_alignParentEnd="true" />
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignTop="@+id/reasonOfRequest"
+        android:layout_alignEnd="@+id/relativeLayoutvis" />
     <TextView
         android:id="@+id/bloodTyep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginTop="19dp"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="4.2dp"
         android:textColor="@color/colorwhite"
         android:layout_alignStart="@+id/blood_pic"
@@ -46,68 +68,73 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:src="@drawable/maskgroup4"
-        android:layout_alignStart="@+id/reasonOfRequest"
         android:id="@+id/imageView3"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_alignBottom="@+id/blood_pic" />
+        android:layout_alignBottom="@+id/location_textview"
+        android:layout_alignStart="@+id/reasonOfRequest" />
 
     <TextView
         android:layout_width="180dp"
         android:id="@+id/location_textview"
-        android:text="Makkah , Alnorr hospital"
+        android:text="Makkah , Alnoor hospital"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/bloodTyep"
+        android:layout_alignEnd="@+id/reasonOfRequest" />
+
+    </RelativeLayout>
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:orientation="horizontal"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/bloodTyep"
-        android:layout_marginStart="14dp">
+        android:id="@+id/relativeLayoutvis"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true">
 
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/countOfblood_pic"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="28dp"
             android:src="@drawable/group151"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginStart="19dp"
-            android:layout_alignBottom="@+id/countOfblood"
-            android:layout_alignParentStart="true" />
+            android:layout_alignStart="@+id/button2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="9"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="23.9dp"
+            android:layout_marginLeft="17dp"
+            android:textSize="11sp"
+            android:layout_marginTop="19dp"
             android:textColor="@color/colorwhite"
             android:layout_alignStart="@+id/countOfblood_pic"
             android:id="@+id/countOfblood"
             android:layout_alignEnd="@+id/countOfblood_pic" />
 
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+
+            android:layout_width="25dp"
+            android:layout_height="28dp"
             android:src="@drawable/group151"
             android:id="@+id/countDone_pic"
-            android:layout_marginStart="44dp"
-            android:layout_alignBottom="@+id/countDone"
+            android:layout_marginStart="68dp"
             android:layout_toEndOf="@+id/countOfblood_pic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="9"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="23.9dp"
+            android:textSize="11sp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="19dp"
             android:textColor="@color/colorwhite"
             android:layout_alignStart="@+id/countDone_pic"
             android:id="@+id/countDone" />
@@ -115,28 +142,42 @@
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="18dp"
             android:src="@drawable/check_sign"
-            android:layout_alignStart="@+id/countDone_pic"/>
+            android:id="@+id/imageView4"
+            android:layout_alignStart="@+id/countDone_pic"
+            android:layout_toEndOf="@+id/countDone_pic" />
 
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+
+            android:layout_width="25dp"
+            android:layout_height="27dp"
             android:src="@drawable/maskgroup12"
             android:id="@+id/chat_pic"
-            android:layout_alignTop="@+id/countDone_pic"
+            android:layout_marginRight="60dp"
             android:layout_toStartOf="@+id/imageView7"
-            android:layout_marginEnd="30dp" />
+            android:layout_marginEnd="38dp" />
 
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="25dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="15dp"
             android:src="@drawable/group7"
-            android:layout_marginEnd="17dp"
             android:id="@+id/imageView7"
-            android:layout_alignTop="@+id/chat_pic"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignEnd="@+id/button2" />
+
+        <Button
+            android:layout_width="305dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/red_gradient"
+            android:text="Going To Donate Blood"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:id="@+id/button2" />
 
 
     </RelativeLayout>

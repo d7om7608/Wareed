@@ -114,7 +114,7 @@ public class DisplayDetails extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent ProfileIntent = new Intent(this, EmergencyListActivity.class);
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);
         finish();
     }

@@ -58,7 +58,7 @@ public class RequestActivity extends AppCompatActivity {
 
 
         calendar = Calendar.getInstance();
-        date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
+        date = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
 
 //---------------------------------------------------------------------
         Intent intent = getIntent();

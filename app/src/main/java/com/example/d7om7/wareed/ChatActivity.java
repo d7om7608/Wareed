@@ -185,7 +185,7 @@ count=0;
             finish();
         }else if (count == 1){
 
-            Intent ProfileIntent = new Intent(this, EmergencyListActivity.class);
+            Intent ProfileIntent = new Intent(this, MainActivity.class);
             startActivity(ProfileIntent);
             finish();
         }
