@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.d7om7.wareed.R.id.BTN;
 
 
 /**
@@ -66,7 +65,6 @@ public class ProfileActivity extends AppCompatActivity {
     String age;
     String DateSecond;
 
-    private Button BTN;
     private Calendar calendar;
     private SimpleDateFormat date;
     private TextView TextDate;
@@ -91,19 +89,6 @@ public class ProfileActivity extends AppCompatActivity {
         ProgressBarProfile=(ProgressBar)findViewById(R.id.ProgressBarProfile);
         ProgressBarProfile.setVisibility(View.VISIBLE);
 
-        //____________________________________dateStart
-        BTN = (Button) findViewById(R.id.dateButton);
-
-        calendar = Calendar.getInstance();
-        date = new SimpleDateFormat("yyyy/MM/dd  :  EEEE", Locale.getDefault());
-
-        BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePicker();
-            }
-        });
-        //____________________________________DateFinish
 
 
         BloodSpinner();

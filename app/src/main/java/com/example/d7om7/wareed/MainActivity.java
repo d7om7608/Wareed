@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,23 +16,31 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Main_status_adapter.changeActivity  {
 
 
     public static final int RC_SIGN_IN = 1;
@@ -38,10 +49,21 @@ public class MainActivity extends AppCompatActivity
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+//___________________________________________
+    Main_status_adapter status_adapter;
+    ProgressBar progressBar;
+    private DatabaseReference root;
+    RequestBlood requestBloodopjict;
+    List<RequestBlood> requestBlood;
+
+
+    //____________________________________emergency
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+
 
         //____________________________________
 
@@ -85,6 +107,90 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
+         //__________________________EmergencyStart
+        requestBlood = new ArrayList<>();
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
+
+        root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
+                .child(data.getString("BloodType", "null")).child("cases");
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        status_adapter = new Main_status_adapter(requestBlood, this);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
+
+
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.getChildren()) {
+
+
+                    String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
+
+                    String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
+
+                    String PatientFileNumber = (String) chelldDataSnapshotCases.child("FileNumber").getValue();
+
+                    String NameOfHospital = (String) chelldDataSnapshotCases.child("Hospital").getValue();
+
+                    String ReasonOfRequest =(String) chelldDataSnapshotCases.child("Reason").getValue();
+
+                    String RequestID = (String) chelldDataSnapshotCases.child("RequestID").getValue();
+
+                    String UserID = (String) chelldDataSnapshotCases.child("UserID").getValue();
+
+
+                    String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
+
+                    String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
+
+                    String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
+                    requestBloodopjict = new RequestBlood(PatientName, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                            StatusTime, RequestID, UserID, (CountOfdone));
+
+
+                    requestBlood.add(requestBloodopjict);
+
+                    status_adapter.notifyDataSetChanged();
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        recyclerView.setAdapter(status_adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        status_adapter.notifyDataSetChanged();
+
+        /*
+        Here LOCATION variables
+         */
+        LocationClass location = new LocationClass(getApplicationContext());
+        double lon = location.getLongitude();
+        double lat = location.getLatitude();
+        String city = location.getCurrectCity();
+        //__________________________EmergencyEND
+
+
 
     }
 
@@ -98,6 +204,14 @@ public class MainActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
+    public void go_to_request_blood(View view) {
+
+
+        Intent startChildActivityIntent = new Intent(this, RequestActivity.class);
+        startActivity(startChildActivityIntent);
+        finish();
     }
 
     long time;
@@ -144,8 +258,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_myCases) {
             Intent ProfileIntent = new Intent(MainActivity.this, MyCases.class);
-            startActivity(ProfileIntent);
-            finish();
+            startActivity(ProfileIntent);finish();
 
 
         }
@@ -155,21 +268,16 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void go_to_List_Emergency(View view) {
 
-        Intent startChildActivityIntent = new Intent(this, EmergencyListActivity.class);
-        startActivity(startChildActivityIntent);
-        finish();
+
+
+    @Override
+    public void Clicked(int position, int id) {
+//        Intent intent = new Intent(this, DisplayDetails.class);
+//        intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
+//        intent.putExtra("getUserID", requestBlood.get(position).getUserID());
+//        startActivity(intent);
+//        finish();
+
     }
-
-    public void go_to_requst_blood(View view) {
-
-
-        Intent startChildActivityIntent = new Intent(this, RequestActivity.class);
-        startActivity(startChildActivityIntent);
-        finish();
-    }
-
-
-
 }
