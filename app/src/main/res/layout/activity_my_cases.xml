@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.d7om7.wareed.EmergencyListActivity"
-    android:background="@drawable/mix_color">
+    tools:context="com.example.d7om7.wareed.MainActivity"
+    android:background="@color/colorwhite">
 
     <ProgressBar
         android:id="@+id/progressBarx"

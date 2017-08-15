@@ -2,215 +2,227 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:layout_centerHorizontal="true"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:padding="10dp"
     android:orientation="horizontal"
-    android:background="@android:color/white">
-    >
+    android:backgroundTint="@color/colorwhite"
+    android:background="@drawable/shadow"
+    android:elevation="5dp">
 
-    <TextView
-        android:id="@+id/reasonOfRequest"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-
-        android:layout_marginTop="12dp"
-        android:text=""
-        android:textAlignment="viewEnd"
-        android:textSize="20sp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_today"
-        android:layout_below="@+id/reasonOfRequest"
-        android:layout_alignParentEnd="true" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="90dp"
-        android:gravity="right"
-        android:layout_height="wrap_content"
-        android:text="وقت الحاله"
-        android:textSize="20sp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/reasonOfRequest"
-        android:layout_toStartOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/statusTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginRight="42dp"
-        android:layout_marginTop="13dp"
-        android:text=""
-        android:textAlignment="viewEnd"
-        android:textSize="20sp" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="18dp"
-    android:layout_below="@+id/statusTime"
-    android:layout_alignParentStart="true"
-    android:orientation="horizontal"
-    android:id="@+id/linearLayout2">
-
-
-    <ImageView
-        android:layout_weight="1"
-
-        android:id="@+id/bloodTypeIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/star_big_on"
-        />
-
-    <ImageView
-        android:layout_weight="1.00"
-
-        android:id="@+id/countofdoneIcon"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:srcCompat="@android:drawable/checkbox_on_background"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_weight="1"
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1">
 
-        android:id="@+id/countofBloodIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_myplaces"
+                <ImageView
+                    android:id="@+id/blood_pic"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/group142" />
 
-        />
+                <TextView
+                    android:id="@+id/bloodTyep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/blood_pic"
+                    android:layout_marginLeft="4.2dp"
+                    android:layout_marginRight="4.2dp"
+                    android:layout_marginTop="15dp"
+                    android:text="AB+"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="15sp" />
 
+            </RelativeLayout>
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+                <TextView
+                    android:id="@+id/reasonOfRequist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/blood_pic"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@+id/blood_pic"
+                    android:fontFamily="sans-serif"
+                    android:gravity="left"
+                    android:text="Arm Surgery"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentStart="true"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout3">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignBottom="@+id/location_textview"
+                        android:layout_alignStart="@+id/reasonOfRequest"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/maskgroup4" />
 
-        <TextView
-            android:id="@+id/bloodTypeTextView"
-            android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/location_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/reasonOfRequest"
+                        android:layout_below="@+id/bloodTyep"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="Makkah , Alnoor hospital" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/statusTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/relativeLayoutvis"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignTop="@+id/reasonOfRequest"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.2"
+                android:gravity="end"
+                android:text="2017/8/16"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="فصيله الدم"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            android:id="@+id/relativeLayout2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="5dp"
+            android:paddingBottom="5dp">
 
-        <TextView
-            android:id="@+id/countofdoneTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="تمت"
-            android:textAlignment="center"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:id="@+id/relativeLayoutvis"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/countOfblood_pic"
+                android:layout_width="25dp"
+                android:layout_height="28dp"
+                android:src="@drawable/group151"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_alignStart="@+id/button2"
+                android:layout_above="@+id/button2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:layout_marginLeft="17dp"
+                android:textSize="11sp"
+                android:layout_marginTop="16.5dp"
+                android:textColor="@color/colorwhite"
+                android:layout_alignStart="@+id/countOfblood_pic"
+                android:id="@+id/countOfblood"
+                android:layout_alignEnd="@+id/countOfblood_pic" />
+
+            <ImageView
+
+                android:layout_width="25dp"
+                android:layout_height="28dp"
+                android:src="@drawable/group151"
+                android:id="@+id/countDone_pic"
+                android:layout_marginStart="68dp"
+                android:layout_above="@+id/button2"
+                android:layout_toEndOf="@+id/countOfblood_pic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:textSize="11sp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="16.5dp"
+                android:textColor="@color/colorwhite"
+                android:layout_alignStart="@+id/countDone_pic"
+                android:id="@+id/countDone" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="18dp"
+                android:src="@drawable/check_sign"
+                android:id="@+id/imageView4"
+                android:layout_alignStart="@+id/countDone_pic"
+                android:layout_toEndOf="@+id/countDone_pic" />
+
+            <ImageView
+
+                android:layout_width="25dp"
+                android:layout_height="27dp"
+                android:src="@drawable/maskgroup12"
+                android:id="@+id/chat_pic"
+                android:layout_marginRight="60dp"
+                android:layout_marginEnd="38dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/imageView7" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="27dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/group7"
+                android:id="@+id/imageView7"
+                android:layout_alignParentTop="true"
+                android:layout_alignEnd="@+id/button2" />
+
+            <Button
+                android:layout_width="305dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/red_gradient"
+                android:text="Going To Donate Blood"
+                android:textAllCaps="false"
+                android:textColor="@color/colorwhite"
+                android:id="@+id/button2" />
 
 
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/countofBloodTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="المطلوب"
-            android:textAlignment="center"
-
-            android:textSize="18sp" />
+        </RelativeLayout>
 
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-
-        android:layout_below="@+id/linearLayout3"
-        android:layout_alignParentStart="true"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout4">
-
-
-        <TextView
-            android:id="@+id/bloodTyep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/statusTime"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/countDone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/countOfblood"
-            android:layout_weight="1"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/countOfblood"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/countOfblood"
-            android:layout_weight="1"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-
-
-    </LinearLayout>
-
-
-    <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="التفاصيل"
-    android:textSize="24sp"
-    android:gravity="center"
-    android:id="@+id/detilse"
-   android:padding="4dp"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/colorwhite"
-        android:background="@color/colordetils"/>
-
 
 
 </RelativeLayout>

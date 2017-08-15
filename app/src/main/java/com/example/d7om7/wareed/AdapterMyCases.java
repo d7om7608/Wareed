@@ -65,11 +65,11 @@ public class AdapterMyCases extends RecyclerView.Adapter<AdapterMyCases.ViewHold
 
         public ViewHolder(View itemLayout) {
             super(itemLayout);
-            reasonOfRequest = (TextView) itemLayout.findViewById(R.id.reasonOfRequest);
-            statusTime = (TextView) itemLayout.findViewById(R.id.statusTime);
-            countOfrequest = (TextView) itemLayout.findViewById(R.id.countOfblood);
-            countDone = (TextView) itemLayout.findViewById(R.id.countDone);
-            bloodTyep = (TextView) itemLayout.findViewById(R.id.bloodTyep);
+            reasonOfRequest = (TextView) itemLayout.findViewById(R.id.mycase_reasonOfRequest);
+            statusTime = (TextView) itemLayout.findViewById(R.id.mycase_statusTime);
+            countOfrequest = (TextView) itemLayout.findViewById(R.id.mycase_countOfblood);
+            countDone = (TextView) itemLayout.findViewById(R.id.mycase_countOfdone);
+            bloodTyep = (TextView) itemLayout.findViewById(R.id.mycase_bloodType);
 
 
         }

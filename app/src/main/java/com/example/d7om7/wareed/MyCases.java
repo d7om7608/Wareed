@@ -34,7 +34,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
-    SharedPreferences prefs ;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
 
-        root =FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city","null"));
+        root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city", "null"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //progressBar.setVisibility(View.VISIBLE);
@@ -71,14 +71,47 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("hello","fgngg");
 
-                for(DataSnapshot chelldDataSnapshotBloodType:dataSnapshot.getChildren() ){
-                    if (chelldDataSnapshotBloodType.hasChild("cases")) {
-                        for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.child("cases").getChildren()) {
-                            Log.d("hello",chelldDataSnapshotCases.getValue().toString());
+                for (DataSnapshot chelldDataSnapshotBloodType : dataSnapshot.getChildren()) {
 
-                        }
+                    for (DataSnapshot chelldDataSnapshotCases : chelldDataSnapshotBloodType.child("cases").getChildren()) {
+
+                        String UserID = (String) chelldDataSnapshotCases.child("UserID").getValue();
+                        if (UserID.equals(prefs.getString("id", "NOTHING HERE"))) {
+
+                            String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
+
+                            String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
+
+                            String PatientFileNumber = (String) chelldDataSnapshotCases.child("FileNumber").getValue();
+
+                            String NameOfHospital = (String) chelldDataSnapshotCases.child("Hospital").getValue();
+
+                            String ReasonOfRequest = (String) chelldDataSnapshotCases.child("Reason").getValue();
+
+                            String RequestID = (String) chelldDataSnapshotCases.child("RequestID").getValue();
+
+
+
+                            String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
+
+                            String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
+
+                            String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
+                            requestBloodopjict = new RequestBlood(PatientName, (PatientFileNumber),(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                                    StatusTime, RequestID, UserID,(CountOfdone));
+
+
+
+                                requestBlood.add(requestBloodopjict);
+                            }
+
+                            myCases_adapter.notifyDataSetChanged();
+
+
+
+
+
                     }
                 }
             }
@@ -88,9 +121,6 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 
             }
         });
-
-
-
 
 
         recyclerView.setAdapter(myCases_adapter);
@@ -112,51 +142,18 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         super.onResume();
 //        progressBar.setVisibility(View.GONE);
     }
+
     private void Add_Request(DataSnapshot dataSnapshot) {
         Iterator i = dataSnapshot.getChildren().iterator();
 
 
-
-
-
         while (i.hasNext()) {
 
-            String CountOfBlood = (String) ((DataSnapshot) i.next()).getValue();
 
-            String BloodType = (String) ((DataSnapshot) i.next()).getValue();
-
-            String PatientFileNumber = (String) ((DataSnapshot) i.next()).getValue();
-
-            String NameOfHospital = (String) ((DataSnapshot) i.next()).getValue();
-
-            String ReasonOfRequest = (String) ((DataSnapshot) i.next()).getValue();
-
-            String RequestID = (String) ((DataSnapshot) i.next()).getValue();
-
-            String UserID = (String) ((DataSnapshot) i.next()).getValue();
-
-
-
-                String CountOfdone = (String) ((DataSnapshot) i.next()).getValue();
-
-                String PatientName = (String) ((DataSnapshot) i.next()).getValue();
-
-                String StatusTime = (String) ((DataSnapshot) i.next()).getValue();
-                requestBloodopjict = new RequestBlood(PatientName, Integer.valueOf(PatientFileNumber), Integer.valueOf(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                        StatusTime, RequestID, UserID, Integer.valueOf(CountOfdone));
-
-
-            if (UserID.equals(prefs.getString("id", "NOTHING HERE"))) {
-                requestBlood.add(requestBloodopjict);
-            }
-
-                myCases_adapter.notifyDataSetChanged();
 
         }
 
     }
-
-
 
 
     @Override

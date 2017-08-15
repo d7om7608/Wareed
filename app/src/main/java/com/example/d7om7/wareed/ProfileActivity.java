@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.d7om7.wareed.R.id.BTN;
 
 
 /**
@@ -67,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayAdapter<String> cityadapter;
     String  IdCity ;
     String  nameCity;
+    ProgressBar ProgressBarProfile;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +81,8 @@ public class ProfileActivity extends AppCompatActivity {
         GenderSpinner = (Spinner) findViewById(R.id.profile_gender_spinner);
         ageText = (EditText) findViewById(R.id.age);
         TextDate = (TextView) findViewById(R.id.TextDate);
-        //____________________________________dateStart
-        BTN = (Button) findViewById(R.id.dateButton);
+        ProgressBarProfile=(ProgressBar)findViewById(R.id.ProgressBarProfile);
+        ProgressBarProfile.setVisibility(View.VISIBLE);
 
 
         calendar = Calendar.getInstance();
@@ -93,7 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         //____________________________________DateFinish
-
 
         BloodSpinner();
         CitySpinner();
@@ -121,6 +121,8 @@ public class ProfileActivity extends AppCompatActivity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ProgressBarProfile.setVisibility(View.INVISIBLE);
+
                 for(DataSnapshot chelldDataSnapshot:dataSnapshot.child("cities").getChildren() ){
 
               IdCity =  chelldDataSnapshot.getKey();
@@ -165,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity {
         UserUID = SignAuth.getCurrentUser().getUid();
         UsernameTooked = UserNameEditText.getText().toString().trim();
         BloodTypeTooked = BloodTypeSpinner.getSelectedItem().toString().trim();
-        CityTooked =""+ CitySpinner.getSelectedItemPosition();//.getSelectedItem().toString().trim();
+        CityTooked =""+ CitySpinner.getSelectedItemPosition();
         GenderTooked = GenderSpinner.getSelectedItem().toString().trim();
         Email = EmailEditText.getText().toString().trim();
         age = ageText.getText().toString().trim();

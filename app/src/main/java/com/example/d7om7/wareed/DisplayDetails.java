@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.R.attr.data;
+
 public class DisplayDetails extends AppCompatActivity {
     TextView pantienName;
     TextView fileNumber;
@@ -38,8 +40,10 @@ public class DisplayDetails extends AppCompatActivity {
 
         pantienName = (TextView) findViewById(R.id.pantienName);
         fileNumber = (TextView) findViewById(R.id.fileNumber);
-        //Log("hello")
-        root = FirebaseDatabase.getInstance().getReference().child("requestblood").child(intent.getStringExtra("getRequestID"));
+        String requestID = intent.getStringExtra("getRequestID");
+        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
+        root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
+                .child(data.getString("BloodType", "null")).child("cases").child(requestID);
         countDone = (TextView) findViewById(R.id.countDone);
         countBlood = (TextView) findViewById(R.id.countBlood);
         reasonOfRequist = (TextView) findViewById(R.id.reasonOfRequist);
@@ -93,14 +97,13 @@ public class DisplayDetails extends AppCompatActivity {
         String requestID = intent.getStringExtra("getRequestID");
         String userID = intent.getStringExtra("getUserID");
 
-        SharedPreferences  prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
-        if (userID.equals(prefs.getString("id", "NOTHING HERE"))){
-            Log.d("hello",userID);
-            Log.d("hello",prefs.getString("id", "NOTHING HERE"));
+        if (userID.equals(prefs.getString("id", "NOTHING HERE"))) {
 
-            Toast.makeText(getApplicationContext(),"هذه الحاله خاصه بك",Toast.LENGTH_SHORT).show();
-        }else {
+
+            Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
+        } else {
             Intent ChatIntent = new Intent(this, ChatActivity.class);
             ChatIntent.putExtra("requestID", requestID);
             ChatIntent.putExtra("userID", userID);
@@ -109,8 +112,9 @@ public class DisplayDetails extends AppCompatActivity {
 
         }
     }
+
     public void onBackPressed() {
-        Intent ProfileIntent = new Intent(this, EmergencyListActivity.class);
+        Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);
         finish();
     }
