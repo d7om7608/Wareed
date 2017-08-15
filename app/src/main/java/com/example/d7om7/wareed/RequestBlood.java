@@ -4,9 +4,9 @@ package com.example.d7om7.wareed;
 
 public class RequestBlood {
     String patientName;
-    int patientFileNumber;
-    int countOfBlood;
-    int countOfdone;
+    String patientFileNumber;
+    String countOfBlood;
+    String countOfdone;
     String reasonOfRequest;
     String bloodType;
 
@@ -15,8 +15,8 @@ public class RequestBlood {
     String userID;
     String statusTime;
 
-    public RequestBlood(String patientName, int patientFileNumber, int countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
-                        String statusTime, String requestID, String userID, int countOfdone) {
+    public RequestBlood(String patientName, String patientFileNumber, String countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
+                        String statusTime, String requestID, String userID, String countOfdone) {
         this.patientName=patientName;
         this.patientFileNumber=patientFileNumber;
         this.countOfBlood=countOfBlood;
@@ -31,11 +31,11 @@ public class RequestBlood {
 
     }
 
-    public int getCountOfdone() {
+    public String getCountOfdone() {
         return countOfdone;
     }
 
-    public void setCountOfdone(int countOfdone) {
+    public void setCountOfdone(String countOfdone) {
         this.countOfdone = countOfdone;
     }
 
@@ -57,19 +57,19 @@ public class RequestBlood {
         this.patientName = patientName;
     }
 
-    public int getPatientFileNumber() {
+    public String getPatientFileNumber() {
         return patientFileNumber;
     }
 
-    public void setPatientFileNumber(int patientFileNumber) {
+    public void setPatientFileNumber(String patientFileNumber) {
         this.patientFileNumber = patientFileNumber;
     }
 
-    public int getCountOfBlood() {
+    public String getCountOfBlood() {
         return countOfBlood;
     }
 
-    public void setCountOfBlood(int countOfBlood) {
+    public void setCountOfBlood(String countOfBlood) {
         this.countOfBlood = countOfBlood;
     }
 
