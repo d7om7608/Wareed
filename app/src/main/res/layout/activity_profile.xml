@@ -6,17 +6,26 @@
         android:layout_height="match_parent"
         android:background="@color/DarkRed"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-    >
+        android:layout_centerHorizontal="true" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
         android:background="@color/white"
-        android:id="@+id/relativeLayout3">
+        android:id="@+id/relativeLayout3"
+        android:layout_margin="5dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
-    </RelativeLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:id="@+id/ProgressBarProfile"/>
+
+
 
 
     <TextView
@@ -33,14 +42,6 @@
         android:background="@drawable/shadow"
         android:elevation="5dp"/>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/dateButton"
-            android:layout_toStartOf="@+id/textView2"
-            android:layout_marginEnd="75dp"
-            android:visibility="gone"
-            android:id="@+id/ProgressBarProfile"/>
 
 
 
@@ -98,10 +99,9 @@
             android:id="@+id/dateButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:hint="Pick Last Blood Donation Date"
-            android:textColor="#ffffff"
+            android:layout_margin="10dp"
+            android:text="Pick Last Blood Donation Date"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_below="@+id/age"
             android:layout_marginTop="12dp"
@@ -110,13 +110,24 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="30dp"
-    android:layout_margin="5dp"
     android:orientation="horizontal"
     android:layout_below="@+id/TextDate"
-    android:layout_alignStart="@+id/dateButton"
-    android:layout_marginTop="16dp"
     android:weightSum="1"
-    android:id="@+id/linearLayout2">
+    android:id="@+id/linearLayout2"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/blood"
+        android:alpha="0.7"
+        android:layout_marginRight="5dp"
+        android:id="@+id/imageView" />
 
     <TextView
             android:id="@+id/textView2"
@@ -124,7 +135,8 @@
             android:layout_height="wrap_content"
             android:text="Blood Type"
             android:textSize="18sp"
-            android:layout_alignParentLeft="true" />
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView" />
 
     <Spinner
         android:id="@+id/profile_bloodType_spinner"
@@ -137,31 +149,44 @@
 
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Save"
         android:background="@drawable/red_gradient"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:onClick="SaveSettingsOnClick"
+        android:id="@+id/button4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="10dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp" />
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="30dp"
-    android:layout_marginTop="5dp"
     android:layout_below="@+id/relativeLayout"
     android:layout_alignEnd="@+id/relativeLayout3"
-    android:layout_alignStart="@+id/relativeLayout">
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_alignParentStart="true">
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/gender"
+        android:id="@+id/imageView9"
+        android:layout_marginRight="5dp"/>
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender"
         android:textSize="18sp"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView9" />
 
     <Spinner
         android:id="@+id/profile_gender_spinner"
@@ -173,20 +198,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_alignStart="@+id/dateButton"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:orientation="horizontal"
-        android:id="@+id/relativeLayout">
+        android:id="@+id/relativeLayout"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/ProgressBarProfile">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/city"
+            android:id="@+id/imageView9"
+            android:layout_marginRight="5dp"/>
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:text="City"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_alignParentTop="true"
+
+            android:layout_toEndOf="@+id/imageView9" />
 
 
         <Spinner
@@ -201,3 +237,4 @@
 
 </RelativeLayout>
 
+</RelativeLayout>
