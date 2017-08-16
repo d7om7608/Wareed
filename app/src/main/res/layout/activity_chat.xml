@@ -2,15 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mix_color">
+    android:background="@color/DarkRed">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/colorwhite"
+        android:layout_margin="5dp"
+        android:background="@color/white"
         >
-    <RelativeLayout
+
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:backgroundTint="@color/white"
+            android:text="Chat"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/DarkRed"
+            android:background="@drawable/shadow"
+            android:elevation="5dp"
+            android:id="@+id/textView" />
+        <RelativeLayout
 
         android:layout_width="70dp"
         android:layout_height="55dp"
@@ -29,7 +45,7 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/chat_send_button"
             android:layout_alignParentBottom="true"
-            android:hint="أكتب رسالتك ..."
+            android:hint=" Write You'r Message"
             android:maxLength="240"
             />
 
@@ -39,7 +55,10 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_weight="1"
-            android:text="أرسل"
+            android:text="Send"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:background="@drawable/red_gradient"
             android:onClick="SendBtnClick"
             android:layout_alignParentTop="true" />
 
@@ -47,12 +66,12 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/linearLayout"
         android:id="@+id/chat_list_view"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/textView" />
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"

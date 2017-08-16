@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -40,7 +41,8 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cases);
-        setTitle("حالاتي");
+
+
         prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
         requestBlood = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
