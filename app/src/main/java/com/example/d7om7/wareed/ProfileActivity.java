@@ -84,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
         ProgressBarProfile=(ProgressBar)findViewById(R.id.ProgressBarProfile);
         ProgressBarProfile.setVisibility(View.VISIBLE);
 
-
+        BTN = (Button) findViewById(R.id.dateButton);
         calendar = Calendar.getInstance();
 
         BTN.setOnClickListener(new View.OnClickListener() {
