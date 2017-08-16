@@ -6,7 +6,7 @@
     android:layout_centerHorizontal="true"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:backgroundTint="@color/colorwhite"
+    android:backgroundTint="@color/white"
     android:background="@drawable/shadow"
     android:elevation="5dp">
 
@@ -45,7 +45,7 @@
                     android:layout_marginTop="15dp"
                     android:text="AB+"
                     android:textAlignment="center"
-                    android:textColor="@color/colorwhite"
+                    android:textColor="@color/white"
                     android:textSize="13sp" />
 
             </RelativeLayout>
@@ -116,7 +116,7 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="14.5dp"
                 android:text="9"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/white"
                 android:textSize="11sp" />
 
             <ImageView
@@ -137,7 +137,7 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="14.5dp"
                 android:text="9"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/white"
                 android:textSize="11sp" />
 
             <ImageView
@@ -159,7 +159,7 @@
                 android:text="Edit"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
         </RelativeLayout>
     </LinearLayout>

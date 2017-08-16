@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:iosched="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/main_toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?actionBarSize" />-->
+<RelativeLayout
+
+    android:layout_marginTop="55dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/DarkRed"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+<RelativeLayout
+    android:layout_margin="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,8 +24,16 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.d7om7.wareed.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="@color/colorwhite"
+    android:background="@color/white"
     android:weightSum="1">
+        <android.support.v7.widget.Toolbar
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_toolbar"
+            android:gravity="center"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+        </android.support.v7.widget.Toolbar>
 
         <TextView
             android:layout_margin="5dp"
@@ -19,7 +43,7 @@
             android:textAlignment="center"
             android:layout_centerHorizontal="true"
             android:textSize="20dp"
-            android:textColor="@color/colorwhite"
+            android:textColor="@color/white"
             android:id="@+id/last_donation_date"
             android:background="@drawable/red_gradient"/>
 
@@ -54,7 +78,9 @@
             android:text="Do You need Blood Donors ?"
             android:onClick="go_to_request_blood"
             android:textAllCaps="false"
-            android:textColor="@color/colorwhite"
+            android:textColor="@color/white"
             android:background="@drawable/red_gradient"/>
+
+</RelativeLayout>
 
 </RelativeLayout>

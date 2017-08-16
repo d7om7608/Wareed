@@ -126,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
+//         MainToolBar;
+        Toolbar MainToolBar = (Toolbar) findViewById(R.id.main_toolbar);
+        setTitle("Emergency Cases");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.DarkRed));
+
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.getChildren()) {
 
-
+                    Log.d("hello","fdgdfgf");
                     String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
 
                     String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
@@ -164,9 +169,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
 
                     String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
+                    String NameCity = (String) chelldDataSnapshotCases.child("NameCity").getValue();
 
                     String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
-                    requestBloodopjict = new RequestBlood(PatientName, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                    requestBloodopjict = new RequestBlood(PatientName,NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
                             StatusTime, RequestID, UserID, (CountOfdone));
 
 
@@ -242,11 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_mainActivity) {
-            Intent ProfileIntent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(ProfileIntent);
-
-        } else if (id == R.id.nav_Talks) {
+        if (id == R.id.nav_Talks) {
             Intent ProfileIntent = new Intent(MainActivity.this, ListMyChating.class);
             startActivity(ProfileIntent);
             finish();
@@ -277,11 +279,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void Clicked(int position, int id) {
-        Intent intent = new Intent(this, DisplayDetails.class);
-        intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
-        intent.putExtra("getUserID", requestBlood.get(position).getUserID());
-        startActivity(intent);
-        finish();
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+
+
+
+        if (requestBlood.get(position).getUserID().equals(prefs.getString("id", "NOTHING HERE"))) {
+            Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("requestID", requestBlood.get(position).getRequestID());
+            intent.putExtra("userID", requestBlood.get(position).getUserID());
+            startActivity(intent);
+            finish();
+
+        }
+
 
     }
 

@@ -9,13 +9,13 @@ public class RequestBlood {
     String countOfdone;
     String reasonOfRequest;
     String bloodType;
-
+    String cityName;
     String nameOfHospital;
     String requestID;
     String userID;
     String statusTime;
 
-    public RequestBlood(String patientName, String patientFileNumber, String countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
+    public RequestBlood(String patientName,String cityName, String patientFileNumber, String countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
                         String statusTime, String requestID, String userID, String countOfdone) {
         this.patientName=patientName;
         this.patientFileNumber=patientFileNumber;
@@ -28,7 +28,15 @@ public class RequestBlood {
         this.userID=userID;
         this.statusTime=statusTime;
         this.countOfdone=countOfdone;
+        this.cityName=cityName;
+    }
 
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public String getCountOfdone() {

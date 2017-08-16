@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -47,7 +48,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_my_chating);
-        setTitle("محادثاتي");
+
         recyclerView = (RecyclerView) findViewById(R.id.my_chat_RecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         informationOfChatings = new ArrayList<>();
