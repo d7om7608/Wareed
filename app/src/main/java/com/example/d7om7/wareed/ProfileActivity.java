@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.d7om7.wareed.R.id.dateButton;
 
 
 /**
@@ -62,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     String age;
     long DateSecond;
     private Button dateButton;
+    private Button BTN;
     private Calendar calendar;
     private TextView TextDate;
     private List<String> CityArray=new ArrayList<>();
