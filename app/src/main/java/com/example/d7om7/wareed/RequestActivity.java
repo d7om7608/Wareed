@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.example.d7om7.wareed.menagerModel.donor;
-
 public class RequestActivity extends AppCompatActivity {
     RequestBlood requestBlood;
     EditText pantienNameText;
@@ -176,7 +174,7 @@ public class RequestActivity extends AppCompatActivity {
 
         pantienNameText = (EditText) findViewById(R.id.pantienName);
         fileNumberText = (EditText) findViewById(R.id.fileNumber);
-        countBloodText = (EditText) findViewById(R.id.countBlood);
+        countBloodText = (EditText) findViewById(R.id.countDone);
         reasonOfRequistText = (EditText) findViewById(R.id.reasonOfRequist);
         SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
 

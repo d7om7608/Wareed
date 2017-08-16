@@ -290,8 +290,8 @@
                         android:id="@+id/countDone"
                         android:layout_width="84dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/countBlood"
-                        android:layout_alignBottom="@+id/countBlood"
+                        android:layout_alignBaseline="@+id/countDone"
+                        android:layout_alignBottom="@+id/countDone"
                         android:layout_marginLeft="12dp"
                         android:textColor="@color/colorPrimary"
                         android:layout_marginRight="12dp"
@@ -330,7 +330,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/countBlood"
+                        android:id="@+id/countDone"
                         android:layout_width="95dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/imageView2"

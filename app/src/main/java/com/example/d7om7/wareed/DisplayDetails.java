@@ -4,19 +4,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static android.R.attr.data;
 
 public class DisplayDetails extends AppCompatActivity {
     TextView pantienName;
@@ -45,7 +41,7 @@ public class DisplayDetails extends AppCompatActivity {
         root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
                 .child(data.getString("BloodType", "null")).child("cases").child(requestID);
         countDone = (TextView) findViewById(R.id.countDone);
-        countBlood = (TextView) findViewById(R.id.countBlood);
+        countBlood = (TextView) findViewById(R.id.countDone);
         reasonOfRequist = (TextView) findViewById(R.id.reasonOfRequist);
         bloodType = (TextView) findViewById(R.id.bloodType);
         nameHospetal = (TextView) findViewById(R.id.nameHospetal);
