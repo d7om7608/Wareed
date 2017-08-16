@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     String UserUID;
     String age;
     long DateSecond;
-    private Button BTN;
+    private Button dateButton;
     private Calendar calendar;
     private TextView TextDate;
     private List<String> CityArray=new ArrayList<>();
@@ -73,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        dateButton=(Button)findViewById(R.id.dateButton) ;
 
 
 //        Ui components
@@ -90,12 +90,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
 
-//        BTN.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DatePicker();
-//            }
-//        });
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePicker();
+            }
+        });
         //____________________________________DateFinish
 
         BloodSpinner();
@@ -112,6 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (prefs.getString("id", null) != null) {
             UserNameEditText.setText(prefs.getString("display_name", "NOTHING HERE"));
             EmailEditText.setText(prefs.getString("email", "NOTHING HERE"));
+            ageText.setText(prefs.getString("age", "NOTHING HERE"));
         }
 
 
@@ -236,7 +237,6 @@ public class ProfileActivity extends AppCompatActivity {
                 calendar2.set(datepicker.getYear(), datepicker.getMonth(), datepicker.getDayOfMonth());
                 Date time = calendar2.getTime();
                 long UnixTime = time.getTime();
-                TextDate.setText(String.valueOf(UnixTime));
                 DateSecond = UnixTime;
                 D_DatePicker.dismiss();
             }

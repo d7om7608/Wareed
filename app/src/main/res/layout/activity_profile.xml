@@ -88,7 +88,6 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="year/month/day"
             android:textAlignment="center"
             android:id="@+id/TextDate"
             android:textSize="20sp"

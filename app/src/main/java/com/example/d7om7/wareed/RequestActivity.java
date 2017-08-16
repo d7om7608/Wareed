@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -68,10 +67,7 @@ public class RequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requst);
-
-
-
-
+        setTitle("إنشاء طلب للتبرع");
 
 
         calendar = Calendar.getInstance();
@@ -195,12 +191,12 @@ public class RequestActivity extends AppCompatActivity {
         else if (reasonOfRequistText.getText().toString().equals(""))
             Toast.makeText(getApplicationContext(), "الرجاء كتابة سبب التنويم", Toast.LENGTH_SHORT).show();
 
-        else if (spinner.getSelectedItem().toString().equals(""))
+        else if (spinner.getSelectedItem()==null)
             Toast.makeText(getApplicationContext(), "الرجاء اختيار فصيلة الدم", Toast.LENGTH_SHORT).show();
 
-        else if (Hospetal_spiner.getSelectedItem().toString().equals(""))
+        else if (Hospetal_spiner.getSelectedItem()==null)
             Toast.makeText(getApplicationContext(), "الرجاء اختيار اسم المستشفى", Toast.LENGTH_SHORT).show();
-        else if (CitySpinner.getSelectedItem().toString().equals(""))
+        else if (CitySpinner.getSelectedItem()==null)
             Toast.makeText(getApplicationContext(), "الرجاء اختيار اسم المدينه", Toast.LENGTH_SHORT).show();
 
         else {
