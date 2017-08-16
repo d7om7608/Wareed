@@ -87,12 +87,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
 
-        BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePicker();
-            }
-        });
+//        BTN.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DatePicker();
+//            }
+//        });
         //____________________________________DateFinish
 
         BloodSpinner();
