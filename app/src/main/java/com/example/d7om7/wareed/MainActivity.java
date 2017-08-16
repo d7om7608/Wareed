@@ -20,6 +20,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.getChildren()) {
 
-
+                    Log.d("hello","fdgdfgf");
                     String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
 
                     String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
@@ -160,9 +161,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
 
                     String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
+                    String NameCity = (String) chelldDataSnapshotCases.child("NameCity").getValue();
 
                     String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
-                    requestBloodopjict = new RequestBlood(PatientName, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                    requestBloodopjict = new RequestBlood(PatientName,NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
                             StatusTime, RequestID, UserID, (CountOfdone));
 
 
@@ -269,11 +271,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void Clicked(int position, int id) {
-        Intent intent = new Intent(this, DisplayDetails.class);
-        intent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
-        intent.putExtra("getUserID", requestBlood.get(position).getUserID());
-        startActivity(intent);
-        finish();
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+
+
+
+        if (requestBlood.get(position).getUserID().equals(prefs.getString("id", "NOTHING HERE"))) {
+            Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("requestID", requestBlood.get(position).getRequestID());
+            intent.putExtra("userID", requestBlood.get(position).getUserID());
+            startActivity(intent);
+            finish();
+
+        }
+
 
     }
 }

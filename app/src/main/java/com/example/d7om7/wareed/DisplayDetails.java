@@ -94,23 +94,20 @@ public class DisplayDetails extends AppCompatActivity {
     public void GoToChat(View view) {
 
 
-        String requestID = intent.getStringExtra("getRequestID");
-        String userID = intent.getStringExtra("getUserID");
 
-        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-
-        if (userID.equals(prefs.getString("id", "NOTHING HERE"))) {
-
-
-            Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent ChatIntent = new Intent(this, ChatActivity.class);
-            ChatIntent.putExtra("requestID", requestID);
-            ChatIntent.putExtra("userID", userID);
-            startActivity(ChatIntent);
-            finish();
-
-        }
+//
+//        if (userID.equals(prefs.getString("id", "NOTHING HERE"))) {
+//
+//
+//            Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Intent ChatIntent = new Intent(this, ChatActivity.class);
+//            ChatIntent.putExtra("requestID", requestID);
+//            ChatIntent.putExtra("userID", userID);
+//            startActivity(ChatIntent);
+//            finish();
+//
+//        }
     }
 
     public void onBackPressed() {
