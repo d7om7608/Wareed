@@ -226,16 +226,21 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("statusTime", FinalDate);
             map2.put("RequestID", temp_key);
             map2.put("done", "0");
+            map2.put("lastNotificationSent","0");
             map2.put("NameCity",NameCity);
 
 
-            message_root.updateChildren(map2);
+            if(message_root.updateChildren(map2) != null){
+                Toast.makeText(getApplicationContext(),"تمت إضافة الحالة بنجاح",Toast.LENGTH_LONG);
+                Intent startChildActivityIntent = new Intent(this, MainActivity.class);
+                startActivity(startChildActivityIntent);
+                finish();
+                txetEmpty();
+            }else{
+                Toast.makeText(getApplicationContext(),"حصل خطأ في إضافة الحالة",Toast.LENGTH_LONG);
+            }
 
 
-            Intent startChildActivityIntent = new Intent(this, MainActivity.class);
-            startActivity(startChildActivityIntent);
-            finish();
-            txetEmpty();
 
         }
 
