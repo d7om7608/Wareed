@@ -7,11 +7,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorwhite"
+        android:background="@color/white"
         android:layout_margin = "10dp">
 
+        <android.support.v7.widget.Toolbar
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_toolbar"
+            xmlns:android="http://schemas.android.com/apk/res/android" />
 
-    <EditText
+
+
+        <EditText
         android:id="@+id/phone_number_edit_text"
         android:layout_width="280dp"
         android:layout_height="wrap_content"

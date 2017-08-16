@@ -118,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
+//         MainToolBar;
+        Toolbar MainToolBar = (Toolbar) findViewById(R.id.main_toolbar);
+        setTitle("Emergency Cases");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.DarkRed));
+
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -235,11 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_mainActivity) {
-            Intent ProfileIntent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(ProfileIntent);
-
-        } else if (id == R.id.nav_Talks) {
+        if (id == R.id.nav_Talks) {
             Intent ProfileIntent = new Intent(MainActivity.this, ListMyChating.class);
             startActivity(ProfileIntent);
             finish();
