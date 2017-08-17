@@ -94,8 +94,18 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                             for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-                                informationOfChatings.add(informationOfChatings1);
-                                adapterMyChating.notifyDataSetChanged();
+
+                              //  for (int i=0;i<informationOfChatings.size();i++) {
+
+//                                    if (!informationOfChatings.get(i).getNameRequster().equals(idRequester) &&
+//                                           ! informationOfChatings.get(i).getNameDoner().equals(IdDoner) &&
+//                                           ! informationOfChatings.get(i).getRequestID().equals(IdRequest)) {
+                                        informationOfChatings.add(informationOfChatings1);
+                                        adapterMyChating.notifyDataSetChanged();
+                                    //}
+                              //  }
+
+
                             }
 
                         }
@@ -110,20 +120,23 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                             String IdDoner = chelldDataSnapshotIdDoner.getKey();
                             if (IdDoner.equals(prefs.getString("id", "NOTHING HERE"))) {
 
-                            for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
-                                String IdRequest = chelldDataSnapshotIdRequest.getKey();
-                                InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-                                for (int i=0;i<informationOfChatings.size();i++){
-                                    if (informationOfChatings.get(i).getNameRequster().equals(idRequester)&&
-                                            informationOfChatings.get(i).getNameDoner().equals(IdDoner)&&
-                                            informationOfChatings.get(i).getRequestID().equals(IdRequest)){
-                                            informationOfChatings.add(informationOfChatings1);
-                                            adapterMyChating.notifyDataSetChanged();
-                                    }
+                                for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
+                                    String IdRequest = chelldDataSnapshotIdRequest.getKey();
+                                    InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
 
+
+                                //for (int i=0;i<informationOfChatings.size();i++) {
+
+//                                    if (!informationOfChatings.get(i).getNameRequster().equals(idRequester) &&
+//                                            ! informationOfChatings.get(i).getNameDoner().equals(IdDoner) &&
+//                                            ! informationOfChatings.get(i).getRequestID().equals(IdRequest)) {
+                                        informationOfChatings.add(informationOfChatings1);
+                                        adapterMyChating.notifyDataSetChanged();
+                                   // }
+                            //    }
                                 }
 
-                            }
+
 
                         }
                     }
