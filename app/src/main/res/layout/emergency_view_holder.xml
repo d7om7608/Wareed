@@ -77,6 +77,7 @@
                     android:layout_alignTop="@+id/blood_pic"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:gravity="left"
                     android:layout_toEndOf="@+id/blood_pic"
                     android:fontFamily="sans-serif"
                     android:text="Arm Surgery"
