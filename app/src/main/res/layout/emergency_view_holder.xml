@@ -72,14 +72,14 @@
 
                 <TextView
                     android:id="@+id/reasonOfRequist"
-                    android:layout_width="wrap_content"
+                    android:layout_width="260dp"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/blood_pic"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:gravity="left"
                     android:layout_toEndOf="@+id/blood_pic"
                     android:fontFamily="sans-serif"
-                    android:gravity="left"
                     android:text="Arm Surgery"
                     android:textAlignment="gravity"
                     android:textColor="@color/black"

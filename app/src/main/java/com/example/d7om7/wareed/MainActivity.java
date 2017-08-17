@@ -127,9 +127,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
 
 //         MainToolBar;
-        Toolbar MainToolBar = (Toolbar) findViewById(R.id.main_toolbar);
+
         setTitle("Emergency Cases");
         toolbar.setTitleTextColor(getResources().getColor(R.color.DarkRed));
+        toolbar.setNavigationIcon(R.drawable.maskgroup1);
+
 
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -242,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (time + 2000 > System.currentTimeMillis())
                 super.onBackPressed();
             else
-                Toast.makeText(this, "اضغط مرتين للخروج", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Press Again", Toast.LENGTH_SHORT).show();
             time = System.currentTimeMillis();
         }
     }
@@ -290,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (requestBlood.get(position).getUserID().equals(prefs.getString("id", "NOTHING HERE"))) {
-            Toast.makeText(getApplicationContext(), "هذه الحاله خاصه بك", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "This is your case", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("requestID", requestBlood.get(position).getRequestID());
@@ -323,8 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Also if you intend on generating your own notifications as a result of a received FCM
             // message, here is where that should be initiated. See sendNotification method below.
             sendNotification(remoteMessage.getNotification().getBody());
-            Log.d("Hello", "From: " + remoteMessage.getFrom());
-            Log.d("Hello", "Notification Message Body: " + remoteMessage.getNotification().getBody());
+
         }
 
         private void sendNotification(String messageBody) {

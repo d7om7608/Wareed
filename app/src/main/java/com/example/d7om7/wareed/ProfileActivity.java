@@ -47,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
+    private DatabaseReference AllUsers;
     private Dialog D_DatePicker;
     private EditText UserNameEditText;
     private EditText EmailEditText;
@@ -205,7 +206,7 @@ public class ProfileActivity extends AppCompatActivity {
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(CityTooked).child(BloodTypeTooked)
                 .child("users");
 
-
+        AllUsers = FirebaseDatabase.getInstance().getReference().child("Allusers");
         if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
 
             Toast.makeText(ProfileActivity.this, "Missing Data", Toast.LENGTH_SHORT).show();
@@ -222,6 +223,18 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("LastNotification").setValue("0");
             current_user_db.child("donateCount").setValue("0");
 
+
+            DatabaseReference Allusers = AllUsers.child(UserUID);
+            Allusers.child("user name").setValue(UsernameTooked);
+            Allusers.child("BloodType").setValue(BloodTypeTooked);
+            Allusers.child("gender").setValue(GenderTooked);
+            Allusers.child("city").setValue(CityTooked);
+            Allusers.child("email").setValue(Email);
+            Allusers.child("age").setValue(age);
+            Allusers.child("DateSecondDonate").setValue(DateSecond);
+            Allusers.child("LastNotification").setValue("0");
+            Allusers.child("donateCount").setValue("0");
+
             /**
              * Firebase generate token.
              */
@@ -236,7 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
-            Toast.makeText(getApplicationContext(), "تم حفظ الملف", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Profile Saved", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -266,6 +279,7 @@ public class ProfileActivity extends AppCompatActivity {
                 long UnixTime = time.getTime();
                 DateSecond = UnixTime;
                 D_DatePicker.dismiss();
+                Toast.makeText(getApplicationContext(),"Date Saved",Toast.LENGTH_SHORT).show();
             }
         });
         BTN_Close.setOnClickListener(new View.OnClickListener() {

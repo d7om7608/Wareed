@@ -32,7 +32,6 @@ public class MyCasesDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cases_details);
         intent = getIntent();
-        setTitle("تفاصيل حالتي");
         SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
 
         pantienName = (TextView) findViewById(R.id.pantienName);

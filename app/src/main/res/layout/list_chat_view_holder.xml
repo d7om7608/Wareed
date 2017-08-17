@@ -35,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="اسم المرسل : "
+        android:text="المتبرع :  "
         android:textAlignment="textEnd"
         android:textSize="20sp"
         android:layout_below="@+id/textView9"
@@ -51,29 +51,8 @@
         android:textSize="20sp"
         android:layout_alignBaseline="@+id/textView10"
         android:layout_alignBottom="@+id/textView10"
+        android:layout_marginBottom="10dp"
         android:layout_toStartOf="@+id/textView10" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
 
-        android:text="رقم ملف المريض : "
-        android:textAlignment="viewEnd"
-        android:textSize="20sp"
-        android:layout_below="@+id/textView10"
-        android:layout_alignEnd="@+id/textView10" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/requstID"
-        android:text=""
-        android:textAlignment="textEnd"
-        android:textSize="20sp"
-        android:layout_marginBottom="15dp"
-        android:layout_alignBaseline="@+id/textView11"
-        android:layout_alignBottom="@+id/textView11"
-        android:layout_toStartOf="@+id/textView11" />
 </RelativeLayout>

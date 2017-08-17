@@ -53,7 +53,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         informationOfChatings = new ArrayList<>();
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-        adapterMyChating = new AdapterMyChating(informationOfChatings, this,getApplicationContext());
+        adapterMyChating = new AdapterMyChating(informationOfChatings, this, getApplicationContext());
         recyclerView.setAdapter(adapterMyChating);
         mProgressBar = (ProgressBar) findViewById(R.id.chatingProgressBar);
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
@@ -94,8 +94,13 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                             for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
+
+
                                 informationOfChatings.add(informationOfChatings1);
+
                                 adapterMyChating.notifyDataSetChanged();
+
+
                             }
 
                         }
@@ -106,24 +111,18 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
 
                     String idRequester = chelldDataSnapshotIdRequester.getKey();
 
-                        for (DataSnapshot chelldDataSnapshotIdDoner : chelldDataSnapshotIdRequester.getChildren()) {
-                            String IdDoner = chelldDataSnapshotIdDoner.getKey();
-                            if (IdDoner.equals(prefs.getString("id", "NOTHING HERE"))) {
+                    for (DataSnapshot chelldDataSnapshotIdDoner : chelldDataSnapshotIdRequester.getChildren()) {
+                        String IdDoner = chelldDataSnapshotIdDoner.getKey();
+                        if (IdDoner.equals(prefs.getString("id", "NOTHING HERE"))) {
 
                             for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-                                for (int i=0;i<informationOfChatings.size();i++){
-                                    if (informationOfChatings.get(i).getNameRequster().equals(idRequester)&&
-                                            informationOfChatings.get(i).getNameDoner().equals(IdDoner)&&
-                                            informationOfChatings.get(i).getRequestID().equals(IdRequest)){
-                                            informationOfChatings.add(informationOfChatings1);
-                                            adapterMyChating.notifyDataSetChanged();
-                                    }
 
-                                }
-
+                                informationOfChatings.add(informationOfChatings1);
+                                adapterMyChating.notifyDataSetChanged();
                             }
+
 
                         }
                     }

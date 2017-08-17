@@ -109,7 +109,7 @@ count=0;
         SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!ChatEditText.getText().toString().equals("")){
+                if (!ChatEditText.getText().toString().trim().equals("")){
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
@@ -122,7 +122,7 @@ count=0;
 
                 message_root.updateChildren(map2);
             }else
-                    Toast.makeText(getApplicationContext(),"الرجاء ادخال نص",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Empty Text",Toast.LENGTH_SHORT).show();
             }
         });
 
