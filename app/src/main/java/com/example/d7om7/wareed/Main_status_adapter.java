@@ -49,6 +49,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         holder.countDone.setText("" + requestedBloodList.get(position).getCountOfdone());
         holder.bloodTyep.setText(" " + requestedBloodList.get(position).getBloodType());
         holder.cityAndHospital_textview.setText(requestedBloodList.get(position).getCityName()+" , "+requestedBloodList.get(position).getNameOfHospital());
+        holder.FileNumber.setText(requestedBloodList.get(position).getPatientFileNumber());
         Intent intent=new Intent();
 
         holder.BloodInfoLayout.setVisibility(View.GONE);
@@ -107,10 +108,12 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         TextView bloodTyep;
         RelativeLayout BloodInfoLayout ;
         public boolean isExpanded = false ;
+        TextView FileNumber;
         ImageView imageViewNAV;
 
         public ViewHolder(View itemLayout) {
             super(itemLayout);
+            FileNumber = (TextView) itemLayout.findViewById(R.id.file_number);
             cityAndHospital_textview=(TextView)itemLayout.findViewById(R.id.cityAndHospital_textview);
             reasonOfRequest = (TextView) itemLayout.findViewById(R.id.reasonOfRequist);
             statusTime = (TextView) itemLayout.findViewById(R.id.statusTime);

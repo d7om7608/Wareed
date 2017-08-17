@@ -132,13 +132,32 @@
         <RelativeLayout
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="88dp"
             android:orientation="horizontal"
             android:id="@+id/relativeLayoutvis"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_below="@+id/relativeLayout2"
             android:layout_centerHorizontal="true">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_alignEnd="@+id/imageViewNAV"
+                android:layout_toEndOf="@+id/countOfblood">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/maskgroup5"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/file_number"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/countOfblood_pic"
@@ -156,7 +175,7 @@
                 android:text="9"
                 android:layout_marginLeft="17dp"
                 android:textSize="11sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="38dp"
                 android:textColor="@color/white"
                 android:layout_alignStart="@+id/countOfblood_pic"
                 android:id="@+id/countOfblood"
@@ -178,7 +197,7 @@
                 android:text="9"
                 android:textSize="11sp"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="38dp"
                 android:textColor="@color/white"
                 android:layout_alignStart="@+id/countDone_pic"
                 android:id="@+id/countDone" />
@@ -189,6 +208,7 @@
                 android:layout_marginLeft="18dp"
                 android:src="@drawable/check_sign"
                 android:id="@+id/imageView4"
+                android:layout_marginTop="20dp"
                 android:layout_alignStart="@+id/countDone_pic"
                 android:layout_toEndOf="@+id/countDone_pic" />
 
