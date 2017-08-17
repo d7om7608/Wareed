@@ -46,6 +46,7 @@ public class CityBloodPreferences {
                     editor.putString("email", data.get("email").toString());
                     editor.putString("gender", data.get("gender").toString());
                     editor.putString("age", data.get("age").toString());
+                    editor.putString("LastNotification",data.get("LastNotification").toString());
 
 
                     editor.apply();

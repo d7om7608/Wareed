@@ -72,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
     String  IdCity ;
     String  nameCity;
     ProgressBar ProgressBarProfile;
+    SharedPreferences sharedPref = getSharedPreferences("UserData",0);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,11 +119,6 @@ public class ProfileActivity extends AppCompatActivity {
             ageText.setText(prefs.getString("age", "NOTHING HERE"));
 
             setSelectedSpinner(prefs,"BloodType",BloodTypeSpinner);
-            /*String bloodTypeTooked = prefs.getString("BloodType","NOTHING HERE");
-            Log.d("Hello",bloodTypeTooked);
-            ArrayAdapter bloodTypeAdapter = (ArrayAdapter) BloodTypeSpinner.getAdapter(); //cast to an ArrayAdapter
-            int bloodTypePostion = bloodTypeAdapter.getPosition(bloodTypeTooked);
-            BloodTypeSpinner.setSelection(bloodTypePostion);*/
 
 
             setSelectedSpinner(prefs,"gender",GenderSpinner);
@@ -134,17 +130,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected void setSelectedSpinner(SharedPreferences prefs,String prefName,Spinner spinner){
         String valueTooked = prefs.getString(prefName,"NOTHING HERE");
-        Log.d("Hello","ValueTooked("+prefName+")="+valueTooked);
-        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter(); //cast to an ArrayAdapter
         if(prefName == "city"){
-            Log.d("Hello","City[Item]="+adapter.getItem(Integer.parseInt(valueTooked)).toString());
             spinner.setSelection(Integer.parseInt(valueTooked));
         }else{
+            ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter(); //cast to an ArrayAdapter
             int postion = adapter.getPosition(valueTooked);
-            Log.d("Hello","Postion("+prefName+")="+String.valueOf(postion));
             spinner.setSelection(postion);
         }
-
 
     }
 
@@ -214,7 +206,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
 
             Toast.makeText(ProfileActivity.this, "Missing Data", Toast.LENGTH_SHORT).show();
-        } else {
+        }else {
 
             DatabaseReference current_user_db = SignDataBase.child(UserUID);
             current_user_db.child("user name").setValue(UsernameTooked);
@@ -224,8 +216,12 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("email").setValue(Email);
             current_user_db.child("age").setValue(age);
             current_user_db.child("DateSecondDonate").setValue(DateSecond);
-            current_user_db.child("LastNotification").setValue("0");
             current_user_db.child("donateCount").setValue("0");
+            if(sharedPref.getString("LastNotification",null) != null){
+                current_user_db.child("LastNotification").setValue(sharedPref.getString("LastNotification",null));
+            }else{
+                current_user_db.child("LastNotification").setValue("0");
+            }
 
 
             DatabaseReference Allusers = AllUsers.child(UserUID);
@@ -236,15 +232,24 @@ public class ProfileActivity extends AppCompatActivity {
             Allusers.child("email").setValue(Email);
             Allusers.child("age").setValue(age);
             Allusers.child("DateSecondDonate").setValue(DateSecond);
-            Allusers.child("LastNotification").setValue("0");
+
+            if(sharedPref.getString("LastNotification",null) != null){
+                Allusers.child("LastNotification").setValue(sharedPref.getString("LastNotification",null));
+            }else{
+                Allusers.child("LastNotification").setValue("0");
+            }
+
             Allusers.child("donateCount").setValue("0");
 
+            removeCity();
             /**
              * Firebase generate token.
              */
             String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
             current_user_db.child("NotificationToken").setValue(refreshedToken);
+
+
 
             CityBloodPreferences c = new CityBloodPreferences();
             c.saveInPrefernces(current_user_db, SignAuth, getApplicationContext());
@@ -301,5 +306,11 @@ public class ProfileActivity extends AppCompatActivity {
         Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);
         finish();
+    }
+
+    protected void removeCity(){
+        SharedPreferences data = getSharedPreferences("UserData",0);
+        FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city",null)).child(data.getString("BloodType",null))
+                .child("users").child(data.getString("id",null)).removeValue();
     }
 }

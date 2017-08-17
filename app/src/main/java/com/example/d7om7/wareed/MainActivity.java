@@ -311,8 +311,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String latitude =requestBlood.get(position).getLatOfHospital();
 
         String longitude =requestBlood.get(position).getLngOfHospital();
-        String uri = "https://www.google.com/maps/preview/@"+latitude+","+longitude+","+15+"z";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+
+        String addressString = requestBlood.get(position).getNameOfHospital();
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("geo")
+                .path(latitude.toString()+","+longitude.toString())
+                .query(addressString);
+        Uri addressUri = builder.build();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(addressUri);
         startActivity(intent);
 
     }
