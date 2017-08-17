@@ -32,7 +32,6 @@ public class DisplayDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         intent = getIntent();
         setContentView(R.layout.activity_display_detailse);
-        setTitle("تفاصيل الحالة");
 
         pantienName = (TextView) findViewById(R.id.pantienName);
         fileNumber = (TextView) findViewById(R.id.fileNumber);

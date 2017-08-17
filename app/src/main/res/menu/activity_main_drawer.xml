@@ -15,13 +15,13 @@
 
         <item
             android:id="@+id/nav_myCases"
-            android:icon="@drawable/mycases"
+            android:icon="@android:drawable/ic_menu_search"
             android:title="My Cases" />
 
         <item
             android:id="@+id/nav_signout"
             android:title="Log Out"
-            android:icon="@drawable/logout"/>
+            android:icon="@android:drawable/ic_menu_set_as"/>
 
     </group>
 

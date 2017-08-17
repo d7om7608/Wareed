@@ -68,7 +68,6 @@ public class RequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requst);
-        setTitle("إنشاء طلب للتبرع");
 
 
         calendar = Calendar.getInstance();
@@ -190,22 +189,22 @@ public class RequestActivity extends AppCompatActivity {
 
 
         if (pantienNameText.getText().toString().equals("") )
-            Toast.makeText(getApplicationContext(), "الرجاء كتابة الاسم", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Write the patient name", Toast.LENGTH_SHORT).show();
         else if (fileNumberText.getText().toString().equals(""))
-            Toast.makeText(getApplicationContext(), "الرجاء كتابه رقم ملف المريض", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Write patient id", Toast.LENGTH_SHORT).show();
         else if (countBloodText.getText().toString().equals(""))
-            Toast.makeText(getApplicationContext(), "الرجاء كتابة كم عدد الاكياس المطلوبه", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Write blood bags required", Toast.LENGTH_SHORT).show();
 
         else if (reasonOfRequistText.getText().toString().equals(""))
-            Toast.makeText(getApplicationContext(), "الرجاء كتابة سبب التنويم", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Write patient state", Toast.LENGTH_SHORT).show();
 
         else if (spinner.getSelectedItem()==null)
-            Toast.makeText(getApplicationContext(), "الرجاء اختيار فصيلة الدم", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Pick Blood Type", Toast.LENGTH_SHORT).show();
 
         else if (Hospetal_spiner.getSelectedItem()==null)
-            Toast.makeText(getApplicationContext(), "الرجاء اختيار اسم المستشفى", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Pick City", Toast.LENGTH_SHORT).show();
         else if (CitySpinner.getSelectedItem()==null)
-            Toast.makeText(getApplicationContext(), "الرجاء اختيار اسم المدينه", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Pick Hospital", Toast.LENGTH_SHORT).show();
 
         else {
 
@@ -248,13 +247,13 @@ public class RequestActivity extends AppCompatActivity {
 
 
             if(message_root.updateChildren(map2) != null){
-                Toast.makeText(getApplicationContext(),"تمت إضافة الحالة بنجاح",Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(),"Case Added Successfully",Toast.LENGTH_LONG);
                 Intent startChildActivityIntent = new Intent(this, MainActivity.class);
                 startActivity(startChildActivityIntent);
                 finish();
                 txetEmpty();
             }else{
-                Toast.makeText(getApplicationContext(),"حصل خطأ في إضافة الحالة",Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(),"Error In Adding The Case",Toast.LENGTH_LONG);
             }
 
 

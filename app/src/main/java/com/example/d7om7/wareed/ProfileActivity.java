@@ -224,7 +224,7 @@ public class ProfileActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
-            Toast.makeText(getApplicationContext(), "تم حفظ الملف", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Profile Saved", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -254,6 +254,7 @@ public class ProfileActivity extends AppCompatActivity {
                 long UnixTime = time.getTime();
                 DateSecond = UnixTime;
                 D_DatePicker.dismiss();
+                Toast.makeText(getApplicationContext(),"Date Saved",Toast.LENGTH_SHORT).show();
             }
         });
         BTN_Close.setOnClickListener(new View.OnClickListener() {
