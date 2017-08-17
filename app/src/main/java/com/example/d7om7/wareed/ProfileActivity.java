@@ -115,6 +115,33 @@ public class ProfileActivity extends AppCompatActivity {
             UserNameEditText.setText(prefs.getString("display_name", "NOTHING HERE"));
             EmailEditText.setText(prefs.getString("email", "NOTHING HERE"));
             ageText.setText(prefs.getString("age", "NOTHING HERE"));
+
+            setSelectedSpinner(prefs,"BloodType",BloodTypeSpinner);
+            /*String bloodTypeTooked = prefs.getString("BloodType","NOTHING HERE");
+            Log.d("Hello",bloodTypeTooked);
+            ArrayAdapter bloodTypeAdapter = (ArrayAdapter) BloodTypeSpinner.getAdapter(); //cast to an ArrayAdapter
+            int bloodTypePostion = bloodTypeAdapter.getPosition(bloodTypeTooked);
+            BloodTypeSpinner.setSelection(bloodTypePostion);*/
+
+
+            setSelectedSpinner(prefs,"gender",GenderSpinner);
+
+        }
+
+
+    }
+
+    protected void setSelectedSpinner(SharedPreferences prefs,String prefName,Spinner spinner){
+        String valueTooked = prefs.getString(prefName,"NOTHING HERE");
+        Log.d("Hello","ValueTooked("+prefName+")="+valueTooked);
+        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter(); //cast to an ArrayAdapter
+        if(prefName == "city"){
+            Log.d("Hello","City[Item]="+adapter.getItem(Integer.parseInt(valueTooked)).toString());
+            spinner.setSelection(Integer.parseInt(valueTooked));
+        }else{
+            int postion = adapter.getPosition(valueTooked);
+            Log.d("Hello","Postion("+prefName+")="+String.valueOf(postion));
+            spinner.setSelection(postion);
         }
 
 
@@ -130,15 +157,13 @@ public class ProfileActivity extends AppCompatActivity {
                 ProgressBarProfile.setVisibility(View.INVISIBLE);
 
                 for(DataSnapshot chelldDataSnapshot:dataSnapshot.child("cities").getChildren() ){
-
-              IdCity =  chelldDataSnapshot.getKey();
-
-              nameCity = (String) chelldDataSnapshot.child("name").getValue().toString();
-
-            CityArray.add(nameCity);
-            cityadapter.notifyDataSetChanged();
-
+                    IdCity =  chelldDataSnapshot.getKey();
+                    nameCity = (String) chelldDataSnapshot.child("name").getValue().toString();
+                    CityArray.add(nameCity);
+                    cityadapter.notifyDataSetChanged();
                 }
+                setSelectedSpinner(getSharedPreferences("UserData",0),"city",CitySpinner);
+
             }
 
             @Override
@@ -161,7 +186,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void GenderSpinner() {
-        String GenderArray[] = {"male \n", "female\n"};
+        String GenderArray[] = {"male", "female"};
         ArrayAdapter<String> genderadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, GenderArray);
         GenderSpinner.setAdapter(genderadapter);

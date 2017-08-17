@@ -2,27 +2,20 @@ package com.example.d7om7.wareed;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Azura on 8/9/2017.
  */
 
 public class CityBloodPreferences {
-    List<String> cities;
 
 
 
@@ -30,29 +23,6 @@ public class CityBloodPreferences {
         String BloodTypes[] = {"O+","O-","A+","A-","B+","B-","AB+","AB-"};
         return BloodTypes ;
 
-    }
-
-    public List getCities () {
-
-        DatabaseReference CitiesReference ;
-        CitiesReference = FirebaseDatabase.getInstance().getReference().child("cities");
-        CitiesReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                 cities= dataSnapshot.child("cities").getValue(List.class);
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return cities ;
     }
 
     public void  saveInPrefernces(final DatabaseReference UserData,final FirebaseAuth mAuth,Context c) {
@@ -86,12 +56,6 @@ public class CityBloodPreferences {
 
                 }
             });
-        }else{
         }
-
-
-
-        //editor.putString("email",mAuth.getCurrentUser().getEmail().toString());
-
     }
 }
