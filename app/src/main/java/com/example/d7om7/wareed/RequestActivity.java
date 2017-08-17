@@ -40,6 +40,9 @@ public class RequestActivity extends AppCompatActivity {
     variables of citiesSpinner
      */
     List<String> CityArray = new ArrayList<String>();
+    List<String> lat = new ArrayList<String>();
+    List<String> lng = new ArrayList<String>();
+
     List<String> HospitalsArray = new ArrayList<String>();
     ArrayAdapter<String> cityadapter;
     ArrayAdapter<String> hospitalsAdapter;
@@ -126,8 +129,15 @@ public class RequestActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot chelldDataSnapshotHospital : dataSnapshot.getChildren()) {
                     String hospitals = "";
+                    String latString="";
+                    String lngString="";
                     hospitals = chelldDataSnapshotHospital.child("name").getValue().toString();
+                    latString=chelldDataSnapshotHospital.child("lat").getValue().toString();
+                    lngString=chelldDataSnapshotHospital.child("lng").getValue().toString();
                     HospitalsArray.add(hospitals);
+                    lat.add(latString);
+                    lng.add(lngString);
+
                     hospitalsAdapter.notifyDataSetChanged();
 
                 }
@@ -199,6 +209,10 @@ public class RequestActivity extends AppCompatActivity {
         else {
 
             selectHospetal=Hospetal_spiner.getSelectedItem().toString();
+            int positionHospital=Hospetal_spiner.getSelectedItemPosition();
+            String latSelected=lat.get(positionHospital);
+            String lngSelected=lng.get(positionHospital);
+
             NameCity=CitySpinner.getSelectedItem().toString();
             root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(String.valueOf(selectedCity))
                     .child(selectBloodType).child("cases");
@@ -218,6 +232,9 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("BloodBags", countBloodText.getText().toString());
             map2.put("Reason", reasonOfRequistText.getText().toString());
             map2.put("Hospital", selectHospetal);
+            map2.put("latOfHospital", latSelected);
+            map2.put("lngOfHospital", lngSelected);
+
             SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
             map2.put("UserID", prefs.getString("id", "NOTHING HERE"));
