@@ -27,7 +27,7 @@ public class CityBloodPreferences {
 
 
     public static String [] getBloodTypes (){
-        String BloodTypes[] = {"O+","O-","A+","A-","B+","B-","AB+","AB-"};
+        String BloodTypes[] = {"I don't know","O+","O-","A+","A-","B+","B-","AB+","AB-"};
         return BloodTypes ;
 
     }

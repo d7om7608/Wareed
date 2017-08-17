@@ -4,7 +4,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/DarkRed"
+        android:background="@color/white"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" >
 
@@ -17,6 +17,8 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
+
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,8 +26,6 @@
             android:layout_centerVertical="true"
             android:visibility="gone"
             android:id="@+id/ProgressBarProfile"/>
-
-
 
 
     <TextView
@@ -140,7 +140,7 @@
 
     <Spinner
         android:id="@+id/profile_bloodType_spinner"
-        android:layout_width="186dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
        ></Spinner>
@@ -190,7 +190,7 @@
 
     <Spinner
         android:id="@+id/profile_gender_spinner"
-        android:layout_width="186dp"
+        android:layout_width="150dp"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
          />
@@ -205,7 +205,8 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@+id/ProgressBarProfile">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
         <ImageView
             android:layout_width="30dp"
@@ -227,7 +228,7 @@
 
         <Spinner
             android:id="@+id/profile_city_spinner"
-            android:layout_width="186dp"
+            android:layout_width="150dp"
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
 

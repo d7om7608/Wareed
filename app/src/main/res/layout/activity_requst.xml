@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/DarkRed">
+    android:background="@color/white">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -39,14 +39,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="470dp">
+        android:layout_height="480dp">
 
         <LinearLayout
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="30dp"
             tools:context="com.example.d7om7.wareed.RequestActivity"
             android:weightSum="1">
 
@@ -200,20 +202,22 @@
                 android:layout_margin="10dp"
                 android:layout_width="350dp"
                 android:layout_height="35dp"
-               >
+                >
 
                 <ImageView
+                    android:id="@+id/city_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
                     android:src="@drawable/city"/>
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/city_spiner"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="City"
+                    android:layout_alignLeft="@+id/city_image"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -225,6 +229,7 @@
                     ></Spinner>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_margin="10dp"

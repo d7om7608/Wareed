@@ -122,7 +122,7 @@ count=0;
 
                 message_root.updateChildren(map2);
             }else
-                    Toast.makeText(getApplicationContext(),"الرجاء ادخال نص",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Empty Text",Toast.LENGTH_SHORT).show();
             }
         });
 

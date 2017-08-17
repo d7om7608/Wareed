@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/DarkRed">
+    android:background="@color/white">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:backgroundTint="@color/white"
-            android:text="Request Blood"
+            android:text="Request Details"
             android:textAlignment="center"
             android:textSize="22sp"
             android:layout_alignParentTop="true"
@@ -269,7 +269,7 @@
             android:onClick="saveChanget"
             android:layout_alignBottom="@+id/button5"
             android:layout_alignParentBottom="true"
-            android:text="Add"
+            android:text="Save"
             android:textColor="@color/white"
             android:textSize="24sp"
 
