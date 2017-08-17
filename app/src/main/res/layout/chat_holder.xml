@@ -33,7 +33,6 @@
         android:gravity="left"
         android:text="Message"
         android:textColor="@color/black"
-        android:background="@drawable/shadow"
             android:elevation="5dp"
         android:textSize="22sp" />
     </LinearLayout>

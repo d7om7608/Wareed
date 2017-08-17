@@ -68,7 +68,8 @@
 
                 <EditText
                     android:id="@+id/pantienName"
-                    android:layout_width="305dp"
+                    android:inputType="textShortMessage"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
@@ -97,7 +98,7 @@
                     android:textColor="@color/black"
                     android:hint="Hospital File Number"
                     android:id="@+id/fileNumber"
-                    android:layout_width="305dp"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:maxLength="15"
@@ -123,7 +124,7 @@
                 <EditText
                     android:hint="Blood Bags Needed"
                     android:id="@+id/countDone"
-                    android:layout_width="305dp"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:maxLength="1"
@@ -150,8 +151,9 @@
                     android:id="@+id/imageView8" />
                 <EditText
                     android:hint="Patient State"
+                    android:inputType="textShortMessage"
                     android:id="@+id/reasonOfRequist"
-                    android:layout_width="305dp"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="20sp"

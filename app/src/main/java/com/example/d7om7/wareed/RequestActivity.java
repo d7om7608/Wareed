@@ -247,13 +247,13 @@ public class RequestActivity extends AppCompatActivity {
 
 
             if(message_root.updateChildren(map2) != null){
-                Toast.makeText(getApplicationContext(),"تمت إضافة الحالة بنجاح",Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(),"Case Added Successfully",Toast.LENGTH_LONG);
                 Intent startChildActivityIntent = new Intent(this, MainActivity.class);
                 startActivity(startChildActivityIntent);
                 finish();
                 txetEmpty();
             }else{
-                Toast.makeText(getApplicationContext(),"حصل خطأ في إضافة الحالة",Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(),"Error In Adding The Case",Toast.LENGTH_LONG);
             }
 
 

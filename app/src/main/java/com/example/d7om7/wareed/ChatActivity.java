@@ -109,7 +109,7 @@ count=0;
         SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!ChatEditText.getText().toString().equals("")){
+                if (!ChatEditText.getText().toString().trim().equals("")){
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
