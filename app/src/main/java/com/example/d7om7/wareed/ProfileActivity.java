@@ -163,7 +163,11 @@ public class ProfileActivity extends AppCompatActivity {
                     CityArray.add(nameCity);
                     cityadapter.notifyDataSetChanged();
                 }
-                setSelectedSpinner(getSharedPreferences("UserData",0),"city",CitySpinner);
+                SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+
+                if (prefs.getString("id", null) != null) {
+                    setSelectedSpinner(getSharedPreferences("UserData", 0), "city", CitySpinner);
+                }
 
             }
 
