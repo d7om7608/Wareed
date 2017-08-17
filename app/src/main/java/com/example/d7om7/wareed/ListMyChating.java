@@ -95,15 +95,19 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
 
-                              //  for (int i=0;i<informationOfChatings.size();i++) {
+                                for (int i=0;i<informationOfChatings.size();i++){
 
-//                                    if (!informationOfChatings.get(i).getNameRequster().equals(idRequester) &&
-//                                           ! informationOfChatings.get(i).getNameDoner().equals(IdDoner) &&
-//                                           ! informationOfChatings.get(i).getRequestID().equals(IdRequest)) {
-                                        informationOfChatings.add(informationOfChatings1);
-                                        adapterMyChating.notifyDataSetChanged();
-                                    //}
-                              //  }
+                                    Log.d("hello",informationOfChatings.get(i).getNameRequster());
+                                    Log.d("hello",idRequester);
+
+                                    if (informationOfChatings.get(i).getNameRequster().equals(idRequester)&&
+                                            informationOfChatings.get(i).getNameDoner().equals(IdDoner) &&
+                                            informationOfChatings.get(i).getRequestID().equals(IdRequest)
+                                            ){
+
+                                    }
+                                }
+                                adapterMyChating.notifyDataSetChanged();
 
 
                             }
@@ -123,17 +127,20 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                                 for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                     String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                     InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
+                                    for (int i=0;i<informationOfChatings.size();i++){
 
-
-                                //for (int i=0;i<informationOfChatings.size();i++) {
-
-//                                    if (!informationOfChatings.get(i).getNameRequster().equals(idRequester) &&
-//                                            ! informationOfChatings.get(i).getNameDoner().equals(IdDoner) &&
-//                                            ! informationOfChatings.get(i).getRequestID().equals(IdRequest)) {
+                                        Log.d("hello",informationOfChatings.get(i).getNameRequster());
+                                        Log.d("hello",idRequester);
                                         informationOfChatings.add(informationOfChatings1);
-                                        adapterMyChating.notifyDataSetChanged();
-                                   // }
-                            //    }
+
+                                        if (informationOfChatings.get(i).getNameRequster().equals(idRequester)&&
+                                                informationOfChatings.get(i).getNameDoner().equals(IdDoner) &&
+                                                informationOfChatings.get(i).getRequestID().equals(IdRequest)
+                                                ){
+
+                                        }
+                                    }
+                                    adapterMyChating.notifyDataSetChanged();
                                 }
 
 

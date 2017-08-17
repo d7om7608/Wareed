@@ -323,8 +323,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Also if you intend on generating your own notifications as a result of a received FCM
             // message, here is where that should be initiated. See sendNotification method below.
             sendNotification(remoteMessage.getNotification().getBody());
-            Log.d("Hello", "From: " + remoteMessage.getFrom());
-            Log.d("Hello", "Notification Message Body: " + remoteMessage.getNotification().getBody());
+
         }
 
         private void sendNotification(String messageBody) {
