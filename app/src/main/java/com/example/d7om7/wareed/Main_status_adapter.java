@@ -29,6 +29,8 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
     }
     public interface changeActivity  {
         public void Clicked (int position,int id);
+
+        public void ClickedNVG (int position,int id);
     }
 
     @Override
@@ -80,6 +82,13 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
 
             }
         });
+        holder.imageViewNAV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategoryHandler.ClickedNVG(position, id);
+
+            }
+        });
 
     }
 
@@ -98,7 +107,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         TextView bloodTyep;
         RelativeLayout BloodInfoLayout ;
         public boolean isExpanded = false ;
-
+        ImageView imageViewNAV;
 
         public ViewHolder(View itemLayout) {
             super(itemLayout);
@@ -110,7 +119,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
             countDone = (TextView) itemLayout.findViewById(R.id.countDone);
             bloodTyep = (TextView) itemLayout.findViewById(R.id.bloodTyep);
             BloodInfoLayout = (RelativeLayout) itemLayout.findViewById(R.id.relativeLayoutvis);
-
+            imageViewNAV=(ImageView)itemLayout.findViewById(R.id.imageViewNAV);
 
         }
     }

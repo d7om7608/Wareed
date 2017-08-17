@@ -169,11 +169,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
 
                     String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
+
                     String NameCity = (String) chelldDataSnapshotCases.child("NameCity").getValue();
 
                     String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
+
+                    String latOfHospital = (String) chelldDataSnapshotCases.child("latOfHospital").getValue();
+
+                    String lngOfHospital = (String) chelldDataSnapshotCases.child("lngOfHospital").getValue();
+
                     requestBloodopjict = new RequestBlood(PatientName,NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                            StatusTime, RequestID, UserID, (CountOfdone));
+                            StatusTime, RequestID, UserID, (CountOfdone),latOfHospital,lngOfHospital);
 
 
                     requestBlood.add(requestBloodopjict);
@@ -294,6 +300,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+
+    }
+
+    @Override
+    public void ClickedNVG(int position, int id) {
+
+        String latitude =requestBlood.get(position).getLatOfHospital();
+
+        String longitude =requestBlood.get(position).getLngOfHospital();
+        String uri = "https://www.google.com/maps/preview/@"+latitude+","+longitude+","+15+"z";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(intent);
 
     }
 

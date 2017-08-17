@@ -100,9 +100,15 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
                             String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
 
                             String StatusTime = (String) chelldDataSnapshotCases.child("statusTime").getValue();
+
                             String NameCity = (String) chelldDataSnapshotCases.child("NameCity").getValue();
+
+                            String latOfHospital = (String) chelldDataSnapshotCases.child("latOfHospital").getValue();
+
+                            String lngOfHospital = (String) chelldDataSnapshotCases.child("lngOfHospital").getValue();
+
                             requestBloodopjict = new RequestBlood(PatientName,NameCity, (PatientFileNumber),(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                                    StatusTime, RequestID, UserID,(CountOfdone));
+                                    StatusTime, RequestID, UserID,(CountOfdone),latOfHospital,lngOfHospital);
 
 
 
