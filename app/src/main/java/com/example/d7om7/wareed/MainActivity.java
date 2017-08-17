@@ -349,4 +349,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
         }
     }
+
+
 }
