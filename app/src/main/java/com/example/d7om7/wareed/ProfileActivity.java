@@ -72,13 +72,13 @@ public class ProfileActivity extends AppCompatActivity {
     String  IdCity ;
     String  nameCity;
     ProgressBar ProgressBarProfile;
-    SharedPreferences sharedPref = getSharedPreferences("UserData",0);
+    SharedPreferences sharedPref;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         dateButton=(Button)findViewById(R.id.dateButton) ;
-
+        sharedPref = getApplicationContext().getSharedPreferences("UserData",0);
 
 //        Ui components
         UserNameEditText = (EditText) findViewById(R.id.username_edittext);
@@ -240,8 +240,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             Allusers.child("donateCount").setValue("0");
+            if(sharedPref.getString("city",null) != null && sharedPref.getString("city",null)!= CityTooked){
+                removeCity();
+            }
 
-            removeCity();
             /**
              * Firebase generate token.
              */
