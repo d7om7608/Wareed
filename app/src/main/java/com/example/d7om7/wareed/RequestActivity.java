@@ -202,9 +202,9 @@ public class RequestActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Pick Blood Type", Toast.LENGTH_SHORT).show();
 
         else if (Hospetal_spiner.getSelectedItem()==null)
-            Toast.makeText(getApplicationContext(), "Pick City", Toast.LENGTH_SHORT).show();
-        else if (CitySpinner.getSelectedItem()==null)
             Toast.makeText(getApplicationContext(), "Pick Hospital", Toast.LENGTH_SHORT).show();
+        else if (CitySpinner.getSelectedItem()==null)
+            Toast.makeText(getApplicationContext(), "Pick City", Toast.LENGTH_SHORT).show();
 
         else {
 

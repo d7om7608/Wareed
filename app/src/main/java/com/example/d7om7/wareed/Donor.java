@@ -10,18 +10,24 @@ public class Donor {
 
     protected String name;
     protected String phoneNumber;
+
     protected int donateCount;
     protected String city;
     protected String bloodType;
     protected String lastDonatingDate;
     protected String lastNotificationDate;
     protected String userID;
+    protected int NumberOfDonation ;
     protected List<String> requestsId;
 
 
     public String getRequestBlood(int position) {
         return requestsId.get(position);
     }
+
+    public int getNumberOfDonation() {return NumberOfDonation;}
+
+    public void setNumberOfDonation(int numberOfDonation) {NumberOfDonation = numberOfDonation;}
 
     public void setRequestBlood(String requestId) {
         this.requestsId.add(requestId);

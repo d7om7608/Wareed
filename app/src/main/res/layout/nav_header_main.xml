@@ -7,7 +7,7 @@
     android:layout_height="150dp"
     android:layout_width="150dp"
     android:layout_margin="20dp"
-    android:background="@drawable/group184"
+    android:background="@drawable/user"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical">
 
