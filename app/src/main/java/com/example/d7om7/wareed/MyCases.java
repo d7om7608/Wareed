@@ -1,5 +1,7 @@
 package com.example.d7om7.wareed;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -12,7 +14,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,19 +29,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import static android.R.attr.data;
 import static android.R.attr.id;
+import static com.example.d7om7.wareed.R.id.BTN_Close;
+import static com.example.d7om7.wareed.R.id.BTN_GetDate;
 
 public class MyCases extends AppCompatActivity implements AdapterMyCases.changeActivity {
 
     AdapterMyCases myCases_adapter;
-    ProgressBar progressBar;
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
+    RecyclerView recyclerView;
+    private Dialog UpdateCase;
+    TextView nullText;
     SharedPreferences prefs;
 
     @Override
@@ -45,22 +57,26 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 
         prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
         requestBlood = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
-
-        root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city", "null"));
+        recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+        nullText=(TextView)findViewById(R.id.nullMyCases);
+                root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city", "null"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //progressBar.setVisibility(View.VISIBLE);
         myCases_adapter = new AdapterMyCases(requestBlood, this);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarx);
-        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                progressBar.setVisibility(View.INVISIBLE);
+                progressDialog.dismiss();
             }
 
             @Override
@@ -94,7 +110,6 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
                             String RequestID = (String) chelldDataSnapshotCases.child("RequestID").getValue();
 
 
-
                             String CountOfdone = (String) chelldDataSnapshotCases.child("done").getValue();
 
                             String PatientName = (String) chelldDataSnapshotCases.child("pantienName").getValue();
@@ -107,22 +122,23 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
 
                             String lngOfHospital = (String) chelldDataSnapshotCases.child("lngOfHospital").getValue();
 
-                            requestBloodopjict = new RequestBlood(PatientName,NameCity, (PatientFileNumber),(CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                                    StatusTime, RequestID, UserID,(CountOfdone),latOfHospital,lngOfHospital);
+                            requestBloodopjict = new RequestBlood(PatientName, NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                                    StatusTime, RequestID, UserID, (CountOfdone), latOfHospital, lngOfHospital);
 
 
+                            requestBlood.add(requestBloodopjict);
+                        }
 
-                                requestBlood.add(requestBloodopjict);
-                            }
-
-                            myCases_adapter.notifyDataSetChanged();
-
-
-
+                        myCases_adapter.notifyDataSetChanged();
 
 
                     }
                 }
+                if (requestBlood.isEmpty())
+                    nullText.setVisibility(View.VISIBLE);
+                else
+                    nullText.setVisibility(View.INVISIBLE);
+
             }
 
             @Override
@@ -149,7 +165,6 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
     @Override
     protected void onResume() {
         super.onResume();
-//        progressBar.setVisibility(View.GONE);
     }
 
     private void Add_Request(DataSnapshot dataSnapshot) {
@@ -159,28 +174,75 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         while (i.hasNext()) {
 
 
-
         }
 
     }
 
 
-    @Override
-    public void Clicked(int position, int id) {
-        Intent startChildActivityIntent = new Intent(this, MyCasesDetails.class);
-
-        startChildActivityIntent.putExtra("getRequestID", requestBlood.get(position).getRequestID());
-        startChildActivityIntent.putExtra("getUserID", requestBlood.get(position).getUserID());
-
-        startActivity(startChildActivityIntent);
-        finish();
-
-    }
-
     public void onBackPressed() {
         Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);
         finish();
+    }
+
+    @Override
+    public void ClickedDelet(int position, int id) {
+
+
+        root.child(requestBlood.get(position).bloodType).child("cases").child(requestBlood.get(position).getRequestID()).removeValue();
+
+        requestBlood.clear();
+        myCases_adapter.notifyDataSetChanged();
+
+
+    }
+
+
+    @Override
+    public void ClickedUpdate(final int position, int id) {
+
+
+        UpdateCase = new Dialog(this);
+        UpdateCase.setContentView(R.layout.dilalog_update_my_cases);
+        Button BTN_CloseMydetails = (Button) UpdateCase.findViewById(R.id.BTN_CloseMydetails);
+        Button BTN_OKMyDetails = (Button) UpdateCase.findViewById(R.id.BTN_OKMyDetails);
+        final EditText countBloodUpdate = (EditText) UpdateCase.findViewById(R.id.countBloodUpdate);
+        countBloodUpdate.setText(requestBlood.get(position).getCountOfBlood());
+        BTN_OKMyDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (countBloodUpdate.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please Enter Number", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    SharedPreferences data = getSharedPreferences("UserData", 0);
+                    root.child(data.getString("BloodType", null))
+                            .child("cases").child(requestBlood.get(position).getRequestID()).child("BloodBags").setValue(countBloodUpdate.getText().toString());
+                    requestBlood.clear();
+                    myCases_adapter.notifyDataSetChanged();
+
+                    UpdateCase.dismiss();
+                    Toast.makeText(getApplicationContext(), "Date Saved", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+        });
+        BTN_CloseMydetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateCase.dismiss();
+            }
+        });
+
+        UpdateCase.show();
+    }
+
+
+    protected void removeCity() {
+        SharedPreferences data = getSharedPreferences("UserData", 0);
+        FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", null)).child(data.getString("BloodType", null))
+                .child("users").child(data.getString("id", null)).removeValue();
     }
 }
 

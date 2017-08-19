@@ -1,6 +1,7 @@
 package com.example.d7om7.wareed;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,11 +67,12 @@ public class ProfileActivity extends AppCompatActivity {
     private Button BTN;
     private Calendar calendar;
     private TextView TextDate;
+    ProgressDialog progressDialog;
+
     private List<String> CityArray=new ArrayList<>();
     ArrayAdapter<String> cityadapter;
     String  IdCity ;
     String  nameCity;
-    ProgressBar ProgressBarProfile;
     SharedPreferences sharedPref;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         dateButton=(Button)findViewById(R.id.dateButton) ;
         sharedPref = getApplicationContext().getSharedPreferences("UserData",0);
-
+          progressDialog= new ProgressDialog(this);
 //        Ui components
         UserNameEditText = (EditText) findViewById(R.id.username_edittext);
         EmailEditText = (EditText) findViewById(R.id.email_edittext);
@@ -88,9 +89,11 @@ public class ProfileActivity extends AppCompatActivity {
         GenderSpinner = (Spinner) findViewById(R.id.profile_gender_spinner);
         ageText = (EditText) findViewById(R.id.age);
         TextDate = (TextView) findViewById(R.id.TextDate);
-        ProgressBarProfile=(ProgressBar)findViewById(R.id.ProgressBarProfile);
-        ProgressBarProfile.setVisibility(View.VISIBLE);
-
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         BTN = (Button) findViewById(R.id.dateButton);
         calendar = Calendar.getInstance();
 
@@ -147,7 +150,7 @@ public class ProfileActivity extends AppCompatActivity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ProgressBarProfile.setVisibility(View.INVISIBLE);
+                progressDialog.dismiss();
 
                 for(DataSnapshot chelldDataSnapshot:dataSnapshot.child("cities").getChildren() ){
                     IdCity =  chelldDataSnapshot.getKey();

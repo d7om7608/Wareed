@@ -3,6 +3,7 @@ package com.example.d7om7.wareed;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.d7om7.wareed.R;
 import com.google.firebase.database.ChildEventListener;
@@ -37,26 +39,30 @@ import static android.R.attr.id;
 public class ListMyChating extends AppCompatActivity implements AdapterMyChating.changeActivity {
     RecyclerView recyclerView;
     AdapterMyChating adapterMyChating;
-    ProgressBar mProgressBar;
     List<InformationOfChating> informationOfChatings;
     DatabaseReference root;
     String UserId;
     SharedPreferences prefs;
+    private TextView nullText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_my_chating);
-
+        nullText=(TextView)findViewById(R.id.nullChat);
         recyclerView = (RecyclerView) findViewById(R.id.my_chat_RecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         informationOfChatings = new ArrayList<>();
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         adapterMyChating = new AdapterMyChating(informationOfChatings, this, getApplicationContext());
         recyclerView.setAdapter(adapterMyChating);
-        mProgressBar = (ProgressBar) findViewById(R.id.chatingProgressBar);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         adapterMyChating.notifyDataSetChanged();
         if (prefs.getString("id", null) != null) {
             UserId = (prefs.getString("id", "NOTHING HERE"));
@@ -70,7 +76,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                mProgressBar.setVisibility(View.INVISIBLE);
+                progressDialog.dismiss();
             }
 
             @Override
@@ -94,11 +100,10 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                             for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-
+                                informationOfChatings.clear();
+                                adapterMyChating.notifyDataSetChanged();
 
                                 informationOfChatings.add(informationOfChatings1);
-
-                                adapterMyChating.notifyDataSetChanged();
 
 
                             }
@@ -107,26 +112,35 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                     }
                 }
 
+                if (informationOfChatings.isEmpty())
+                    nullText.setVisibility(View.VISIBLE);
+                else
+                    nullText.setVisibility(View.INVISIBLE);
                 for (DataSnapshot chelldDataSnapshotIdRequester : dataSnapshot.getChildren()) {
 
-                    String idRequester = chelldDataSnapshotIdRequester.getKey();
+                        String idRequester = chelldDataSnapshotIdRequester.getKey();
 
-                    for (DataSnapshot chelldDataSnapshotIdDoner : chelldDataSnapshotIdRequester.getChildren()) {
-                        String IdDoner = chelldDataSnapshotIdDoner.getKey();
-                        if (IdDoner.equals(prefs.getString("id", "NOTHING HERE"))) {
+                        for (DataSnapshot chelldDataSnapshotIdDoner : chelldDataSnapshotIdRequester.getChildren()) {
+                            String IdDoner = chelldDataSnapshotIdDoner.getKey();
+                            if (IdDoner.equals(prefs.getString("id", "NOTHING HERE"))) {
 
-                            for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
-                                String IdRequest = chelldDataSnapshotIdRequest.getKey();
-                                InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
+                                for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
+                                    String IdRequest = chelldDataSnapshotIdRequest.getKey();
+                                    InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
+                                    informationOfChatings.clear();
+                                    adapterMyChating.notifyDataSetChanged();
+                                    informationOfChatings.add(informationOfChatings1);
 
-                                informationOfChatings.add(informationOfChatings1);
-                                adapterMyChating.notifyDataSetChanged();
+                                }
+
+
                             }
-
-
                         }
                     }
-                }
+                if (informationOfChatings.isEmpty())
+                    nullText.setVisibility(View.VISIBLE);
+                else
+                    nullText.setVisibility(View.INVISIBLE);
 
             }
 

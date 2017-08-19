@@ -4,6 +4,7 @@ package com.example.d7om7.wareed;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 
@@ -31,6 +32,7 @@ import android.view.View;
 
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,12 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     //___________________________________________
     Main_status_adapter status_adapter;
-    ProgressBar progressBar;
     private DatabaseReference root;
     RequestBlood requestBloodopjict;
     List<RequestBlood> requestBlood;
-
-
+    RecyclerView recyclerView;
+    private TextView nullText;
     //____________________________________emergency
 
     @Override
@@ -72,11 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
 
-        //____________________________________
-
-        menagerModel menagerModel = new menagerModel();
-        menagerModel.creatDonor();
-        //_____________________________________
         setContentView(R.layout.sidebar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -92,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //__________________________________________________
 
+        nullText=(TextView)findViewById(R.id.nullMain);
         NotificationGenie notif = new NotificationGenie();
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -115,16 +112,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //__________________________EmergencyStart
         requestBlood = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
         SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
 
         root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
                 .child(data.getString("BloodType", "null")).child("cases");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         status_adapter = new Main_status_adapter(requestBlood, this);
-        progressBar = (ProgressBar) findViewById(R.id.progress);
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffb3dc"), PorterDuff.Mode.MULTIPLY);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
 //         MainToolBar;
 
@@ -133,12 +133,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setNavigationIcon(R.drawable.maskgroup1);
 
 
-
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
             }
 
             @Override
@@ -149,10 +148,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                requestBlood.clear();
+                status_adapter.notifyDataSetChanged();
                 for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.getChildren()) {
 
-                    Log.d("hello","fdgdfgf");
+                    Log.d("hello", "fdgdfgf");
                     String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
 
                     String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
@@ -180,16 +180,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String lngOfHospital = (String) chelldDataSnapshotCases.child("lngOfHospital").getValue();
 
-                    requestBloodopjict = new RequestBlood(PatientName,NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                            StatusTime, RequestID, UserID, (CountOfdone),latOfHospital,lngOfHospital);
+                    requestBloodopjict = new RequestBlood(PatientName, NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
+                            StatusTime, RequestID, UserID, (CountOfdone), latOfHospital, lngOfHospital);
+
 
 
                     requestBlood.add(requestBloodopjict);
 
-                    status_adapter.notifyDataSetChanged();
-
 
                 }
+
+                if (requestBlood.isEmpty())
+                    nullText.setVisibility(View.VISIBLE);
+                else
+                    nullText.setVisibility(View.INVISIBLE);
+
             }
 
             @Override
@@ -267,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_signout) {
 
-            SharedPreferences data = getSharedPreferences("UserData",0);
+            SharedPreferences data = getSharedPreferences("UserData", 0);
             data.edit().clear().commit();
             mFirebaseAuth.signOut();
 
@@ -290,7 +295,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
 
-
         if (requestBlood.get(position).getUserID().equals(prefs.getString("id", "NOTHING HERE"))) {
             Toast.makeText(getApplicationContext(), "This is your case", Toast.LENGTH_SHORT).show();
         } else {
@@ -308,14 +312,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void ClickedNVG(int position, int id) {
 
-        String latitude =requestBlood.get(position).getLatOfHospital();
+        String latitude = requestBlood.get(position).getLatOfHospital();
 
-        String longitude =requestBlood.get(position).getLngOfHospital();
+        String longitude = requestBlood.get(position).getLngOfHospital();
 
         String addressString = requestBlood.get(position).getNameOfHospital();
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("geo")
-                .path(latitude.toString()+","+longitude.toString())
+                .path(latitude.toString() + "," + longitude.toString())
                 .query(addressString);
         Uri addressUri = builder.build();
         Intent intent = new Intent(Intent.ACTION_VIEW);
