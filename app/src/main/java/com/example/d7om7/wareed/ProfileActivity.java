@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static android.R.attr.data;
 import static com.example.d7om7.wareed.R.id.dateButton;
+import static com.example.d7om7.wareed.R.id.root;
 
 
 /**
@@ -68,12 +71,15 @@ public class ProfileActivity extends AppCompatActivity {
     private Calendar calendar;
     private TextView TextDate;
     ProgressDialog progressDialog;
+    private Task<Void> root;
 
     private List<String> CityArray=new ArrayList<>();
     ArrayAdapter<String> cityadapter;
     String  IdCity ;
     String  nameCity;
     SharedPreferences sharedPref;
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +102,6 @@ public class ProfileActivity extends AppCompatActivity {
         progressDialog.show();
         BTN = (Button) findViewById(R.id.dateButton);
         calendar = Calendar.getInstance();
-
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
                     CityArray.add(nameCity);
                     cityadapter.notifyDataSetChanged();
                 }
-                SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+                 prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 
                 if (prefs.getString("id", null) != null) {
                     setSelectedSpinner(getSharedPreferences("UserData", 0), "city", CitySpinner);
@@ -194,6 +199,18 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void SaveSettingsOnClick(View view) {
+
+
+
+        if (prefs.getString("id", null) != null) {
+
+
+            root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city", "null"))
+                    .child(prefs.getString("BloodType", "null")).child("users").child(prefs.getString("id", "NOTHING HERE"))
+                    .removeValue();
+
+
+        }
 
         UserUID = SignAuth.getCurrentUser().getUid();
         UsernameTooked = UserNameEditText.getText().toString().trim();

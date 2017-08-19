@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 import static android.R.attr.id;
+import static com.example.d7om7.wareed.R.drawable.user;
 
 
 public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.ViewHolder> {
@@ -51,14 +52,18 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final SharedPreferences data = context.getSharedPreferences("UserData", 0);
 
-        root = FirebaseDatabase.getInstance().getReference().child("Allusers");
+        root = FirebaseDatabase.getInstance().getReference();
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if (data.getString("id", null).equals(informationOfChatings.get(position).getNameRequster())) {
+                    holder.namePantent.setText("Doner : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameDoner()).child("user name").getValue());
+                    holder.senderName.setText("Requester : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue());
+                }else {
+                    holder.namePantent.setText("Doner : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameDoner()).child("user name").getValue());
+                    holder.senderName.setText("Requester : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue());
 
-                holder.namePantent.setText((String) dataSnapshot.child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue());
-                holder.senderName.setText((String) dataSnapshot.child(informationOfChatings.get(position).getNameDoner()).child("user name").getValue());
-
+                }
             }
 
 
@@ -93,7 +98,7 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
         public ViewHolder(View itemLayout) {
             super(itemLayout);
             namePantent = (TextView) itemLayout.findViewById(R.id.namePantent);
-            senderName = (TextView) itemLayout.findViewById(R.id.senderName);
+            senderName = (TextView) itemLayout.findViewById(R.id.cityAndHospitalChating);
             // requstID = (TextView) itemLayout.findViewById(R.id.requstID);
 
         }

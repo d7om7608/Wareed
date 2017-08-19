@@ -88,6 +88,7 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                informationOfChatings.clear();
 
                 for (DataSnapshot chelldDataSnapshotIdRequester : dataSnapshot.getChildren()) {
 
@@ -100,7 +101,6 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                             for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                 String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                 InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-                                informationOfChatings.clear();
                                 adapterMyChating.notifyDataSetChanged();
 
                                 informationOfChatings.add(informationOfChatings1);
@@ -127,7 +127,6 @@ public class ListMyChating extends AppCompatActivity implements AdapterMyChating
                                 for (DataSnapshot chelldDataSnapshotIdRequest : chelldDataSnapshotIdDoner.getChildren()) {
                                     String IdRequest = chelldDataSnapshotIdRequest.getKey();
                                     InformationOfChating informationOfChatings1 = new InformationOfChating(idRequester, IdDoner, IdRequest);
-                                    informationOfChatings.clear();
                                     adapterMyChating.notifyDataSetChanged();
                                     informationOfChatings.add(informationOfChatings1);
 

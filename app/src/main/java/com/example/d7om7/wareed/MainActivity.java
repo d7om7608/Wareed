@@ -152,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 status_adapter.notifyDataSetChanged();
                 for (DataSnapshot chelldDataSnapshotCases : dataSnapshot.getChildren()) {
 
-                    Log.d("hello", "fdgdfgf");
                     String CountOfBlood = (String) chelldDataSnapshotCases.child("BloodBags").getValue();
 
                     String BloodType = (String) chelldDataSnapshotCases.child("BloodType").getValue();
