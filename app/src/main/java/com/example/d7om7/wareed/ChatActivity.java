@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,15 +47,14 @@ import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ArrayList<String> arrayList = new ArrayList<>();
-
+    List<ChatModel> chatModels;
     LinearLayout ChatViewHolder;
-    ;
-    private ArrayAdapter<String> arrayAdapter;
+    ListView ChatListViewView;
+    AdabterSMG adabterSMG;
     private EditText ChatEditText;
     private Button SendBtn;
-    private String temp_key;
-    ListView ChatListView;
+    String temp_key;
+
     private FirebaseDatabase mFirebaseDatabase;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     String name = "";
@@ -68,8 +71,16 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(@AppCompatDelegate.NightMode Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        chatModels = new ArrayList<>();
         count = 0;
+        ChatListViewView = (ListView) findViewById(R.id.chat_RecyclerView_view);
+        // ChatListViewView.setLayoutManager(new LinearLayoutManager(this));
+        adabterSMG = new AdabterSMG(chatModels, getApplicationContext());
 
+
+        ChatListViewView.setAdapter(adabterSMG);
+        //ChatListViewView.setItemAnimator(new DefaultItemAnimator());
+        adabterSMG.notifyDataSetChanged();
 
         //_________________________________________________
 
@@ -80,6 +91,7 @@ public class ChatActivity extends AppCompatActivity {
             UserId = (prefs.getString("id", "NOTHING HERE"));
 
         }
+
 
         //_____________________________________________________________________
         Intent intent = getIntent();
@@ -92,18 +104,16 @@ public class ChatActivity extends AppCompatActivity {
             String requesterID = intent.getStringExtra("NameRequster");
             String requestID = intent.getStringExtra("FileNumber");
             String donerID = intent.getStringExtra("NameDoner");
+
             root = FirebaseDatabase.getInstance().getReference().child("MainChat").child(requesterID).child(donerID).child(requestID);
             count = 2;
 
         }
 
-        ChatListView = (ListView) findViewById(R.id.chat_list_view);
         ChatEditText = (EditText) findViewById(R.id.chat_msg_edit_text);
         SendBtn = (Button) findViewById(R.id.chat_send_button);
 
         ChatViewHolder = (LinearLayout) findViewById(R.id.chat_view_holder);
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.chat_holder, R.id.msg_text_view, arrayList);
-        ChatListView.setAdapter(arrayAdapter);
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
@@ -116,6 +126,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!ChatEditText.getText().toString().trim().equals("")) {
+
                     Map<String, Object> map = new HashMap<String, Object>();
                     temp_key = root.push().getKey();
                     root.updateChildren(map);
@@ -123,6 +134,9 @@ public class ChatActivity extends AppCompatActivity {
                     Map<String, Object> map2 = new HashMap<String, Object>();
                     map2.put("name", name);
                     map2.put("msg", ChatEditText.getText().toString());
+                    map2.put("IdSend", prefs.getString("id", null) );
+                    adabterSMG.notifyDataSetChanged();
+
                     if (name.equals(prefs.getString("display_name", "NOTHING HERE")))
                         ChatEditText.setText("");
 
@@ -136,43 +150,42 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressDialog.dismiss();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                root.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        Add_Chat(dataSnapshot);
+                        adabterSMG.notifyDataSetChanged();
+                        ChatListViewView.setSelection(chatModels.size());
 
-            }
-        });
-        root.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Add_Chat(dataSnapshot);
-                arrayAdapter.notifyDataSetChanged();
-                ChatListView.setSelection(arrayAdapter.getCount());
-                ChatListView.deferNotifyDataSetChanged();
+                    }
 
-//
-            }
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        Add_Chat(dataSnapshot);
+                        ChatListViewView.setSelection(chatModels.size());
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Add_Chat(dataSnapshot);
-                ChatListView.setSelection(arrayAdapter.getCount());
-                ChatListView.deferNotifyDataSetChanged();
-
-                arrayAdapter.notifyDataSetChanged();
-                ChatEditText.setText("");
+                        adabterSMG.notifyDataSetChanged();
+                        ChatEditText.setText("");
 
 
-            }
+                    }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            }
+                    }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
             }
 
@@ -183,7 +196,6 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
-
 
     public void onBackPressed() {
 
@@ -198,26 +210,25 @@ public class ChatActivity extends AppCompatActivity {
             finish();
         }
     }
-
-    private String chat_msg, chat_user_name;
-
+    private String chat_msg, chat_user_name,IdSender;
     private void Add_Chat(DataSnapshot dataSnapshot) {
 
         Iterator i = dataSnapshot.getChildren().iterator();
         while (i.hasNext()) {
-            ChatListView.setSelection(arrayAdapter.getCount());
-            ChatListView.deferNotifyDataSetChanged();
+            ChatListViewView.setSelection(chatModels.size());
+            ChatListViewView.deferNotifyDataSetChanged();
+            IdSender=(String) ((DataSnapshot) i.next()).getValue();
             chat_msg = (String) ((DataSnapshot) i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
-
-            arrayList.add(chat_user_name + " :\n  " + chat_msg);
-            arrayAdapter.notifyDataSetChanged();
-            ChatListView.setSelection(arrayList.size());
+            ChatModel chatModelxx=new ChatModel(chat_msg,IdSender,chat_user_name);
+            chatModels.add(chatModelxx);
+            adabterSMG.notifyDataSetChanged();
+            ChatListViewView.setAdapter(adabterSMG);
+            ChatListViewView.setSelection(chatModels.size());
         }
 
 
     }
-
     public void GoToDonate(View view) {
 
 

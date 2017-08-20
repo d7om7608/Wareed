@@ -167,16 +167,7 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         super.onResume();
     }
 
-    private void Add_Request(DataSnapshot dataSnapshot) {
-        Iterator i = dataSnapshot.getChildren().iterator();
 
-
-        while (i.hasNext()) {
-
-
-        }
-
-    }
 
 
     public void onBackPressed() {
