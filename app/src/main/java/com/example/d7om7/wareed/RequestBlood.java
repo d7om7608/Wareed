@@ -16,15 +16,15 @@ public class RequestBlood {
     String statusTime;
     String latOfHospital;
     String lngOfHospital;
-
+    String location;
     public RequestBlood(String patientName,String cityName, String patientFileNumber, String countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
-                        String statusTime, String requestID, String userID, String countOfdone,String latOfHospital,String lngOfHospital) {
+                        String statusTime, String requestID, String userID, String countOfdone,String latOfHospital,String lngOfHospital,String location) {
         this.patientName=patientName;
         this.patientFileNumber=patientFileNumber;
         this.countOfBlood=countOfBlood;
         this.reasonOfRequest=reasonOfRequest;
         this.bloodType=bloodType;
-
+        this.location=location;
         this.nameOfHospital=nameOfHospital;
         this.requestID=requestID;
         this.userID=userID;
@@ -33,6 +33,14 @@ public class RequestBlood {
         this.cityName=cityName;
         this.lngOfHospital=lngOfHospital;
         this.latOfHospital=latOfHospital;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getLatOfHospital() {

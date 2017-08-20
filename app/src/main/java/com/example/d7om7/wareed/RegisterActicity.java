@@ -1,5 +1,6 @@
 package com.example.d7om7.wareed;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,14 +42,14 @@ public class RegisterActicity extends AppCompatActivity {
     private EditText PhoneNumberEditText;
     private EditText VerificationCodeEditText;
     String mVerificationId;
-
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
+          progressDialog = new ProgressDialog(this);
 
 
         PhoneNumberEditText = (EditText) findViewById(R.id.phone_number_edit_text);
@@ -65,23 +66,34 @@ public class RegisterActicity extends AppCompatActivity {
         String phoneNumber = "00966"+PhoneNumberEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNumber)) return;
 
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber, 60, TimeUnit.SECONDS, RegisterActicity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                         signInWithCredentials(phoneAuthCredential);
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
                         Toast.makeText(RegisterActicity.this, "Verification Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         super.onCodeSent(verificationId, forceResendingToken);
                         mVerificationId = verificationId;
+                        progressDialog.dismiss();
+
+
 
                     }
 
@@ -89,7 +101,7 @@ public class RegisterActicity extends AppCompatActivity {
                     public void onCodeAutoRetrievalTimeOut(String verificationID) {
                         super.onCodeAutoRetrievalTimeOut(verificationID);
                         Toast.makeText(RegisterActicity.this, "Time Out", Toast.LENGTH_SHORT).show();
-
+                        progressDialog.dismiss();
 
                     }
                 }

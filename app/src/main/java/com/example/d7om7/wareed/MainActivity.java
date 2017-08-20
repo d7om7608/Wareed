@@ -178,9 +178,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String latOfHospital = (String) chelldDataSnapshotCases.child("latOfHospital").getValue();
 
                     String lngOfHospital = (String) chelldDataSnapshotCases.child("lngOfHospital").getValue();
-
+                    String location = (String) chelldDataSnapshotCases.child("location").getValue();
                     requestBloodopjict = new RequestBlood(PatientName, NameCity, (PatientFileNumber), (CountOfBlood), ReasonOfRequest, BloodType, NameOfHospital,
-                            StatusTime, RequestID, UserID, (CountOfdone), latOfHospital, lngOfHospital);
+                            StatusTime, RequestID, UserID, (CountOfdone), latOfHospital, lngOfHospital,location);
 
 
 
@@ -312,18 +312,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void ClickedNVG(int position, int id) {
 
         String latitude = requestBlood.get(position).getLatOfHospital();
-
+        String location=  requestBlood.get(position).getLocation();
         String longitude = requestBlood.get(position).getLngOfHospital();
+//
+//        String addressString = requestBlood.get(position).getNameOfHospital();
+//        Uri.Builder builder = new Uri.Builder();
+//        builder.scheme("geo")
+//                .path(location)
+//                .query(addressString);
+//        Uri addressUri = builder.build();
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(addressUri);
+//        startActivity(intent);
+        Log.d("hello",""+location);
+        Uri uri = Uri.parse(location);
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
-        String addressString = requestBlood.get(position).getNameOfHospital();
-        Uri.Builder builder = new Uri.Builder();
-        builder.scheme("geo")
-                .path(latitude.toString() + "," + longitude.toString())
-                .query(addressString);
-        Uri addressUri = builder.build();
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(addressUri);
-        startActivity(intent);
 
     }
 

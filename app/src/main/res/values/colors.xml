@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#FB493A</color>
-    <color name="colorAccent">#7d2e5c</color>
+    <color name="colorAccent">#FB493A</color>
     <color name="colorwhite">#FB493A</color>
     <color name="colordetils">#5b6cce</color>
     <color name="colordeprogres">#ffb3dc</color>

@@ -41,6 +41,7 @@ public class RequestActivity extends AppCompatActivity {
      */
     List<String> CityArray = new ArrayList<String>();
     List<String> lat = new ArrayList<String>();
+    List<String> location = new ArrayList<String>();
     List<String> lng = new ArrayList<String>();
 
     List<String> HospitalsArray = new ArrayList<String>();
@@ -131,13 +132,15 @@ public class RequestActivity extends AppCompatActivity {
                     String hospitals = "";
                     String latString="";
                     String lngString="";
+                    String locationString="";
                     hospitals = chelldDataSnapshotHospital.child("name").getValue().toString();
                     latString=chelldDataSnapshotHospital.child("lat").getValue().toString();
                     lngString=chelldDataSnapshotHospital.child("lng").getValue().toString();
+                    locationString=chelldDataSnapshotHospital.child("location").getValue().toString();
                     HospitalsArray.add(hospitals);
                     lat.add(latString);
                     lng.add(lngString);
-
+                    location.add(locationString);
                     hospitalsAdapter.notifyDataSetChanged();
 
                 }
@@ -212,7 +215,7 @@ public class RequestActivity extends AppCompatActivity {
             int positionHospital=Hospetal_spiner.getSelectedItemPosition();
             String latSelected=lat.get(positionHospital);
             String lngSelected=lng.get(positionHospital);
-
+            String locationselected=location.get(positionHospital);
             NameCity=CitySpinner.getSelectedItem().toString();
             root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(String.valueOf(selectedCity))
                     .child(selectBloodType).child("cases");
@@ -234,6 +237,7 @@ public class RequestActivity extends AppCompatActivity {
             map2.put("Hospital", selectHospetal);
             map2.put("latOfHospital", latSelected);
             map2.put("lngOfHospital", lngSelected);
+            map2.put("location",locationselected);
 
             SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
 

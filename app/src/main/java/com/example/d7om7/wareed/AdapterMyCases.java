@@ -47,7 +47,7 @@ public class AdapterMyCases extends RecyclerView.Adapter<AdapterMyCases.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.reasonOfRequest.setText("" + requestedBloodList.get(position).getReasonOfRequest());
         holder.statusTime.setText("" + requestedBloodList.get(position).getStatusTime());
-        holder.bloodTyep.setText(" " + requestedBloodList.get(position).getBloodType());
+        holder.bloodTyep.setText("  " + requestedBloodList.get(position).getBloodType());
         holder.cityAndHospital_textview.setText(requestedBloodList.get(position).getCityName() +
                 " , " + requestedBloodList.get(position).getNameOfHospital());
         holder.FileNumber.setText(requestedBloodList.get(position).getPatientFileNumber());

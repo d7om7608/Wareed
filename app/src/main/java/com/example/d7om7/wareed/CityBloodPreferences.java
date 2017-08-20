@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class CityBloodPreferences {
 
-
+    SharedPreferences.Editor editor;
 
     public static String [] getBloodTypes (){
         String BloodTypes[] = {"I don't know","O+","O-","A+","A-","B+","B-","AB+","AB-"};
@@ -32,7 +32,7 @@ public class CityBloodPreferences {
                                  */
         SharedPreferences sharedPref = c.getSharedPreferences("UserData",0);
 
-        final SharedPreferences.Editor editor = sharedPref.edit();
+          editor = sharedPref.edit();
         if (UserData != null){
             UserData.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

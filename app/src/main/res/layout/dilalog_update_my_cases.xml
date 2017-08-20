@@ -28,7 +28,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
 
-        android:text="Enter the number of donors remainig \n''Enter number only''     "
+        android:text="Enter the number of donors remainig"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="12.5sp"
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:inputType="number"
         android:layout_marginBottom="15dp"
         android:id="@+id/countBloodUpdate"
         android:textSize="15sp" />

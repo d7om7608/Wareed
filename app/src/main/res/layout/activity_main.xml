@@ -53,14 +53,14 @@
         android:layout_alignStart="@+id/textView7"
         android:layout_below="@+id/textView7"
         android:layout_marginTop="236dp"
-        android:text="nothing here..."
+        android:text="No Requests In Your Ciry..."
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:id="@+id/nullMain"
         android:visibility="visible" />
 
-
+565553561
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_emergency"

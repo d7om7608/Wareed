@@ -7,7 +7,7 @@
     <com.github.library.bubbleview.BubbleTextView
         android:id="@+id/msg_text_viewSend"
         android:padding="10dp"
-        android:textColor="#FFF"
+        android:textColor="#FFFFFF"
         android:layout_marginRight="5dp"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         app:arrowPosition="14dp"
         app:arrowLocation="right"
         app:arrowCenter="true"
-        app:bubbleColor="#7EC0EE"
+        app:bubbleColor="#d0c7ba"
         />
 
 
