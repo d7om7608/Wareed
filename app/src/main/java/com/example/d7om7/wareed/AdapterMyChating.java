@@ -21,6 +21,7 @@ import java.util.List;
 
 import static android.R.attr.id;
 import static com.example.d7om7.wareed.R.drawable.user;
+import static com.example.d7om7.wareed.R.id.bloodTyepChating;
 
 
 public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.ViewHolder> {
@@ -59,9 +60,13 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
                 if (data.getString("id", null).equals(informationOfChatings.get(position).getNameRequster())) {
                     holder.namePantent.setText("Doner : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameDoner()).child("user name").getValue());
                     holder.senderName.setText("Requester : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue());
+                    holder.bloodTyepChating.setText((String) dataSnapshot.child("Main").child("cities").child(data.getString("city", "null"))
+                            .child(data.getString("BloodType", "null")).child("cases").child(informationOfChatings.get(position).getRequestID()).child("BloodType").getValue());
                 }else {
                     holder.namePantent.setText("Doner : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameDoner()).child("user name").getValue());
                     holder.senderName.setText("Requester : "+(String) dataSnapshot.child("Allusers").child(informationOfChatings.get(position).getNameRequster()).child("user name").getValue());
+                    holder.bloodTyepChating.setText((String) dataSnapshot.child("Main").child("cities").child(data.getString("city", "null"))
+                            .child(data.getString("BloodType", "null")).child("cases").child(informationOfChatings.get(position).getRequestID()).child("BloodType").getValue());
 
                 }
             }
@@ -92,14 +97,14 @@ public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView namePantent;
         TextView senderName;
-        //  TextView requstID;
+          TextView bloodTyepChating;
 
 
         public ViewHolder(View itemLayout) {
             super(itemLayout);
             namePantent = (TextView) itemLayout.findViewById(R.id.namePantent);
             senderName = (TextView) itemLayout.findViewById(R.id.cityAndHospitalChating);
-            // requstID = (TextView) itemLayout.findViewById(R.id.requstID);
+            bloodTyepChating = (TextView) itemLayout.findViewById(R.id.bloodTyepChating);
 
         }
     }

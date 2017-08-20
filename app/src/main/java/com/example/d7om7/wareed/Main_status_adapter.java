@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,8 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         public void Clicked (int position,int id);
 
         public void ClickedNVG (int position,int id);
+
+        public void ClickedShare (int position,int id);
     }
 
     @Override
@@ -46,10 +49,9 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         holder.reasonOfRequest.setText("" + requestedBloodList.get(position).getReasonOfRequest());
         holder.statusTime.setText("" + requestedBloodList.get(position).getStatusTime());
         holder.countOfrequest.setText("" + requestedBloodList.get(position).getCountOfBlood());
-        holder.countDone.setText("" + requestedBloodList.get(position).getCountOfdone());
         holder.bloodTyep.setText(" " + requestedBloodList.get(position).getBloodType());
         holder.cityAndHospital_textview.setText(requestedBloodList.get(position).getCityName()+" , "+requestedBloodList.get(position).getNameOfHospital());
-        holder.FileNumber.setText(requestedBloodList.get(position).getPatientFileNumber());
+        holder.FileNumber.setText("ID File "+requestedBloodList.get(position).getPatientFileNumber());
 
         holder.BloodInfoLayout.setVisibility(View.GONE);
 
@@ -67,7 +69,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
                 }else {
                     Animation animation = new TranslateAnimation(0,0,75, 0);
                     animation.setDuration(175);
-                    animation.setFillAfter(true);
+                    animation.setFillAfter(false);
                     holder.BloodInfoLayout.startAnimation(animation);
                     holder.BloodInfoLayout.setVisibility(View.GONE);
 
@@ -89,6 +91,12 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
 
             }
         });
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategoryHandler.ClickedShare(position,id);
+            }
+        });
 
     }
 
@@ -101,11 +109,11 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         TextView reasonOfRequest;
         TextView statusTime;
         ImageView chat_pic;
+        ImageView share;
         TextView countOfrequest;
         TextView cityAndHospital_textview;
-        TextView countDone;
         TextView bloodTyep;
-        RelativeLayout BloodInfoLayout ;
+        LinearLayout BloodInfoLayout ;
         public boolean isExpanded = false ;
         TextView FileNumber;
         ImageView imageViewNAV;
@@ -118,10 +126,10 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
             statusTime = (TextView) itemLayout.findViewById(R.id.statusTime);
             chat_pic=(ImageView)itemLayout.findViewById(R.id.chat_pic);
             countOfrequest = (TextView) itemLayout.findViewById(R.id.countOfblood);
-            countDone = (TextView) itemLayout.findViewById(R.id.countDone);
             bloodTyep = (TextView) itemLayout.findViewById(R.id.bloodTyep);
-            BloodInfoLayout = (RelativeLayout) itemLayout.findViewById(R.id.relativeLayoutvis);
+            BloodInfoLayout = (LinearLayout) itemLayout.findViewById(R.id.LinearLayoutVisibale);
             imageViewNAV=(ImageView)itemLayout.findViewById(R.id.imageViewNAV);
+            share=(ImageView) itemLayout.findViewById(R.id.share);
 
         }
     }

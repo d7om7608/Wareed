@@ -331,6 +331,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    public void ClickedShare(int position, int id) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
     public class NotificationGenie extends FirebaseMessagingService {
         @Override
         public void onMessageReceived(RemoteMessage remoteMessage) {

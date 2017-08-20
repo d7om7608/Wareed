@@ -34,7 +34,7 @@
                 android:layout_marginLeft="4.2dp"
                 android:layout_marginRight="4.2dp"
                 android:layout_marginTop="15dp"
-                android:text="AB+"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
