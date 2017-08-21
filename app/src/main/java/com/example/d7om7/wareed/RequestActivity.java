@@ -72,7 +72,7 @@ public class RequestActivity extends AppCompatActivity {
 
 
         calendar = Calendar.getInstance();
-        date = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        date = new SimpleDateFormat("MM/dd", Locale.getDefault());
 
 
          spinner = (Spinner) findViewById(R.id.planets_spiner);

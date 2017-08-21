@@ -202,15 +202,15 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        if (prefs.getString("id", null) != null) {
-
-
-            root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city", "null"))
-                    .child(prefs.getString("BloodType", "null")).child("users").child(prefs.getString("id", "NOTHING HERE"))
-                    .removeValue();
-
-
-        }
+//        if (prefs.getString("id", null) != null) {
+//
+//
+//            root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(prefs.getString("city", "null"))
+//                    .child(prefs.getString("BloodType", "null")).child("users").child(prefs.getString("id", "NOTHING HERE"))
+//                    .removeValue();
+//
+//
+//        }
 
         UserUID = SignAuth.getCurrentUser().getUid();
         UsernameTooked = UserNameEditText.getText().toString().trim();
@@ -227,7 +227,9 @@ public class ProfileActivity extends AppCompatActivity {
 
             Toast.makeText(ProfileActivity.this, "Missing Data", Toast.LENGTH_SHORT).show();
         }else {
-
+            if(sharedPref.getString("city",null) != null && sharedPref.getString("city",null)!= CityTooked){
+                removeCity();
+            }
             DatabaseReference current_user_db = SignDataBase.child(UserUID);
             current_user_db.child("user name").setValue(UsernameTooked);
             current_user_db.child("BloodType").setValue(BloodTypeTooked);
@@ -260,9 +262,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             Allusers.child("donateCount").setValue("0");
-            if(sharedPref.getString("city",null) != null && sharedPref.getString("city",null)!= CityTooked){
-                removeCity();
-            }
+
 
             /**
              * Firebase generate token.
@@ -334,5 +334,7 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences data = getSharedPreferences("UserData",0);
         FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city",null)).child(data.getString("BloodType",null))
                 .child("users").child(data.getString("id",null)).removeValue();
+
+
     }
 }

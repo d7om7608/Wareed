@@ -25,9 +25,9 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1">
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/blood_pic"
@@ -47,7 +47,7 @@
                     android:text="AB+"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
@@ -65,7 +65,7 @@
 
                     <TextView
                         android:id="@+id/reasonOfRequist"
-                        android:layout_width="240dp"
+                        android:layout_width="225dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/blood_pic"
@@ -80,7 +80,7 @@
                         android:textSize="20sp" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="225dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_marginTop="5dp"
@@ -97,7 +97,7 @@
 
                         <TextView
                             android:id="@+id/cityAndHospital_textview"
-                            android:layout_width="match_parent"
+                            android:layout_width="225dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_alignEnd="@+id/reasonOfRequest"
@@ -112,7 +112,7 @@
 
                 <TextView
                     android:id="@+id/statusTime"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/relativeLayoutvis"
                     android:layout_alignParentRight="true"
