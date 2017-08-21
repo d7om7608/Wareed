@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String city = location.getCurrectCity();
         //__________________________EmergencyEND
 
-
+   status_adapter.notifyDataSetChanged();
     }
 
     @Override
