@@ -191,6 +191,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 }
+                status_adapter.notifyDataSetChanged();
+
 
                 if (requestBlood.isEmpty())
                     nullText.setVisibility(View.VISIBLE);

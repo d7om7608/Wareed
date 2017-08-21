@@ -60,7 +60,6 @@
         android:id="@+id/nullMain"
         android:visibility="visible" />
 
-565553561
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_emergency"
