@@ -60,7 +60,10 @@
         android:id="@+id/nullMain"
         android:visibility="visible" />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2edea0b357aa442a712d36014ad483d7d03164cc
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_emergency"
             android:layout_width="999dp"

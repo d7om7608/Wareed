@@ -154,13 +154,6 @@ public class MyCases extends AppCompatActivity implements AdapterMyCases.changeA
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         myCases_adapter.notifyDataSetChanged();
 
-        /*
-        Here LOCATION variables
-         */
-        LocationClass location = new LocationClass(this);
-        double lon = location.getLongitude();
-        double lat = location.getLatitude();
-        String city = location.getCurrectCity();
 
     }
 

@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.d7om7.wareed.R.id.imageViewNAV;
@@ -210,13 +212,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         status_adapter.notifyDataSetChanged();
 
-        /*
-        Here LOCATION variables
-         */
-        LocationClass location = new LocationClass(getApplicationContext());
-        double lon = location.getLongitude();
-        double lat = location.getLatitude();
-        String city = location.getCurrectCity();
         //__________________________EmergencyEND
 
    status_adapter.notifyDataSetChanged();
@@ -393,13 +388,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.updateGPS) {
-
-        //TODO Hello
+            // Here update GPS
+            updateLocation();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    protected void updateLocation(){
+        final LocationClass location = new LocationClass(this);
+        final SharedPreferences data = getSharedPreferences("UserData",0);
+        final DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        final String lastCity = data.getString("city",null);
+        if(lastCity != null){
+            if(lastCity != location.getCurrectCity()){
+                root.child("cities").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot city: dataSnapshot.getChildren()){
+                            String cityInDatabase = city.child("name").getValue().toString().toLowerCase().trim();
+                            String cityInLocation = location.getCurrectCity().toString().toLowerCase().trim();
+                            if(cityInDatabase.equals(cityInLocation)){
+                                String cityID = city.getKey().toString();
+                                updateUserProfile(cityID);
+                                Toast.makeText(getApplicationContext(),"Location Updated",Toast.LENGTH_LONG);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        }
+    }
+
+    protected void updateUserProfile(String newCityID){
+        SharedPreferences data = getSharedPreferences("UserData",0);
+        FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city",null)).child(data.getString("BloodType",null))
+                .child("users").child(data.getString("id",null)).removeValue();
+
+        DatabaseReference SignDataBase = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(newCityID).child(data.getString("BloodType",null))
+                .child("users");
+
+        DatabaseReference current_user_db = SignDataBase.child(data.getString("id",null));
+        current_user_db.child("user name").setValue(data.getString("display_name",null));
+        current_user_db.child("BloodType").setValue(data.getString("BloodType",null));
+        current_user_db.child("gender").setValue(data.getString("gender",null));
+        current_user_db.child("city").setValue(newCityID);
+        current_user_db.child("email").setValue(data.getString("email",null));
+        current_user_db.child("age").setValue(data.getString("age",null));
+        current_user_db.child("donateCount").setValue("0");
+        if(data.getString("LastNotification",null) != null){
+            current_user_db.child("LastNotification").setValue(data.getString("LastNotification",null));
+        }else{
+            current_user_db.child("LastNotification").setValue("0");
+        }
+
+        data.edit().putString("city",newCityID).apply();
+    }
 
 }
