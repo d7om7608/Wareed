@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //__________________________EmergencyEND
 
-
+   status_adapter.notifyDataSetChanged();
     }
 
     @Override

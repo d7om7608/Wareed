@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginTop="9dp"
@@ -43,7 +42,7 @@
                     android:layout_alignStart="@+id/blood_pic"
                     android:layout_marginLeft="4.2dp"
                     android:layout_marginRight="4.2dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="16dp"
                     android:text="AB+"
                     android:textAlignment="center"
                     android:textColor="@color/white"
@@ -66,12 +65,12 @@
                     <TextView
                         android:id="@+id/reasonOfRequist"
                         android:layout_width="225dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/blood_pic"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_toEndOf="@+id/blood_pic"
+                        android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="left"
                         android:text="Arm Surgery"
@@ -99,11 +98,11 @@
                             android:id="@+id/cityAndHospital_textview"
                             android:layout_width="225dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
                             android:layout_alignEnd="@+id/reasonOfRequest"
                             android:layout_below="@+id/bloodTyep"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
+                            android:layout_marginTop="4dp"
                             android:text="" />
                     </LinearLayout>
 
