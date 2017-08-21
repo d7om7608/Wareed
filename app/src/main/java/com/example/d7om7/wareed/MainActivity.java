@@ -386,8 +386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.updateGPS) {
-
-        //TODO Hello
+            // Here update GPS
             updateLocation();
             return true;
         }
@@ -409,7 +408,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         for(DataSnapshot city: dataSnapshot.getChildren()){
                             String cityInDatabase = city.child("name").getValue().toString().toLowerCase().trim();
                             String cityInLocation = location.getCurrectCity().toString().toLowerCase().trim();
-                            Log.d("Hello","cityInDatabase="+cityInDatabase+", locationCity="+cityInLocation);
                             if(cityInDatabase.equals(cityInLocation)){
                                 String cityID = city.getKey().toString();
                                 updateUserProfile(cityID);
@@ -424,8 +422,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     }
                 });
-            }else{
-                Log.d("Hello","LASTCITY=CURRECTCITY");
             }
         }
     }
