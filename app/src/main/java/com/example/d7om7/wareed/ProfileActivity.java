@@ -50,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase SignFirebaseDatabase;
     private FirebaseAuth SignAuth;
     private DatabaseReference SignDataBase;
+    private DatabaseReference SignInCity;
     private DatabaseReference AllUsers;
     private Dialog D_DatePicker;
     private EditText UserNameEditText;
@@ -65,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
     String GenderTooked;
     String UserUID;
     String age;
-    long DateSecond;
+    Long DateSecond;
     private Button dateButton;
     private Button BTN;
     private Calendar calendar;
@@ -151,11 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void CitySpinner() {
         // TODO: ger city from CityBlood Activity
-<<<<<<< HEAD
-        String CityArray[] = {"مكة\n\n", "جدة\n\n"};
 
-        ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
-=======
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
         root.addValueEventListener(new ValueEventListener() {
             @Override
@@ -182,7 +179,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
          cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
->>>>>>> 2edea0b357aa442a712d36014ad483d7d03164cc
         CitySpinner.setAdapter(cityadapter);
 
 
@@ -224,17 +220,12 @@ public class ProfileActivity extends AppCompatActivity {
         CityTooked =""+ CitySpinner.getSelectedItemPosition();
         GenderTooked = GenderSpinner.getSelectedItem().toString().trim();
         Email = EmailEditText.getText().toString().trim();
-<<<<<<< HEAD
         age=ageText.getText().toString().trim();
-        DateSecond=TextDate.getText().toString().trim();
-        SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
+        //DateSecond=TextDate.getText().toString().trim();
         SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
         .child("bloodtype").child(BloodTypeTooked).child("users");
-=======
-        age = ageText.getText().toString().trim();
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(CityTooked).child(BloodTypeTooked)
                 .child("users");
->>>>>>> 2edea0b357aa442a712d36014ad483d7d03164cc
 
         AllUsers = FirebaseDatabase.getInstance().getReference().child("Allusers");
         if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
@@ -327,7 +318,7 @@ public class ProfileActivity extends AppCompatActivity {
                 long UnixTime = time.getTime();
                 DateSecond = UnixTime;
                 D_DatePicker.dismiss();
-                Toast.makeText(getApplicationContext(),"Date Saved",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_SHORT).show();
             }
         });
         BTN_Close.setOnClickListener(new View.OnClickListener() {

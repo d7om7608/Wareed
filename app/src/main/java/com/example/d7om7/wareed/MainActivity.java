@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lastTimeDonate.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-             Long  TimeCanDonate=Long.valueOf(dataSnapshot.child("TimeCanDonate").getValue().toString());
+             Long  TimeCanDonate=0+Long.valueOf(dataSnapshot.child("TimeCanDonate").getValue().toString());
                 Calendar calendar = Calendar.getInstance();
                 Long startTime =calendar.getTimeInMillis();
 
@@ -409,6 +409,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(sendIntent);
     }
 
+    @Override
+    public void ClickedcoundBlood(int position, int id) {
+        Toast.makeText(getApplicationContext(),"Request : "+requestBlood.get(position).getCountOfBlood(), Toast.LENGTH_SHORT).show();
+
+    }
+
     public class NotificationGenie extends FirebaseMessagingService {
         @Override
         public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -495,6 +501,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
         }
+        Toast.makeText(getApplicationContext(), "your Location Updated", Toast.LENGTH_SHORT).show();
+
     }
 
     protected void updateUserProfile(String newCityID){

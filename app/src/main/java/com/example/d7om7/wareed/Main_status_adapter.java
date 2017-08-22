@@ -17,6 +17,7 @@ import java.util.List;
 
 import static android.R.attr.id;
 import static com.example.d7om7.wareed.R.id.chat_pic;
+import static com.example.d7om7.wareed.R.id.countOfblood_pic;
 
 
 public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapter.ViewHolder> {
@@ -38,6 +39,9 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         public void ClickedDonerDonate(int position, int id);
 
         public void ClickedShare(int position, int id);
+
+        public void ClickedcoundBlood(int position, int id);
+
     }
 
     @Override
@@ -108,6 +112,13 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
                 mCategoryHandler.ClickedDonerDonate(position,id);
             }
         });
+        holder.countOfblood_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategoryHandler.ClickedcoundBlood(position,id);
+
+            }
+        });
 
     }
 
@@ -129,7 +140,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
         TextView FileNumber;
         ImageView imageViewNAV;
         Button button2;
-
+         ImageView countOfblood_pic;
         public ViewHolder(View itemLayout) {
             super(itemLayout);
             button2=(Button)itemLayout.findViewById(R.id.button2);
@@ -143,7 +154,7 @@ public class Main_status_adapter extends RecyclerView.Adapter<Main_status_adapte
             BloodInfoLayout = (LinearLayout) itemLayout.findViewById(R.id.LinearLayoutVisibale);
             imageViewNAV = (ImageView) itemLayout.findViewById(R.id.imageViewNAV);
             share = (ImageView) itemLayout.findViewById(R.id.share);
-
+            countOfblood_pic=(ImageView)itemLayout.findViewById(R.id.countOfblood_pic);
         }
     }
 
