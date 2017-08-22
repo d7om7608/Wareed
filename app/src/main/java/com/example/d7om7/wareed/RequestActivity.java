@@ -136,7 +136,10 @@ public class RequestActivity extends AppCompatActivity {
                     hospitals = chelldDataSnapshotHospital.child("name").getValue().toString();
                     latString=chelldDataSnapshotHospital.child("lat").getValue().toString();
                     lngString=chelldDataSnapshotHospital.child("lng").getValue().toString();
-                    locationString=chelldDataSnapshotHospital.child("location").getValue().toString();
+                    if (chelldDataSnapshotHospital.child("location").getValue()==null)
+                    locationString="null";
+                    else
+                        locationString=chelldDataSnapshotHospital.child("location").getValue().toString();
                     HospitalsArray.add(hospitals);
                     lat.add(latString);
                     lng.add(lngString);

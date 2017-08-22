@@ -239,6 +239,8 @@ public class ProfileActivity extends AppCompatActivity {
             current_user_db.child("age").setValue(age);
             current_user_db.child("DateSecondDonate").setValue(DateSecond);
             current_user_db.child("donateCount").setValue("0");
+            current_user_db.child("TimeCanDonate").setValue("0");
+
             if(sharedPref.getString("LastNotification",null) != null){
                 current_user_db.child("LastNotification").setValue(sharedPref.getString("LastNotification",null));
             }else{
@@ -254,6 +256,7 @@ public class ProfileActivity extends AppCompatActivity {
             Allusers.child("email").setValue(Email);
             Allusers.child("age").setValue(age);
             Allusers.child("DateSecondDonate").setValue(DateSecond);
+            current_user_db.child("TimeCanDonate").setValue("0");
 
             if(sharedPref.getString("LastNotification",null) != null){
                 Allusers.child("LastNotification").setValue(sharedPref.getString("LastNotification",null));

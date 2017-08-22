@@ -32,9 +32,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,10 +50,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.R.attr.data;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static com.example.d7om7.wareed.R.id.age;
 import static com.example.d7om7.wareed.R.id.imageViewNAV;
 
 
@@ -64,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    DatabaseReference lastTimeDonate;
+    TextView canDonateText;
     //___________________________________________
     Main_status_adapter status_adapter;
     private DatabaseReference root;
@@ -72,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView recyclerView;
     private TextView nullText;
     //____________________________________emergency
-
+    SharedPreferences data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +128,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //__________________________EmergencyStart
         requestBlood = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
-        SharedPreferences data = getApplicationContext().getSharedPreferences("UserData", 0);
+         data = getApplicationContext().getSharedPreferences("UserData", 0);
 
         root = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
                 .child(data.getString("BloodType", "null")).child("cases");
+        lastTimeDonate=FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(data.getString("city", "null"))
+                .child(data.getString("BloodType", "null")).child("users").child(data.getString("id", "null"));
+        canDonateText=(TextView)findViewById(R.id.canDonateText);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         status_adapter = new Main_status_adapter(requestBlood, this);
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -136,6 +151,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle("Emergency Cases");
         toolbar.setTitleTextColor(getResources().getColor(R.color.DarkRed));
         toolbar.setNavigationIcon(R.drawable.maskgroup1);
+
+
+        lastTimeDonate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+             Long  TimeCanDonate=Long.valueOf(dataSnapshot.child("TimeCanDonate").getValue().toString());
+                Calendar calendar = Calendar.getInstance();
+                Long startTime =calendar.getTimeInMillis();
+
+               if (TimeCanDonate>startTime) {
+                   canDonateText.setVisibility(View.VISIBLE);
+
+               }else{
+                   canDonateText.setVisibility(View.GONE);
+
+               }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
         root.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -314,19 +354,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String latitude = requestBlood.get(position).getLatOfHospital();
         String location=  requestBlood.get(position).getLocation();
         String longitude = requestBlood.get(position).getLngOfHospital();
-//
-//        String addressString = requestBlood.get(position).getNameOfHospital();
-//        Uri.Builder builder = new Uri.Builder();
-//        builder.scheme("geo")
-//                .path(location)
-//                .query(addressString);
-//        Uri addressUri = builder.build();
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(addressUri);
-//        startActivity(intent);
-        Log.d("hello",""+location);
-        Uri uri = Uri.parse(location);
-        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+
+        if (location.equals("null"))
+            Toast.makeText(getApplicationContext(), "don't have map of hospital", Toast.LENGTH_SHORT).show();
+        else {
+            Uri uri = Uri.parse(location);
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
+
+    }
+     DatePicker datePicker;
+    TimePicker timePicker;
+
+    @Override
+    public void ClickedDonerDonate(int position, int id) {
+
+        lastTimeDonate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Long  TimeCanDonate=Long.valueOf(dataSnapshot.child("TimeCanDonate").getValue().toString());
+                Calendar calendar = Calendar.getInstance();
+                Long startTime =calendar.getTimeInMillis();
+
+                if (TimeCanDonate<=startTime) {
+                    lastTimeDonate.child("DateSecondDonate").setValue(startTime+"");
+                    Long i=startTime+(24*29*3*60*60);
+                    lastTimeDonate.child("TimeCanDonate").setValue(i+"");
+                    canDonateText.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), "شكرا لك", Toast.LENGTH_SHORT).show();
+
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "       شكرا لك \nلا ينصح بالتبرع الان ", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
     }
@@ -436,6 +505,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DatabaseReference SignDataBase = FirebaseDatabase.getInstance().getReference().child("Main").child("cities").child(newCityID).child(data.getString("BloodType",null))
                 .child("users");
 
+
+
+
+        Calendar calendar_1 = Calendar.getInstance();
+
         DatabaseReference current_user_db = SignDataBase.child(data.getString("id",null));
         current_user_db.child("user name").setValue(data.getString("display_name",null));
         current_user_db.child("BloodType").setValue(data.getString("BloodType",null));
@@ -444,6 +518,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         current_user_db.child("email").setValue(data.getString("email",null));
         current_user_db.child("age").setValue(data.getString("age",null));
         current_user_db.child("donateCount").setValue("0");
+        current_user_db.child("DateSecondDonate").setValue("0");
+        current_user_db.child("TimeCanDonate").setValue("0");
+
         if(data.getString("LastNotification",null) != null){
             current_user_db.child("LastNotification").setValue(data.getString("LastNotification",null));
         }else{
