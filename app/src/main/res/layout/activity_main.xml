@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!--<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:iosched="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/main_toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?actionBarSize" />-->
+<RelativeLayout
+
+    android:layout_marginTop="50dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--android:background="@color/DarkRed"-->
+
+
+
+<RelativeLayout
+    android:layout_margin="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,80 +24,66 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.d7om7.wareed.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="@drawable/mix_color"
+    android:background="@color/white"
     android:weightSum="1">
+        <android.support.v7.widget.Toolbar
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_toolbar"
+            android:gravity="center"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+        </android.support.v7.widget.Toolbar>
 
+        <!--<TextView-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:layout_width="360dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="You can donate after"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:id="@+id/last_donation_date"-->
+            <!--android:background="@drawable/red_gradient"/>-->
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_below="@+id/textView7"
+        android:layout_marginTop="236dp"
+        android:text="No Requests In Your Ciry..."
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:id="@+id/nullMain"
+        android:visibility="visible" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_emergency"
+            android:layout_width="999dp"
+            android:layout_height="445dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/button6"
+            android:layout_alignParentTop="true" />
 
 
         <Button
-            android:id="@+id/BTN"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-
-            android:text="Date"
-            android:layout_marginTop="161dp"
-            android:layout_below="@+id/view"
-            android:layout_alignParentStart="true" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_dialog_email"
-            android:onClick="go_to_requst_blood"
-            android:layout_marginBottom="6dp"
-            android:layout_alignEnd="@+id/textView7"
-            android:layout_alignStart="@+id/textView7"
-            android:layout_above="@+id/textView7" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="43dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:onClick="go_to_requst_blood"
-            android:paddingBottom="20dp"
-            android:text="طلب متبرعين"
-            android:textAlignment="center"
-            android:textColor="@color/colorwhite"
-            android:textSize="20sp" />
-
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_dialog_alert"
-            android:onClick="go_to_List_Emergency"
-            android:layout_marginBottom="6dp"
-
-            android:layout_above="@+id/textView8"
-            android:layout_alignEnd="@+id/textView8"
-            android:layout_alignStart="@+id/textView8" />
-
-
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:onClick="go_to_List_Emergency"
-            android:paddingBottom="20dp"
-            android:layout_width="190dp"
-            android:textColor="@color/colorwhite"
-            android:text="الحالات الطارئة"
-            android:textAlignment="center"
             android:textSize="20sp"
-            android:layout_alignParentEnd="true" />
+            android:text="Do You need Blood Donors ?"
+            android:onClick="go_to_request_blood"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_button"
+            android:id="@+id/button6" />
 
-        <!--<ImageView-->
-            <!--android:layout_width="1dp"-->
-            <!--android:layout_height="80dp"-->
-            <!--app:srcCompat="@android:drawable/dark_header"-->
-            <!--android:background="@color/colorwhite"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_centerHorizontal="true" />-->
+</RelativeLayout>
 
 </RelativeLayout>

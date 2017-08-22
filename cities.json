@@ -1,0 +1,87 @@
+{
+	"cities":[
+		{
+			"name":"Riyadh",
+			"hospitals":[]
+		},
+		{
+			"name":"Dammam",
+			"hospitals":[]
+		},
+		{
+			"name":"Safwa",
+			"hospitals":[]
+		},
+		{"name":"Al Qatif","hospitals":[]},
+		{"name":"Dhahran","hospitals":[]},
+		{"name":"Al Faruq","hospitals":[]},
+		{"name":"Khobar","hospitals":[]},
+		{"name":"Jubail","hospitals":[]},
+		{"name":"Sayhat","hospitals":[]},
+		{
+			"name":"Jeddah",
+			"hospitals":[
+	            {
+	                "name":"Abuzinadah Hospital",
+	                "lat":21.508518,
+	                "lng":39.179596
+	            },
+	            {
+	                "name":"Abdul Latif Jameel Hospital",
+	                "lat":21.596255,
+	                "lng":39.204320
+	            },
+	            {
+	                "name":"King Fahad Hospital",
+	                "lat":21.543330,
+	                "lng":39.166603
+	            }
+	        ]
+		},
+		{"name":"Ta'if","hospitals":[]},
+		{
+			"name":"Mecca",
+			"hospitals":[
+				{
+	                "name":"AL-Noor Specialized Hospital",
+	                "lat":21.385026,
+	                "lng":39.860544
+	            }
+	            ,{
+	                "name":"King Faisal Specialist Hospital",
+	                "lat":21.434534,
+	                "lng":39.853377
+	            }
+			]
+		},
+		{"name":"Al Hufuf","hospitals":[]},
+		{"name":"Medina","hospitals":[]},
+		{"name":"Rahimah","hospitals":[]},
+		{"name":"Rabigh","hospitals":[]},
+		{"name":"Yanbu` al Bahr","hospitals":[]},
+		{"name":"Abqaiq","hospitals":[]},
+		{"name":"Mina","hospitals":[]},
+		{"name":"Ramdah","hospitals":[]},
+		{"name":"Linah","hospitals":[]},
+		{"name":"Abha","hospitals":[]},
+		{"name":"Jizan","hospitals":[]},
+		{"name":"Al Yamamah","hospitals":[]},
+		{"name":"Tabuk","hospitals":[]},
+		{"name":"Sambah","hospitals":[]},
+		{"name":"Ras Tanura","hospitals":[]},
+		{"name":"At Tuwal","hospitals":[]},
+		{"name":"Sabya","hospitals":[]},
+		{"name":"Buraidah","hospitals":[]},
+		{"name":"Madinat Yanbu` as Sina`iyah","hospitals":[]},
+		{"name":"Hayil","hospitals":[]},
+		{"name":"Khulays","hospitals":[]},
+		{"name":"Khamis Mushait","hospitals":[]},
+		{"name":"Ra's al Khafji","hospitals":[]},
+		{"name":"Najran","hospitals":[]},
+		{"name":"Sakaka","hospitals":[]},
+		{"name":"Al Bahah","hospitals":[]},
+		{"name":"Rahman","hospitals":[]},
+		{"name":"Jazirah","hospitals":[]},
+		{"name":"Jazirah","hospitals":[]}
+	]
+}

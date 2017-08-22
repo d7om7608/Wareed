@@ -1,200 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/main_layout"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.d7om7.wareed.RequestActivity"
-    android:background="@drawable/mix_color">
+    android:background="@color/white"
+    android:weightSum="1">
 
-    <LinearLayout
+    <TextView
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/colorwhite"
-        android:orientation="vertical">
+        android:layout_height="35dp"
+        android:backgroundTint="@color/white"
+        android:text="Request Blood"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/DarkRed"
+        android:background="@drawable/shadow"
+        android:elevation="5dp"
+        android:id="@+id/textView" >
+
+    </TextView>
 
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="480dp">
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp"
+            tools:context="com.example.d7om7.wareed.RequestActivity"
+            android:weightSum="1">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:context="com.example.d7om7.wareed.RequestActivity">
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
 
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </ScrollView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:text=" اسم المريض"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp" />
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/group112" />
 
                 <EditText
                     android:id="@+id/pantienName"
-                    android:layout_width="match_parent"
+                    android:inputType="textShortMessage"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:hint="Patient Name"
                     android:maxLength="20"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="رقم ملف المريض"
+            </LinearLayout>
 
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp" />
 
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/a1212"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true" />
                 <EditText
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:hint="Hospital File Number"
                     android:id="@+id/fileNumber"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
                     android:inputType="number"
                     android:maxLength="15"
-                    android:textAlignment="viewEnd"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
 
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="عدد اكياس الدم المطلوبة "
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/a5432"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true" />
                 <EditText
-                    android:id="@+id/countBlood"
-                    android:layout_width="match_parent"
+                    android:hint="Blood Bags Needed"
+                    android:id="@+id/countDone"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
                     android:inputType="number"
-                    android:maxLength="2"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:maxLength="1"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="الحالة"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/patientstate"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/imageView8" />
                 <EditText
+                    android:hint="Patient State"
+                    android:inputType="textShortMessage"
                     android:id="@+id/reasonOfRequist"
-                    android:layout_width="match_parent"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/imageView8" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="350dp"
+                android:layout_height="35dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/blood"
+                    android:alpha="0.7"/>
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/profile_city_spinner"
-                    android:layout_alignParentEnd="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="فئة الدم"
+                    android:text="Blood Type"
+                    android:layout_alignParentLeft="true"
                     android:textSize="18sp"
-                    android:layout_alignTop="@+id/planets_spiner" />
+                    android:textColor="@color/black"
+
+                    android:layout_alignBottom="@+id/planets_spiner" />
 
                 <Spinner
                     android:id="@+id/planets_spiner"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:maxLength="70"
+                    android:layout_alignParentRight="true">
 
-                    android:textColor="@color/colorAccent"></Spinner>
-                </RelativeLayout>
+                </Spinner>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/profile_city_spinner"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="المدينة"
-                        android:textSize="18sp"
-                        android:layout_alignTop="@+id/city_spiner" />
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="350dp"
+                android:layout_height="35dp"
+                >
 
-                    <Spinner
+                <ImageView
+                    android:id="@+id/city_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/city"/>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="City"
+                    android:layout_alignLeft="@+id/city_image"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <Spinner
                     android:id="@+id/city_spiner"
                     android:layout_width="200dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="12dp"
-                    android:textColor="@color/colorAccent"></Spinner>
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    ></Spinner>
 
-                </RelativeLayout>
+            </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/profile_city_spinner"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="المستشفى"
-                        android:textSize="18sp"
-                        android:layout_alignTop="@+id/Hospetal_spiner" />
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="350dp"
+                android:layout_height="35dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/hospital"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/Hospetal_spiner"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Hospital"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/Hospetal_spiner"
                     android:layout_width="200dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="12dp"
-                    android:textColor="@color/colorAccent"></Spinner>
-
-                </RelativeLayout>
-
-                <Button
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:onClick="onclick"
-                    android:text="إضافة"
-                    android:textSize="24sp"
-                    android:background="#1DE9B6"
-                    />
+                    android:layout_alignParentRight="true"></Spinner>
 
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="onclick"
+        android:layout_alignParentBottom="true"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+
+        />
 </LinearLayout>
+</RelativeLayout>

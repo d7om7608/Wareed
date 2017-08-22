@@ -4,38 +4,74 @@ package com.example.d7om7.wareed;
 
 public class RequestBlood {
     String patientName;
-    int patientFileNumber;
-    int countOfBlood;
-    int countOfdone;
+    String patientFileNumber;
+    String countOfBlood;
+    String countOfdone;
     String reasonOfRequest;
     String bloodType;
-
+    String cityName;
     String nameOfHospital;
     String requestID;
     String userID;
     String statusTime;
-
-    public RequestBlood(String patientName, int patientFileNumber, int countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
-                        String statusTime, String requestID, String userID, int countOfdone) {
+    String latOfHospital;
+    String lngOfHospital;
+    String location;
+    public RequestBlood(String patientName,String cityName, String patientFileNumber, String countOfBlood, String reasonOfRequest, String bloodType, String nameOfHospital,
+                        String statusTime, String requestID, String userID, String countOfdone,String latOfHospital,String lngOfHospital,String location) {
         this.patientName=patientName;
         this.patientFileNumber=patientFileNumber;
         this.countOfBlood=countOfBlood;
         this.reasonOfRequest=reasonOfRequest;
         this.bloodType=bloodType;
-
+        this.location=location;
         this.nameOfHospital=nameOfHospital;
         this.requestID=requestID;
         this.userID=userID;
         this.statusTime=statusTime;
         this.countOfdone=countOfdone;
-
+        this.cityName=cityName;
+        this.lngOfHospital=lngOfHospital;
+        this.latOfHospital=latOfHospital;
     }
 
-    public int getCountOfdone() {
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLatOfHospital() {
+        return latOfHospital;
+    }
+
+    public void setLatOfHospital(String latOfHospital) {
+        this.latOfHospital = latOfHospital;
+    }
+
+    public String getLngOfHospital() {
+        return lngOfHospital;
+    }
+
+    public void setLngOfHospital(String lngOfHospital) {
+        this.lngOfHospital = lngOfHospital;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getCountOfdone() {
         return countOfdone;
     }
 
-    public void setCountOfdone(int countOfdone) {
+    public void setCountOfdone(String countOfdone) {
         this.countOfdone = countOfdone;
     }
 
@@ -57,19 +93,19 @@ public class RequestBlood {
         this.patientName = patientName;
     }
 
-    public int getPatientFileNumber() {
+    public String getPatientFileNumber() {
         return patientFileNumber;
     }
 
-    public void setPatientFileNumber(int patientFileNumber) {
+    public void setPatientFileNumber(String patientFileNumber) {
         this.patientFileNumber = patientFileNumber;
     }
 
-    public int getCountOfBlood() {
+    public String getCountOfBlood() {
         return countOfBlood;
     }
 
-    public void setCountOfBlood(int countOfBlood) {
+    public void setCountOfBlood(String countOfBlood) {
         this.countOfBlood = countOfBlood;
     }
 

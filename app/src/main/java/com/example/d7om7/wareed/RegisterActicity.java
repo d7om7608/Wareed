@@ -1,10 +1,12 @@
 package com.example.d7om7.wareed;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -40,12 +42,15 @@ public class RegisterActicity extends AppCompatActivity {
     private EditText PhoneNumberEditText;
     private EditText VerificationCodeEditText;
     String mVerificationId;
-
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+          progressDialog = new ProgressDialog(this);
+
 
         PhoneNumberEditText = (EditText) findViewById(R.id.phone_number_edit_text);
         VerificationCodeEditText = (EditText) findViewById(R.id.write_verification_code_edit_text);
@@ -61,23 +66,34 @@ public class RegisterActicity extends AppCompatActivity {
         String phoneNumber = "00966"+PhoneNumberEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNumber)) return;
 
+        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber, 60, TimeUnit.SECONDS, RegisterActicity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                         signInWithCredentials(phoneAuthCredential);
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
                         Toast.makeText(RegisterActicity.this, "Verification Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         super.onCodeSent(verificationId, forceResendingToken);
                         mVerificationId = verificationId;
+                        progressDialog.dismiss();
+
+
 
                     }
 
@@ -85,7 +101,7 @@ public class RegisterActicity extends AppCompatActivity {
                     public void onCodeAutoRetrievalTimeOut(String verificationID) {
                         super.onCodeAutoRetrievalTimeOut(verificationID);
                         Toast.makeText(RegisterActicity.this, "Time Out", Toast.LENGTH_SHORT).show();
-
+                        progressDialog.dismiss();
 
                     }
                 }
@@ -135,49 +151,7 @@ public class RegisterActicity extends AppCompatActivity {
 
     }
 
-    /*public void  saveInPrefernces(final DatabaseReference UserData,final FirebaseAuth mAuth) {
 
-
-                                Save User data in Shared Preference
-
-        Log.d("Hello","B4 sh pref");
-        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("UserData",0);
-        Log.d("Hello","after sh pref");
-
-        final SharedPreferences.Editor editor = sharedPref.edit();
-        Log.d("Hello","B4 if  user");
-        if (UserData != null){
-            UserData.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    HashMap<String, String> data = (HashMap) dataSnapshot.getValue();
-                    editor.putString("display_name", data.get("user name").toString());
-                    editor.putString("phone_number", mAuth.getCurrentUser().getPhoneNumber().toString());
-                    editor.putString("id", mAuth.getCurrentUser().getUid().toString());
-                    editor.putString("BloodType", data.get("BloodType").toString());
-                    editor.putString("city", data.get("city").toString());
-                    editor.putString("email", data.get("email").toString());
-                    editor.putString("gender", data.get("gender").toString());
-
-                    editor.apply();
-                    Log.d("Hello", "display name in donor class:" + data.get("email").toString());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }else{
-            Log.d("Hello","user data null");
-        }
-
-        //Log.d("Hello",mAuth.getCurrentUser().getUid().toString());
-
-        //editor.putString("email",mAuth.getCurrentUser().getEmail().toString());
-
-        //Log.d("Hello",sharedPref.getString("display_name","nothing in dispaly name"));
-    }*/
 
     public void signin_button(View view) {
 

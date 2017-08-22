@@ -2,57 +2,27 @@ package com.example.d7om7.wareed;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Azura on 8/9/2017.
  */
 
 public class CityBloodPreferences {
-    List<String> cities;
 
-
+    SharedPreferences.Editor editor;
 
     public static String [] getBloodTypes (){
-        String BloodTypes[] = {"O+","O-","A+","A-","B+","B-","AB+","AB-"};
+        String BloodTypes[] = {"I don't know","O+","O-","A+","A-","B+","B-","AB+","AB-"};
         return BloodTypes ;
 
-    }
-
-    public List getCities () {
-
-        DatabaseReference CitiesReference ;
-        CitiesReference = FirebaseDatabase.getInstance().getReference().child("cities");
-        CitiesReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                 cities= dataSnapshot.child("cities").getValue(List.class);
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return cities ;
     }
 
     public void  saveInPrefernces(final DatabaseReference UserData,final FirebaseAuth mAuth,Context c) {
@@ -60,12 +30,9 @@ public class CityBloodPreferences {
                                 /*
                                 Save User data in Shared Preference
                                  */
-        Log.d("Hello","B4 sh pref");
         SharedPreferences sharedPref = c.getSharedPreferences("UserData",0);
-        Log.d("Hello","after sh pref");
 
-        final SharedPreferences.Editor editor = sharedPref.edit();
-        Log.d("Hello","B4 if  user");
+          editor = sharedPref.edit();
         if (UserData != null){
             UserData.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -78,9 +45,11 @@ public class CityBloodPreferences {
                     editor.putString("city", data.get("city").toString());
                     editor.putString("email", data.get("email").toString());
                     editor.putString("gender", data.get("gender").toString());
+                    editor.putString("age", data.get("age").toString());
+                    editor.putString("LastNotification",data.get("LastNotification").toString());
+
 
                     editor.apply();
-                    Log.d("Hello", "display name in donor class:" + data.get("email").toString());
                 }
 
                 @Override
@@ -88,14 +57,6 @@ public class CityBloodPreferences {
 
                 }
             });
-        }else{
-            Log.d("Hello","user data null");
         }
-
-        //Log.d("Hello",mAuth.getCurrentUser().getUid().toString());
-
-        //editor.putString("email",mAuth.getCurrentUser().getEmail().toString());
-
-        //Log.d("Hello",sharedPref.getString("display_name","nothing in dispaly name"));
     }
 }
