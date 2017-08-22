@@ -1,4 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detilse"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    android:background="@drawable/shadow"
+    android:elevation="5dp"
+    android:backgroundTint="@color/colorwhite"
+    >
+
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:src="@drawable/group142"
+        android:id="@+id/circleImageView"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Arm Surgery"
+        android:textColor="@color/Black"
+        android:id="@+id/reasonOfRequest"
+        android:layout_margin="5dp"
+        android:layout_alignTop="@+id/circleImageView"
+        android:layout_toEndOf="@+id/circleImageView" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Makkah , Alnoor Hospital"
+        android:id="@+id/textView13"
+        android:textSize="13sp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/relativeLayout" />
+
+    <TextView
+        android:id="@+id/bloodTyep"
+        android:layout_width="33dp"
+        android:layout_height="40dp"
+        android:textSize="12sp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorwhite"
+        android:text="AB+"
+        android:layout_alignTop="@+id/circleImageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017/8/14"
+        android:layout_margin="5dp"
+        android:textSize="13sp"
+        android:id="@+id/statusTime"
+        android:layout_alignTop="@+id/reasonOfRequest"
+        android:layout_alignParentEnd="true" />
+=======
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,9 +72,97 @@
     android:backgroundTint="@color/white"
     android:elevation="5dp">
 
+>>>>>>> 2edea0b357aa442a712d36014ad483d7d03164cc
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/relativeLayout"
+        android:layout_below="@+id/textView13"
+        android:layout_alignStart="@+id/circleImageView">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/circleImageView1"
+        android:src="@drawable/group151"
+        android:layout_marginEnd="11dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/circleImageView2" />
+
+        <TextView
+            android:id="@+id/countOfblood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="22dp"
+            android:textSize="11sp"
+            android:textColor="@color/colorwhite"
+            android:layout_alignStart="@+id/circleImageView1" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/circleImageView2"
+            android:src="@drawable/group151"
+            android:layout_marginEnd="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/countDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="11sp"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="22dp"
+            android:textColor="@color/colorwhite"
+            android:layout_alignStart="@+id/circleImageView2"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:onClick="GoToChat"
+            android:src="@drawable/maskgroup12"
+            android:id="@+id/imageView3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/maskgroup10"
+            android:layout_marginEnd="14dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/circleImageView1" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/download"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@+id/circleImageView2"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:textSize="12sp"
+            android:background="@drawable/red_gradient"
+            android:text="Going To Donate Blood"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:layout_alignParentBottom="true" />
+
+
+
+</RelativeLayout>
+=======
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
 
@@ -257,6 +407,7 @@
 
             </RelativeLayout>
 
+>>>>>>> 2edea0b357aa442a712d36014ad483d7d03164cc
 
         </LinearLayout>
 

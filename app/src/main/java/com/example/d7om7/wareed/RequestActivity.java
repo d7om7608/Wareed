@@ -278,6 +278,40 @@ public class RequestActivity extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
+    public List<String> Arrays(int i) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+
+        if (i == 1) {
+            arrayList.add("king khaled");
+            arrayList.add("king abdullah");
+            arrayList.add("noor");
+
+
+        } else if (i == 2) {
+            arrayList.add("makkah");
+            arrayList.add("jeddah");
+
+        } else if (i == 3) {arrayList.add("O+");
+            arrayList.add("O-");
+            arrayList.add("A+");
+            arrayList.add("A-");
+            arrayList.add("B+");
+            arrayList.add("B-");
+            arrayList.add("AB+");
+            arrayList.add("AB-");
+
+        }
+        if (i == 4) {
+            arrayList.add("king abdulrahman");
+            arrayList.add("king s3od");
+        }
+
+
+        return arrayList;
+    }
+=======
+>>>>>>> 2edea0b357aa442a712d36014ad483d7d03164cc
     public void onBackPressed() {
         Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);
