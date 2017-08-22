@@ -11,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +43,9 @@ public class EmergencyListActivity extends AppCompatActivity implements Main_sta
         setContentView(R.layout.activity_emergency_list);
 
         requestBlood = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_emergency);
+
+
 
         root = FirebaseDatabase.getInstance().getReference().child("requestblood");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

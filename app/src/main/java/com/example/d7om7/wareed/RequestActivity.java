@@ -233,9 +233,7 @@ public class RequestActivity extends AppCompatActivity {
             arrayList.add("makkah");
             arrayList.add("jeddah");
 
-        } else if (i == 3) {
-
-            arrayList.add("O+");
+        } else if (i == 3) {arrayList.add("O+");
             arrayList.add("O-");
             arrayList.add("A+");
             arrayList.add("A-");

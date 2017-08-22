@@ -116,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void CitySpinner() {
         // TODO: ger city from CityBlood Activity
         String CityArray[] = {"مكة\n\n", "جدة\n\n"};
-//        List CityArray  = cityBloodActivity.getCities();
+
         ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, CityArray);
         CitySpinner.setAdapter(cityadapter);
 
@@ -152,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         DateSecond=TextDate.getText().toString().trim();
         SignDataBase = FirebaseDatabase.getInstance().getReference().child("users");
         SignInCity = FirebaseDatabase.getInstance().getReference().child("cities").child(CityTooked)
-                .child("bloodtype").child(BloodTypeTooked).child("users");
+        .child("bloodtype").child(BloodTypeTooked).child("users");
 
         if (UsernameTooked.isEmpty() || BloodTypeTooked.isEmpty()) {
 
