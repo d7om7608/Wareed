@@ -156,7 +156,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lastTimeDonate.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-             Long  TimeCanDonate=0+Long.valueOf(dataSnapshot.child("TimeCanDonate").getValue().toString());
+                Long TimeCanDonate= Long.valueOf(0);
+                if (dataSnapshot.child("TimeCanDonate").getValue()!=null){
+                      TimeCanDonate=0+Long.valueOf(dataSnapshot.child("TimeCanDonate").getValue().toString());
+                }
+
                 Calendar calendar = Calendar.getInstance();
                 Long startTime =calendar.getTimeInMillis();
 
@@ -306,6 +310,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         } else if (id == R.id.nav_profile) {
             Intent ProfileIntent = new Intent(MainActivity.this, ProfileActivity.class);
+            ProfileIntent.putExtra("checkActivity",2);
+
             startActivity(ProfileIntent);
             finish();
 

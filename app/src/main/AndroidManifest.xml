@@ -5,17 +5,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.LOCATION_HARDWARE" />
-    /**
-    Location permission,
+    /** Location permission,
     why two not one? because we choose best provider, if it network we choose COARSE else we choose
-    FINE
-    */
+    FINE **/
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/downloadwareed"
+        android:icon="@drawable/hiah1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="false"

@@ -129,8 +129,8 @@ public class RegisterActicity extends AppCompatActivity {
                                 finish();
 
                             } else {
-
                                 Intent intent = new Intent(RegisterActicity.this, ProfileActivity.class);
+                                intent.putExtra("checkActivity",1);
                                 startActivity(intent);
                                 finish();
                             }

@@ -82,9 +82,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="شكرا لا ينصح بالتبرع لـ3 اشهر"
+        android:textSize="20sp"
         android:visibility="gone"
-        android:textSize="20sp" />
+        android:text="  sorry you can donate after 3 months  "
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button"
+
+        />
 
         <Button
             android:layout_width="match_parent"

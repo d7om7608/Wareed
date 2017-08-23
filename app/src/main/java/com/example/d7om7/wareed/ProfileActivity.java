@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
     String GenderTooked;
     String UserUID;
     String age;
+    Intent getIntent;
     Long DateSecond;
     private Button dateButton;
     private Button BTN;
@@ -89,6 +90,8 @@ public class ProfileActivity extends AppCompatActivity {
         sharedPref = getApplicationContext().getSharedPreferences("UserData",0);
           progressDialog= new ProgressDialog(this);
 //        Ui components
+         getIntent=getIntent();
+
         UserNameEditText = (EditText) findViewById(R.id.username_edittext);
         EmailEditText = (EditText) findViewById(R.id.email_edittext);
         BloodTypeSpinner = (Spinner) findViewById(R.id.profile_bloodType_spinner);
@@ -213,7 +216,6 @@ public class ProfileActivity extends AppCompatActivity {
 //
 //
 //        }
-
         UserUID = SignAuth.getCurrentUser().getUid();
         UsernameTooked = UserNameEditText.getText().toString().trim();
         BloodTypeTooked = BloodTypeSpinner.getSelectedItem().toString().trim();
@@ -333,9 +335,15 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void onBackPressed() {
+
+        if (getIntent.getIntExtra("checkActivity",0)==2){
         Intent ProfileIntent = new Intent(this, MainActivity.class);
         startActivity(ProfileIntent);
-        finish();
+        finish();}else if (getIntent.getIntExtra("checkActivity",0)==1){
+            Intent ProfileIntent = new Intent(this, RegisterActicity.class);
+            startActivity(ProfileIntent);
+            finish();}
+
     }
 
     protected void removeCity(){
