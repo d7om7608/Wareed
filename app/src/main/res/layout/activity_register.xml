@@ -75,7 +75,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:onClick="signin_button"
-        android:text="Save A Live"
+        android:text="Save A Life"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"

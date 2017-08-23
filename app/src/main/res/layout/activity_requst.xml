@@ -214,7 +214,7 @@
                     android:layout_alignParentLeft="true"
                     android:src="@drawable/city"/>
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/texthhhhhhhh"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -244,7 +244,7 @@
                     android:src="@drawable/hospital"/>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/HospitalText"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/Hospetal_spiner"

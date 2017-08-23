@@ -285,6 +285,8 @@ public class ProfileActivity extends AppCompatActivity {
 
             CityBloodPreferences c = new CityBloodPreferences();
             c.saveInPrefernces(current_user_db, SignAuth, getApplicationContext());
+            startService(new Intent(this, Notifications.class));
+            startService(new Intent(this, NotificationInstance.class));
 
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

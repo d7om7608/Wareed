@@ -174,7 +174,6 @@
     android:layout_width="wrap_content"
     android:layout_height="30dp"
     android:layout_below="@+id/relativeLayout"
-    android:layout_alignEnd="@+id/relativeLayout3"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
@@ -223,7 +222,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/city"
-            android:id="@+id/imageView9"
+            android:id="@+id/imageView100"
             android:layout_marginRight="5dp"/>
 
         <TextView

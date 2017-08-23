@@ -104,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //__________________________________________________
 
         nullText=(TextView)findViewById(R.id.nullMain);
-        NotificationGenie notif = new NotificationGenie();
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -410,7 +408,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void ClickedShare(int position, int id) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "I'm "+requestBlood.get(position).getPatientName()+" need your blood donate \n My blood type : "+
+                requestBlood.get(position).getBloodType()+" \nand my file number is: "+requestBlood.get(position).getPatientFileNumber()+"\n" +
+                "in "+requestBlood.get(position).getNameOfHospital()+" Hospital at "+requestBlood.get(position).getCityName()+"\n" +
+                "From: Hiah App");
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }
