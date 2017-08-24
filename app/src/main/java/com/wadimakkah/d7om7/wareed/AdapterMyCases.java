@@ -1,7 +1,6 @@
-package com.example.d7om7.wareed;
+package com.wadimakkah.d7om7.wareed;
 
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,10 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-import static android.R.attr.animation;
 import static android.R.attr.id;
 
 public class AdapterMyCases extends RecyclerView.Adapter<AdapterMyCases.ViewHolder> {

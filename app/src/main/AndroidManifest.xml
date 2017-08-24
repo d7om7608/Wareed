@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.d7om7.wareed">
+    package="com.wadimakkah.d7om7.wareed">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.wadimakkah.d7om7.wareed.MainActivity"
             android:label="Hiah"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,22 +30,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RequestActivity" />
-        <activity android:name=".RegisterActicity" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MyCases" />
-        <activity android:name=".ListMyChating"></activity>
+        <activity android:name="com.wadimakkah.d7om7.wareed.RequestActivity" />
+        <activity android:name="com.wadimakkah.d7om7.wareed.RegisterActicity" />
+        <activity android:name="com.wadimakkah.d7om7.wareed.ChatActivity" />
+        <activity android:name="com.wadimakkah.d7om7.wareed.ProfileActivity" />
+        <activity android:name="com.wadimakkah.d7om7.wareed.MyCases" />
+        <activity android:name="com.wadimakkah.d7om7.wareed.ListMyChating"></activity>
 
         <service
-            android:name=".Notifications">
+            android:name="com.wadimakkah.d7om7.wareed.Notifications">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
         <service
-            android:name=".NotificationInstance">
+            android:name="com.wadimakkah.d7om7.wareed.NotificationInstance">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

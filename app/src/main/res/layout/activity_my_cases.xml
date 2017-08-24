@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.d7om7.wareed.MainActivity"
+    tools:context="com.wadimakkah.d7om7.wareed.MainActivity"
     android:background="@color/white">
 
     <RelativeLayout

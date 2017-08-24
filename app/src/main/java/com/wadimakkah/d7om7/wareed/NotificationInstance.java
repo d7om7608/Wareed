@@ -1,8 +1,6 @@
-package com.example.d7om7.wareed;
+package com.wadimakkah.d7om7.wareed;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;

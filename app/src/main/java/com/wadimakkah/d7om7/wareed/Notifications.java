@@ -1,6 +1,5 @@
-package com.example.d7om7.wareed;
+package com.wadimakkah.d7om7.wareed;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;

@@ -1,16 +1,13 @@
-package com.example.d7om7.wareed;
+package com.wadimakkah.d7om7.wareed;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,8 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 import static android.R.attr.id;
-import static com.example.d7om7.wareed.R.drawable.user;
-import static com.example.d7om7.wareed.R.id.bloodTyepChating;
 
 
 public class AdapterMyChating extends RecyclerView.Adapter<AdapterMyChating.ViewHolder> {

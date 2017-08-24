@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "216199098507",
-    "firebase_url": "https://wareed-1f4ce.firebaseio.com",
-    "project_id": "wareed-1f4ce",
-    "storage_bucket": "wareed-1f4ce.appspot.com"
+    "project_number": "114137697957",
+    "firebase_url": "https://hiah-bd883.firebaseio.com",
+    "project_id": "hiah-bd883",
+    "storage_bucket": "hiah-bd883.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:216199098507:android:1208d6f1ae0870ba",
+        "mobilesdk_app_id": "1:114137697957:android:9f341593300fe777",
         "android_client_info": {
-          "package_name": "com.example.d7om7.wareed"
+          "package_name": "com.wadimakkah.d7om7.wareed"
         }
       },
       "oauth_client": [
         {
-          "client_id": "216199098507-97lvvvers166qmllilqtqsh7ncb7riku.apps.googleusercontent.com",
+          "client_id": "114137697957-cj1dbdpo7hd8fkv4elmlsov53pc346gd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC373NRGoZZ4WJY0qE-2TzDz5K45zKRaPM"
+          "current_key": "AIzaSyA4DbSsZxpD9Zf7TI2xDxdQDc4GPUWY0ZI"
         }
       ],
       "services": {

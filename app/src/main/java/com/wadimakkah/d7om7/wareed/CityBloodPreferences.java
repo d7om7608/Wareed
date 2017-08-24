@@ -1,4 +1,4 @@
-package com.example.d7om7.wareed;
+package com.wadimakkah.d7om7.wareed;
 
 import android.content.Context;
 import android.content.SharedPreferences;

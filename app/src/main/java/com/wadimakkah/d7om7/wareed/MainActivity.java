@@ -1,7 +1,6 @@
-package com.example.d7om7.wareed;
+package com.wadimakkah.d7om7.wareed;
 
 
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -9,10 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.location.LocationManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,18 +22,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.DatePicker;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -50,17 +43,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-
-import static android.R.attr.data;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static com.example.d7om7.wareed.R.id.age;
-import static com.example.d7om7.wareed.R.id.imageViewNAV;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Main_status_adapter.changeActivity {
@@ -102,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //__________________________________________________
+        FirebaseApp.initializeApp(getApplicationContext());
+        FirebaseApp.initializeApp(getApplicationContext());
 
         nullText=(TextView)findViewById(R.id.nullMain);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
