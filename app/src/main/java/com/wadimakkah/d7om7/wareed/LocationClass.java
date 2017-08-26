@@ -27,9 +27,6 @@ public class LocationClass {
 
     private Context mContext;
 
-    protected Criteria criteria;
-    protected String bestProvider;
-
 
 
     public LocationClass(Activity activity){
@@ -42,8 +39,8 @@ public class LocationClass {
 
 
         }else{
-            criteria = new Criteria();
-            bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
+            Criteria criteria = new Criteria();
+            String bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
             android.location.Location location = manager.getLastKnownLocation(bestProvider);
             if(location != null){
                 lon = location.getLongitude();
