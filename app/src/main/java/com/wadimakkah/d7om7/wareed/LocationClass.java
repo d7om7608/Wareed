@@ -11,8 +11,10 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -39,13 +41,25 @@ public class LocationClass {
 
 
         }else{
-            Criteria criteria = new Criteria();
-            String bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
-            android.location.Location location = manager.getLastKnownLocation(bestProvider);
-            if(location != null){
-                lon = location.getLongitude();
-                lat = location.getLatitude();
-                alt = location.getAltitude();
+            List<String> providers = manager.getProviders(true);
+            Location bestLocation = null;
+            for (String provider : providers){
+                Location l = manager.getLastKnownLocation(provider);
+                if (l == null) {
+                    continue;
+                }
+                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                    // Found best last known location: %s", l);
+                    bestLocation = l;
+                }
+            }
+//            Criteria criteria = new Criteria();
+//            String bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
+//            android.location.Location location = manager.getLastKnownLocation(bestProvider);
+            if(bestLocation != null){
+                lon = bestLocation.getLongitude();
+                lat = bestLocation.getLatitude();
+                alt = bestLocation.getAltitude();
             }else{
                 Toast.makeText(mContext,"Failed to get Location",Toast.LENGTH_LONG);
             }
@@ -61,14 +75,14 @@ public class LocationClass {
     protected String getCity(double lon,double lat) {
         Geocoder gcd = new Geocoder(mContext, Locale.ENGLISH);
         try {
-            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+            List<Address> addresses = gcd.getFromLocation(lat, lon,1);
             if (addresses.size() > 0)
             {
                 return addresses.get(0).getLocality();
             }
             else
             {
-                return "";
+                return "nothing";
             }
         }catch (IOException ex){
             return "";

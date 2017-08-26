@@ -22,6 +22,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -409,38 +410,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public class NotificationGenie extends FirebaseMessagingService {
-        @Override
-        public void onMessageReceived(RemoteMessage remoteMessage) {
-            // TODO(developer): Handle FCM messages here.
-            // If the application is in the foreground handle both data and notification messages here.
-            // Also if you intend on generating your own notifications as a result of a received FCM
-            // message, here is where that should be initiated. See sendNotification method below.
-            sendNotification(remoteMessage.getNotification().getBody());
-
-        }
-
-        private void sendNotification(String messageBody) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
-
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.big_heart)
-                    .setContentTitle("FCM Message")
-                    .setContentText(messageBody)
-                    .setAutoCancel(true)
-                    .setSound(defaultSoundUri)
-                    .setContentIntent(pendingIntent);
-
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-        }
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -467,36 +436,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     protected void updateLocation(){
         final LocationClass location = new LocationClass(this);
-        final SharedPreferences data = getSharedPreferences("UserData",0);
         final DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-        final String lastCity = data.getString("city",null);
-        if(lastCity != null){
-            if(lastCity != location.getCurrectCity()){
-                root.child("cities").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for(DataSnapshot city: dataSnapshot.getChildren()){
-                            String cityInDatabase = city.child("name").getValue().toString().toLowerCase().trim();
-                            String cityInLocation = location.getCurrectCity().toString().toLowerCase().trim();
-                            if(cityInDatabase.equals(cityInLocation)){
-                                String cityID = city.getKey().toString();
-                                updateUserProfile(cityID);
-                                Toast.makeText(getApplicationContext(),"Location Updated",Toast.LENGTH_LONG);
-                                break;
-                            }
+        if(location.getCurrectCity() != null){
+            root.child("cities").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    boolean foundLocation = false;
+                    for(DataSnapshot city: dataSnapshot.getChildren()){
+                        String cityInDatabase = city.child("name").getValue().toString().toLowerCase().trim();
+                        String cityInLocation = location.getCurrectCity().toString().toLowerCase().trim();
+                        if(cityInDatabase.equals(cityInLocation)){
+                            String cityID = city.getKey().toString();
+                            updateUserProfile(cityID);
+                            Toast.makeText(getApplicationContext(),"Location Updated",Toast.LENGTH_LONG).show();
+                            foundLocation = true;
+                            break;
                         }
                     }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
+                    if(foundLocation == false){
+                        root.child("unnamedCity").push().setValue(location.getCurrectCity());
+                        Toast.makeText(getApplicationContext(),"your city is not in database",Toast.LENGTH_SHORT).show();
                     }
-                });
-            }
-        }
-        Toast.makeText(getApplicationContext(), "your Location Updated", Toast.LENGTH_SHORT).show();
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            Toast.makeText(getApplicationContext(),"Cannot find your location name.",Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void updateUserProfile(String newCityID){
