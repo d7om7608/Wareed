@@ -13,6 +13,7 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,9 +45,13 @@ public class LocationClass {
             criteria = new Criteria();
             bestProvider = String.valueOf(manager.getBestProvider(criteria, true)).toString();
             android.location.Location location = manager.getLastKnownLocation(bestProvider);
-            lon = location.getLongitude();
-            lat = location.getLatitude();
-            alt = location.getAltitude();
+            if(location != null){
+                lon = location.getLongitude();
+                lat = location.getLatitude();
+                alt = location.getAltitude();
+            }else{
+                Toast.makeText(mContext,"Failed to get Location",Toast.LENGTH_LONG);
+            }
         }
 
 
