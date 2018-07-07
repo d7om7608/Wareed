@@ -63,7 +63,6 @@ public class ChatActivity extends AppCompatActivity {
         ChatListViewView = (ListView) findViewById(R.id.chat_RecyclerView_view);
         // ChatListViewView.setLayoutManager(new LinearLayoutManager(this));
         adabterSMG = new AdabterSMG(chatModels, getApplicationContext());
-cscsccc
 
         ChatListViewView.setAdapter(adabterSMG);
         //ChatListViewView.setItemAnimator(new DefaultItemAnimator());
